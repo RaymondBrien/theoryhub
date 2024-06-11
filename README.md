@@ -21,6 +21,77 @@ The TheoryHub is an online platform designed to help users prepare for music the
 
 </details>
 
+## Wireframes 
+
+In the table below are the base wireframes for the app. This was built using [Google Sites Starter Page](https://sites.google.com/new). 
+
+<details>
+<summary>Home</summary>
+
+| Mobile | Tablet | Desktop |
+|--------|--------|---------|
+| <img src="./static/wireframes/mobile/mobile_home-9.jpg" style="width:150px; height:auto;"/> | <img src="./static/wireframes/tablet/tablet_home-1.jpg" style="width:150px; height:auto;"/> | <img src="./static/wireframes/desktop/desktop-home.png" style="width:150px; height:auto;"/> |
+
+</details>
+
+<details>
+<summary>Signup</summary>
+
+| Mobile | Tablet | Desktop |
+|--------|--------|---------|
+| <img src="./static/wireframes/mobile/mobile_signup-11.jpg" style="width:150px; height:auto;"/> | <img src="./static/wireframes/tablet/tablet_signup-3.jpg" style="width:150px; height:auto;"/> | <img src="./static/wireframes/desktop/desktop-signup.png" style="width:150px; height:auto;"/> |
+
+</details>
+
+<details>
+<summary>Login</summary>
+
+| Mobile | Tablet | Desktop |
+|--------|--------|---------|
+| <img src="./static/wireframes/mobile/mobile_login-10.jpg" style="width:150px; height:auto;"/> | <img src="./static/wireframes/tablet/tablet_login-2.jpg" style="width:150px; height:auto;"/> | <img src="./static/wireframes/desktop/desktop-login.png" style="width:150px; height:auto;"/> |
+
+</details>
+
+<details>
+<summary>User Dashboard</summary>
+
+| Mobile | Tablet | Desktop |
+|--------|--------|---------|
+| <img src="./static/wireframes/mobile/mobile_user_dashboard-12.jpg" style="width:150px; height:auto;"/> | <img src="./static/wireframes/tablet/tablet_user_dashboard-4.jpg" style="width:150px; height:auto;"/> | <img src="./static/wireframes/desktop/desktop-user-dashboard.png" style="width:150px; height:auto;"/> |
+
+</details>
+
+<details>
+<summary>Admin Dashboard</summary>
+
+| Mobile | Tablet | Desktop |
+|--------|--------|---------|
+| <img src="./static/wireframes/mobile/mobile_admin_dash-13.jpg" style="width:150px; height:auto;"/> | <img src="./static/wireframes/tablet/tablet_admin_dashboard-5.jpg" style="width:150px; height:auto;"/> | <img src="./static/wireframes/desktop/desktop-admin-dashboard.png" style="width:150px; height:auto;"/> |
+
+</details>
+
+<details>
+<summary>Question Page</summary>
+
+| Mobile | Tablet | Desktop |
+|--------|--------|---------|
+| <img src="./static/wireframes/mobile/mobile_question-14.jpg" style="width:150px; height:auto;"/> | <img src="./static/wireframes/tablet/tablet_question-7.jpg" style="width:150px; height:auto;"/> | <img src="./static/wireframes/desktop/desktop-question.png" style="width:150px; height:auto;"/> |
+
+</details>
+
+<details>
+<summary>Mobile and Tablet Features</summary>
+
+| Mobile Misc | Tablet Misc |
+|-------------|-------------|
+| <img src="./static/wireframes/mobile/mobile_misc-15.jpg" style="width:150px; height:auto;"/> | <img src="./static/wireframes/tablet/tablet_misc-6.jpg" style="width:150px; height:auto;"/> |
+
+</details>
+
+
+
+
+
 ## Database Architecture 
 
 <details>
