@@ -260,7 +260,7 @@ Entity Relationship Diagram (ERD)
 
 </summary>
 
-<img src="./static/images/erd_models.PNG">
+<img src="./static/images/erd_models-v2.png">
 
 </details>
 
