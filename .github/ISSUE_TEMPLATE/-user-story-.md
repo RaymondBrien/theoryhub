@@ -1,7 +1,7 @@
 ---
 name: "[USER STORY]"
 about: 'Template User Story '
-title: USER STORY
+title: "[USER STORY]"
 labels: ''
 assignees: RaymondBrien
 
