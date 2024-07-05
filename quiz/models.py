@@ -14,7 +14,7 @@ class Quiz(models.Model):
 
     class Meta:
         ordering = ["-created_on"]
-    class __str__(self):
+    def __str__(self):
         return f'Title: {self.title}'
 
 
