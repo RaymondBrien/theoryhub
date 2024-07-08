@@ -14,6 +14,7 @@ class Quiz(models.Model):
 
     class Meta:
         ordering = ["-created_on"]
+        verbose_name_plural = 'Quizzes'
     def __str__(self):
         return f'Title: {self.title}'
 
@@ -40,7 +41,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    """Stores a single answer related :model:`quiz.Qusetion`"""
+    """Stores a single answer related :model:`quiz.Question`"""
     
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
     answer_num = models.IntegerField()
