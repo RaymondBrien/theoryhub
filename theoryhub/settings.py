@@ -31,7 +31,8 @@ DEBUG = False
 ALLOWED_HOSTS = [
     '8000-raymondbrien-theoryhub-5ifrqs0clkn.ws.codeinstitute-ide.net', 
     '127.0.0.1', 
-    '.herokuapp.com ' ,]
+    '.herokuapp.com ' ,
+    'https://theoryhub-253c97b41326.herokuapp.com/']
 
 
 # Application definition
