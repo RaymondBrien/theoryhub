@@ -28,6 +28,13 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False 
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://theoryhub-253c97b41326.herokuapp.com/'
+    
+    # For local development 
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
 ALLOWED_HOSTS = [
     '8000-raymondbrien-theoryhub-5ifrqs0clkn.ws.codeinstitute-ide.net', 
     '127.0.0.1', 
