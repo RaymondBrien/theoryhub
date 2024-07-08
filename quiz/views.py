@@ -9,8 +9,7 @@ class QuizList(generic.ListView):
     Displays a list of all quizzes in :model:`quiz.Quiz`
     paginated by 6 quizzes per page.
     """
-    model = Quiz.objects.all()
+    queryset = Quiz.objects.all()
     template_name = 'quiz/quiz_list.html'
-    context_object_name = 'quizzes'
     paginate_by = 6
 
