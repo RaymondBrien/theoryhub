@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from cloudinary.models import CloudinaryField
 
-
+STATUS = ((0, "Draft"), (1, "Published"))
 class Quiz(models.Model):
     """Stores a single quiz, which is a collection of questions"""
 
@@ -11,7 +11,8 @@ class Quiz(models.Model):
     description = models.TextField(validators=[MinLengthValidator(5), MaxLengthValidator(50)] )
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    image = CloudinaryField('image', default='placeholder') 
+    image = CloudinaryField('image', default='placeholder')
+    status = models.IntegerField(choices=STATUS, default =0)
 
 # TODO add messages if not valid field before try to save?
 # TODO Date field validation for published vs draft quiz - copy to questions too
