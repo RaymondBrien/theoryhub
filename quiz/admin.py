@@ -4,6 +4,7 @@ from django_summernote.admin import SummernoteModelAdmin
 
 admin.site.register(Quiz)
 admin.site.register(Question)
+admin.site.register(Answer)
 
 
 # @admin.register(Quiz)
