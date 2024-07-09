@@ -7,12 +7,26 @@ from cloudinary.models import CloudinaryField
 class Quiz(models.Model):
     """Stores a single quiz, which is a collection of questions"""
 
-    title = models.CharField(max_length=200, unique=True, validators=[MinLengthValidator(5), MaxLengthValidator(10)] )
+    title = models.CharField(max_length=200, unique=True, validators=[MinLengthValidator(5), MaxLengthValidator(20)] )
     description = models.TextField(validators=[MinLengthValidator(5), MaxLengthValidator(50)] )
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     image = CloudinaryField('image', default='placeholder') 
 
+# TODO add messages if not valid field before try to save?
+# TODO Date field validation for published vs draft quiz - copy to questions too
+# https://docs.djangoproject.com/en/4.2/ref/models/instances/#django.db.models.Model.clean_fields
+    # STATUS_CHOICES = (
+    #     ('draft', 'Draft'),
+    #     ('published', 'Published'),
+    # )
+    # def clean(self):
+    # # Don't allow draft entries to have a pub_date.
+    # if self.status == "draft" and self.pub_date is not None:
+    #     raise ValidationError(_("Draft entries may not have a publication date."))
+    # # Set the pub_date for published items if it hasn't been set already.
+    # if self.status == "published" and self.pub_date is None:
+    #     self.pub_date = datetime.date.today()
     class Meta:
         ordering = ["-created_on"]
         verbose_name_plural = 'Quizzes'
