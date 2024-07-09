@@ -1,14 +1,21 @@
+{% extends "base.html" %}
 {% load static %}
-<body>
+
+{% block content %}
+
+<div>
     <h1>List of Quizzes</h1>
     <ul>
         {% for quiz in quizzes %}
         <li>
             <img src="{%  static 'images/nobody.jpg' %}" alt="placeholder">
+        </li>
+        <li>
             <a href="{% url 'quiz:quiz_detail' quiz.id %}">{{ quiz.title }}</a>
         </li>
         {% endfor %}
-        
-    </body>
-    </html>
+    </ul>
 
+</div>
+
+{% endblock content %}
