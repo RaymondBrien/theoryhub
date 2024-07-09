@@ -1,6 +1,10 @@
 from django.contrib import admin
-from .models import Quiz
+from .models import Quiz, Question, Answer
 from django_summernote.admin import SummernoteModelAdmin
+
+admin.site.register(Quiz)
+admin.site.register(Question)
+
 
 # @admin.register(Quiz)
 # class QuizAdmin(SummernoteModelAdmin):
@@ -13,5 +17,3 @@ from django_summernote.admin import SummernoteModelAdmin
 #     search_fields = ('title', 'description')
 #     ordering = ('-created_on',)
 #     summernote_fields = ('description',)
-
-admin.site.register(Quiz)
