@@ -1,13 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 from cloudinary.models import CloudinaryField
 
 
 class Quiz(models.Model):
     """Stores a single quiz, which is a collection of questions"""
 
-    title = models.CharField(max_length=200, unique=True)
-    description = models.TextField()
+    title = models.CharField(max_length=200, unique=True, validators=[MinLengthValidator(5), MaxLengthValidator(10)] )
+    description = models.TextField(validators=[MinLengthValidator(5), MaxLengthValidator(50)] )
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     image = CloudinaryField('image', default='placeholder') 

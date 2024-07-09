@@ -4,7 +4,10 @@ from django_summernote.admin import SummernoteModelAdmin
 
 @admin.register(Quiz)
 class QuizAdmin(SummernoteModelAdmin):
-    summernote_fields = '__all__'
+    """
+    Admin for Quiz creation interface: 
+    create single instance of Quiz.
+    """
     list_display = ('title', 'description', 'created_on', 'updated_on')
     list_filter = ('created_on', 'updated_on')
     search_fields = ('title', 'description')
