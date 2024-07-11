@@ -20,5 +20,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('quiz.urls'), name='quiz-urls'), 
+    path('accounts/', include('allauth.urls')),  # for social authentication
+    path('summernote/', include('django_summernote.urls')),  # for Summernote editor
     path('admin/', admin.site.urls),
 ]
