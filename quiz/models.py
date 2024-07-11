@@ -44,13 +44,15 @@ class Question(models.Model):
     question_text = models.TextField()
     question_image = CloudinaryField('image', default='placeholder')
     points = models.IntegerField(choices=POINTS, default=1)
-        
+    
+    
     class Meta:
         ordering = ["question_text"]
         verbose_name_plural = "Questions"
     def __str__(self):
         return f'Question: {self.question_text} (belongs to Quiz {self.quiz_id})'
-        
+       
+       # TODO: add question numbers to appear in order in each quiz - see snippet to edit below 
         #     QUESTIONS = {
         #     0: "",
         #     1: "What is your name?",
@@ -75,7 +77,7 @@ class Answer(models.Model):
     
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
     answer_content = models.TextField(default='Put multiple-choice answer here',)
-    answer_option = models.IntegerField(choices=ANSWER_OPTIONS, default=1)
+    answer_option = models.IntegerField(choices=ANSWER_OPTIONS, default=1) # TODO: do I need a default here?
     
     # TODO: add validation so always ONE correct answer per question
     correct = models.IntegerField(choices=CORRECT, default=0) # additional field added after ERD
@@ -83,4 +85,7 @@ class Answer(models.Model):
     class Meta:
         ordering = ["answer_option"]
         verbose_name_plural = "Answers"
-        unique_together = ("question_id", "answer_option") # only one answer per answer option per question
+        unique_together = ("question_id", "answer_option") # only one answer option per question (i.e. a, b, c, d only. Not two option b's (a b, b, c) for example)
+    
+    def __str__(self):
+        return f'Answer: {self.answer_content}'
