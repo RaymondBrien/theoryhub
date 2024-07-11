@@ -76,7 +76,8 @@ class Answer(models.Model):
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
     answer_content = models.TextField(default='Put multiple-choice answer here',)
     answer_option = models.IntegerField(choices=ANSWER_OPTIONS, default=1)
-    # TODO: how do I make sure there is always ONE correct answer per question?
+    
+    # TODO: add validation so always ONE correct answer per question
     correct = models.IntegerField(choices=CORRECT, default=0) # additional field added after ERD
     
     class Meta:
