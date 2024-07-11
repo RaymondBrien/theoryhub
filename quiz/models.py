@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from cloudinary.models import CloudinaryField
 
@@ -39,10 +38,8 @@ class Quiz(models.Model):
 class Question(models.Model):
     """Stores a single question related :model:`quiz.Quiz`"""
     # TODO: check how many types of point questions there are, and update integer choices accordingly. 
-    # TODO: check how to best format question text so it's multiple choice, see django docs
-    # TODO: question_options class? Or pulled from answers, with correct/incorrect bool on answers model? # changed from ERD question_text as each question is multiple choice 
-    # https://docs.djangoproject.com/en/4.2/ref/models/fields/
-
+    # TODO: make question numbers - how many per quiz?
+    
     quiz_id = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
     question_text = models.TextField()
     question_image = CloudinaryField('image', default='placeholder')
@@ -53,22 +50,23 @@ class Question(models.Model):
         verbose_name_plural = "Questions"
     def __str__(self):
         return f'Question: {self.question_text} (belongs to Quiz {self.quiz_id})'
+        
+        #     QUESTIONS = {
+        #     0: "",
+        #     1: "What is your name?",
+        #     2: "How old are you?",
+        #     # ... more questions ...
+        # }
+        # from django.utils.translation import gettext_lazy as _
+
+        # class QuestionNumber(models.TextChoices):
+        #     EMPTY = '', _('')
+        #     QUESTION_1 = '1', _('What is your name?')
+        #     QUESTION_2 = '2', _('How old are you?')
+        #     # ... more questions ...
+
+        #     question_number = models.IntegerField(choices=[(k, v) for k, v in QUESTIONS.items()])
     
-#     QUESTIONS = {
-#     0: "",
-#     1: "What is your name?",
-#     2: "How old are you?",
-#     # ... more questions ...
-# }
-# from django.utils.translation import gettext_lazy as _
-
-# class QuestionNumber(models.TextChoices):
-#     EMPTY = '', _('')
-#     QUESTION_1 = '1', _('What is your name?')
-#     QUESTION_2 = '2', _('How old are you?')
-#     # ... more questions ...
-
-#     question_number = models.IntegerField(choices=[(k, v) for k, v in QUESTIONS.items()])
 
 
 
@@ -76,7 +74,9 @@ class Answer(models.Model):
     """Stores a single answer related :model:`quiz.Question`"""
     
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
+    answer_content = models.TextField(default='Put multiple-choice answer here',)
     answer_option = models.IntegerField(choices=ANSWER_OPTIONS, default=1)
+    # TODO: how do I make sure there is always ONE correct answer per question?
     correct = models.IntegerField(choices=CORRECT, default=0) # additional field added after ERD
     
     class Meta:
