@@ -1,22 +1,26 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-<!-- TODO add crispy form tags -->
 
 {% block content %}
+
+{% block title %}
+<h1 class="heading">Quizzes</h1>
+{% endblock %}
+
 
 <div>
     <h1>Welcome to TheoryHub!</h1>
     <p>This is a platform where you can find and practice various topics from various fields.</p>
 </div>
 
-<!-- CONTENT VISIBLE IF SIGNED IN USER -->
+<!-- TODO: CONTENT VISIBLE IF SIGNED IN USER -->
 <div>
     <h1>List of Quizzes</h1>
     <ul>
-        {% for i in quizzes %}
+        {% for q in quizzes %}
         <li>
-            <a href="">{{ i.title }}</a>
+             <a href="">{{ q.title }}</a> <!-- TODO: add button with url for each quiz -->
         </li>
         {% endfor %}
     </ul>

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% url 'quiz_list' as quiz_list_url %}
+
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">About Us</h5>
+        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Sed non mauris vitae erat consequat auctor eu in elit.</p>
+        <a href="#" class="btn btn-primary">Learn More</a>
+    </div>
+    <div>
+        <a href="{{ quiz_list_url }}" class="btn btn-primary">Quiz List</a>
+    </div>
+</div>
+{% endblock content %}

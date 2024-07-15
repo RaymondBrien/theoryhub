@@ -19,10 +19,10 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    path('', include('about.urls'), name='home'), # TODO: debug so home works
+    path('', include('about.urls'), name='about-urls'),
     path('dashboard/', include('dashboard.urls'), name='dashboard-urls'),  # for dashboard app
     path('quiz/', include('quiz.urls'), name='quiz-urls'),  # for quiz app TODO: add custom inidivudal quiz url in quiz app
-    # path('accounts/', include('allauth.urls')),  # for social authentication TODO: do I need this?
+    path('accounts/', include('allauth.urls')),  # for social authentication
     path('summernote/', include('django_summernote.urls')),  # for Summernote editor
     path('admin/', admin.site.urls),
 ]
