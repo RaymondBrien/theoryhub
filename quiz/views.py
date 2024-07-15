@@ -15,28 +15,28 @@ class QuizList(generic.ListView):
     context_object_name = 'quiz_list'
 
 
-    def single_quiz(request, quiz_id):
-        """
-        Displays a single quiz with its questions.
-        
-        **Context**
-       ``queryset``
-            All published instances of :model:`quiz.Quiz`.
-        ``quiz``
-                An instance of :model:`quiz.Quiz`.
-        ``questions``
-                A queryset of :model:`quiz.Question` objects from quiz instance.
-        
-        **Template**
-        :template:`quiz/single_quiz.html`
-        """
-        queryset = Quiz.objects.filter(status=1) 
-        quiz = get_object_or_404(queryset, quiz_id=quiz_id)
-        questions = Question.objects.filter(quiz=quiz)
-        context = {
-            'quiz': quiz,
-            'questions': questions,
-        }
-        return render(request, 'quiz/single_quiz.html', context)
+def single_quiz(request, title):
+    """
+    Displays a single quiz with its questions.
+    
+    **Context**
+    ``queryset``
+        All published instances of :model:`quiz.Quiz`.
+    ``quiz``
+            An instance of :model:`quiz.Quiz`.
+    ``questions``
+            A queryset of :model:`quiz.Question` objects from quiz instance.
+    
+    **Template**
+    :template:`quiz/single_quiz.html`
+    """
+    queryset = Quiz.objects.filter(status=1) 
+    quiz = get_object_or_404(queryset, title=title)
+    questions = Question.objects.filter(quiz=quiz)
+    context = {
+        'quiz': quiz,
+        'questions': questions,
+    }
+    return render(request, 'quiz/single_quiz.html', context)
 
 
