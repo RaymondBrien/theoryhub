@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-
 {% block content %}
+
+{% url 'single_quiz' as single_quiz_url %}
 
 {% block title %}
 <h1 class="heading">Quizzes</h1>
@@ -15,16 +16,19 @@
 </div>
 
 <!-- TODO: CONTENT VISIBLE IF SIGNED IN USER -->
+
+{% if user.is_authenticated %}
 <div>
     <h1>List of Quizzes</h1>
     <ul>
-        {% for q in quizzes %}
+        {% for q in quiz_list %}
         <li>
-             <a href="">{{ q.title }}</a> <!-- TODO: add button with url for each quiz -->
+             <a href="{% url 'single_quiz' q.id %}">{{ q.title }}</a> <!-- TODO: add button with url for each quiz -->
         </li>
         {% endfor %}
     </ul>
 
 </div>
+{% endif %}
 
 {% endblock content %}

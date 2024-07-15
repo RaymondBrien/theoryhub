@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('quiz_list/', views.QuizList.as_view(), name='quiz_list'), # class based view 
-    # path('<int:quiz-id>', views.single_quiz, name='single-quiz'), # function based view TODO: make view
+    path('quiz/<str:title>/', views.single_quiz, name='single_quiz'), # function based view TODO: make view
 ]
