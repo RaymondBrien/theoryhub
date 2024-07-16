@@ -13,6 +13,7 @@ class Quiz(models.Model):
     """Stores a single quiz, which is a collection of questions"""
 
     title = models.CharField(max_length=200, unique=True, validators=[MinLengthValidator(5), MaxLengthValidator(20)])
+    slug = models.SlugField(max_length=200, unique=True)
     description = models.TextField(validators=[MinLengthValidator(5), MaxLengthValidator(50)])
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
