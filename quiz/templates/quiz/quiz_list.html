@@ -27,8 +27,13 @@
         </li>
         {% endfor %}
     </ul>
-
 </div>
 {% endif %}
+{% else %}
+<div>
+    <h1>Login or Register to access the Quiz List</h1>
+    <p>You can learn about various topics from various fields and practice your skills.</p>
+    <a href="{% url 'account_login' %}">Login</a> or <a href="{% url 'account_signup' %}">Register</a>
+</div>
 
 {% endblock content %}
