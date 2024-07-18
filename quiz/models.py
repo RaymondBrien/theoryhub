@@ -84,9 +84,9 @@ class Answer(models.Model):
     """Stores a single answer related :model:`quiz.Question`"""
     
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
-    answer_content = models.TextField(default='Put multiple-choice answer here',)
-    answer_option = models.IntegerField(choices=ANSWER_OPTIONS, default=1) # TODO: do I need a default here?
-    correct = models.IntegerField(choices=CORRECT, default=0) # additional field added after ERD
+    answer_content = models.TextField(default='Put multiple-choice answer here')
+    answer_option = models.IntegerField(choices=ANSWER_OPTIONS, null=False) # TODO: do I need a default here?
+    correct = models.IntegerField(choices=CORRECT, default=0) # default answer incorrect
     
     class Meta:
         ordering = ["answer_option"]
