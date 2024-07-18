@@ -21,18 +21,13 @@ def single_quiz(request, slug):
     
     **Context**
     ``queryset`` TODO: edit params to includes slug
-        All published instances of :model:`quiz.Quiz`.
-    ``title``
-            An instance of :model:`quiz.title`.
-    ``questions``
-            A queryset of :model:`quiz.Question` objects from quiz instance.
-    
+
     **Template**
     :template:`quiz/single_quiz.html`
     """
     queryset = Quiz.objects.filter(status=1) 
     quiz = get_object_or_404(queryset, slug=slug)
-    questions = Question.objects.filter(quiz=quiz)
+    questions = Question.objects.filter(quiz_id=quiz)
     context = {
         'quiz': quiz,
         'questions': questions,
