@@ -15,25 +15,31 @@
     <p>This is a platform where you can find and practice various topics from various fields.</p>
 </div>
 
-<!-- TODO: CONTENT VISIBLE IF SIGNED IN USER -->
-
 {% if user.is_authenticated %}
 <div>
     <h1>List of Quizzes</h1>
     <ul>
         {% for q in quiz_list %}
         <li>
-             <a href="{% url 'single_quiz' q.id %}">{{ q.title }}</a> <!-- TODO: add button with url for each quiz -->
+             <a href="{% url 'single_quiz' q.slug %}">{{ q.title }}</a> <!-- TODO: add button with url for each quiz -->
+             <span class="badge badge-primary">Last updated on {{ q.updated_on }}</span>
+            
+             <!-- TODO add to dashboard instead -->
+             <!-- <span class="badge badge-primary">{{ q.num_questions }}</span>
+             <span class="badge badge-secondary">{{ q.average_score }}</span>
+             <span class="badge badge-success">{{ q.num_correct_answers }}</span>
+             <span class="badge badge-danger">{{ q.num_incorrect_answers }}</span> -->
         </li>
         {% endfor %}
     </ul>
 </div>
-{% endif %}
 {% else %}
+<!-- TODO add styles  -->
 <div>
     <h1>Login or Register to access the Quiz List</h1>
     <p>You can learn about various topics from various fields and practice your skills.</p>
     <a href="{% url 'account_login' %}">Login</a> or <a href="{% url 'account_signup' %}">Register</a>
 </div>
 
+{% endif %}
 {% endblock content %}

@@ -15,15 +15,15 @@ class QuizList(generic.ListView):
     context_object_name = 'quiz_list'
 
 
-def single_quiz(request, title):
+def single_quiz(request, slug):
     """
     Displays a single quiz with its questions.
     
     **Context**
-    ``queryset``
+    ``queryset`` TODO: edit params to includes slug
         All published instances of :model:`quiz.Quiz`.
-    ``quiz``
-            An instance of :model:`quiz.Quiz`.
+    ``title``
+            An instance of :model:`quiz.title`.
     ``questions``
             A queryset of :model:`quiz.Question` objects from quiz instance.
     
@@ -31,7 +31,7 @@ def single_quiz(request, title):
     :template:`quiz/single_quiz.html`
     """
     queryset = Quiz.objects.filter(status=1) 
-    quiz = get_object_or_404(queryset, title=title)
+    quiz = get_object_or_404(queryset, slug=slug)
     questions = Question.objects.filter(quiz=quiz)
     context = {
         'quiz': quiz,

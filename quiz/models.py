@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from cloudinary.models import CloudinaryField
+from django.utils.text import slugify
 
 STATUS = ((0, "Draft"), (1, "Published"))
 CORRECT = ((0, "Incorrect"), (1, "Correct" ))
@@ -13,7 +14,7 @@ class Quiz(models.Model):
     """Stores a single quiz, which is a collection of questions"""
 
     title = models.CharField(max_length=200, unique=True, validators=[MinLengthValidator(5), MaxLengthValidator(20)])
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, default=slugify(title))
     description = models.TextField(validators=[MinLengthValidator(5), MaxLengthValidator(50)])
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -34,6 +35,12 @@ class Quiz(models.Model):
         verbose_name_plural = "Quizzes"
     def __str__(self):
         return f'{self.title}'
+    
+    # ensure new quizzes automatically have slugified title as slug for url functionality
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
 
 class Question(models.Model):
@@ -79,8 +86,6 @@ class Answer(models.Model):
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
     answer_content = models.TextField(default='Put multiple-choice answer here',)
     answer_option = models.IntegerField(choices=ANSWER_OPTIONS, default=1) # TODO: do I need a default here?
-    
-    # TODO: add validation so always ONE correct answer per question
     correct = models.IntegerField(choices=CORRECT, default=0) # additional field added after ERD
     
     class Meta:
