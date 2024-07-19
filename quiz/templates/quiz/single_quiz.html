@@ -6,6 +6,7 @@
 <!-- {% endblock %} -->
 
 {% block content %}
+
 <!-- TODO: CREDIT TIM NELSON -->
 <!-- TODO:  add function view to render question content in template -->
 <!-- TODO: add initial title page of single quiz: quiz title, description. Do not show quiz content until button is clicked. -->
@@ -17,8 +18,8 @@
 <!-- TODO: add a "Restart Quiz" button to reset the quiz and start over. -->
 
 
-
-<section id="quiz-container" class="{% if user.is_authenticated %} container my-5 {% else %} d-none {% endif  %}">
+<!-- class="{% if user.is_authenticated %} container my-5 {% else %} d-none {% endif  %} -->
+<section id="quiz-container">
 
     <!-- quiz start button -->
     <div class="row" id="quiz-start-row">
@@ -35,9 +36,10 @@
                         question{{ questions|length|pluralize }}
                     </p>
                     <p>
-                        When you're ready, click the <strong>Start Quiz</strong> button.
+                        <!-- TODO: style button -->
+                        When you're ready, click the <strong>Start Quiz</strong> button. 
                     </p>
-                    <!-- TODO:Add JS to reveal quiz section once clicked: -->
+                    <!-- TODO:Add JS to reveal quiz section once clicked?: -->
                     <button id="quiz-start-btn" class="btn btn-ci my-4">Start Quiz</button>
                 </div>
             </div>
@@ -48,7 +50,6 @@
     <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
             <!-- TODO: Add post request view via quiz form-->
-            <!-- TODO add submit quiz url -->
             <!-- TODO: add submit quiz to form with: action=" url 'submit_quiz' quiz.id "> -->
             <form id="quiz-form" class="hide full" method="POST">
                 {% csrf_token %}
@@ -60,48 +61,24 @@
 
                 <fieldset id="card-set-{{ forloop.counter }}{% if forloop.last %}-last{% endif %}"
                     class="card shadow {% if not forloop.first %}hide full{% endif %}">
-
-                    <!-- progress bar -->
-                    <div id="progress_{{ forloop.counter }}" class="progress">
-                        <!-- TODO progress instead of progress bar for accessibility? -->
-                        <div id="progress-bar-{% if forloop.first %}first{% else %}{{ forloop.counter }}{% endif %}"
-                            class="progress-bar progress-bar-striped bg-p-orange progress-bar-animated"
-                            role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-                            data-questionindex="1" data-questioncounter="{{ questions|length }}">
-                            1 of {{ questions|length }}
-                        </div>
+                    <!-- display the question content -->
+                    <div class="question-content">
+                        <img src="{{ question.question_image }}" alt="question image">
+                        <h6>{{ question.question_text }}</h6>
                     </div>
 
-                    <!-- TODO add as future feature: track duration of each individual question -->
-                    <!-- <input type="hidden" id="time_taken-{{ question.id }}" name="time_taken-{{ question.id }}"
-                        value="0"> -->
-
-                    <!-- display the question -->
-                    <legend class="card-header bg-p-grey text-t-grey">
-                        <span class="text-danger">*</span>
-                        {{ question.question }}
-
-                        <!-- optional text, where applicable -->
-                        {% if question.text %}
-                        <p class="bg-s-grey text-black text-center my-3 p-3 rounded">
-                            <small class="fs-6">{{ question.text|safe|linebreaksbr }}</small>
-                        </p>
-                        {% endif %}
-                    </legend>
-
-                    <!-- cycle through each of the question's choices -->
-                    <div class="card-body">
-                        <!-- TODO EDIT -->
-
-                        {% if quiz.quiz_type|safe == "is_not_mentor" %}
-                        {% for choice in question.choices %}
-                        {% include "quizzes/partials/choices.html" %}
+                    <!-- display the answer options -->
+                    <div class="answer-options">
+                        {% for answer in question.answers.all %}
+                        <div class="form-check">
+                            <!-- TODO: check template logic for input value  -->
+                            <input class="form-check-input" type="radio" name="{{ question_id }}" id="{{ answer.answer_option }}"
+                                value="{% if answer.correct %} question.points {% else %} 0 {% endif %}">
+                            <label class="form-check-label" for="{{ answer.answer_option }}">
+                                {{ answer.answer_content }}
+                            </label>
+                        </div>
                         {% endfor %}
-                        {% endif %}
-
-                        <!-- error handling -->
-                        <span id="error-handler-{{ forloop.counter }}"
-                            class="text-danger d-flex justify-content-center"></span>
                     </div>
 
                     <!-- next && submit buttons -->
