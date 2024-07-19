@@ -39,12 +39,13 @@ def single_quiz(request, slug):
     quiz = get_object_or_404(queryset, slug=slug)
     
     # Prefetch related answers to avoid multiple database queries
-    answers_prefetch = Prefetch('answers', queryset=Answer.objects.all())
-    questions = Question.objects.filter(quiz_id=quiz).prefetch_related('answers_prefetch')
+    # answers_prefetch = Prefetch('answers', queryset=Answer.objects.all())
+    questions = Question.objects.filter(quiz_id=quiz)
+    # .prefetch_related(answers_prefetch)
 
     context = {
         'quiz': quiz,
-        'question': questions,
+        'questions': questions,
     }
     return render(request, 'quiz/single_quiz.html', context)
 

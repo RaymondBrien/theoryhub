@@ -30,9 +30,6 @@ class Quiz(models.Model):
     # # Set the pub_date for published items if it hasn't been set already.
     # if self.status == "published" and self.pub_date is None:
     #     self.pub_date = datetime.date.today()
-    class Meta:
-        ordering = ["-created_on"]
-        verbose_name_plural = "Quizzes"
     def __str__(self):
         return f'{self.title}'
     
@@ -41,6 +38,9 @@ class Quiz(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+    class Meta:
+        ordering = ["-created_on"]
+        verbose_name_plural = "Quizzes"
 
 
 class Question(models.Model):
@@ -58,7 +58,7 @@ class Question(models.Model):
         ordering = ["question_text"]
         verbose_name_plural = "Questions"
     def __str__(self):
-        return f'Question: {self.question_text} (belongs to Quiz {self.quiz_id})'
+        return f'Question belongs to Quiz {self.quiz_id})'
        
        # TODO: add question numbers to appear in order in each quiz - see snippet to edit below 
         #     QUESTIONS = {
