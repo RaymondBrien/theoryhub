@@ -19,7 +19,7 @@
 
 
 <!-- class="{% if user.is_authenticated %} container my-5 {% else %} d-none {% endif  %} -->
-<section id="quiz-container">
+<section id="quiz-container" class="container">
 
     <!-- quiz start button -->
     <div class="row" id="quiz-start-row">
@@ -72,8 +72,8 @@
                         {% for answer in question.answers.all %}
                         <div class="form-check">
                             <!-- TODO: check template logic for input value  -->
-                             <!-- TODO debug radio buttons - more than one can be clicked currently -->
-                            <input class="form-check-input" type="radio" name="{{ question_id }}" id="{{ answer.answer_option }}"
+                             <!-- TODO debug radio buttons - more than one can be clicked currently:  -->
+                            <input class="form-check-input" type="radio" name="{{ question.id }}" id="{{ answer.answer_option }}"
                                 value="{% if answer.correct %} question.points {% else %} 0 {% endif %}">
                             <label class="form-check-label" for="{{ answer.answer_option }}">
                                 {{ answer.answer_content }}
