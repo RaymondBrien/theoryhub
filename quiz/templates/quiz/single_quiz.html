@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 <!-- {% block css %} -->
 <!--TODO: ADD Quiz-specific STYLES  and crispy form tags <link rel="stylesheet" href="{% static 'css/quiz.css' %}" type="text/css"> -->
@@ -37,7 +38,7 @@
                     </p>
                     <p>
                         <!-- TODO: style button -->
-                        When you're ready, click the <strong>Start Quiz</strong> button. 
+                        When you're ready, click the <strong>Start Quiz</strong> button.
                     </p>
                     <!-- TODO:Add JS to reveal quiz section once clicked?: -->
                     <button id="quiz-start-btn" class="btn btn-ci my-4">Start Quiz</button>
@@ -49,12 +50,12 @@
     <!-- quiz form -->
     <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
-            <!-- TODO: Add post request view via quiz form-->
             <!-- TODO: add submit quiz to form with: action=" url 'submit_quiz' quiz.id "> -->
             <form id="quiz-form" class="hide full" method="POST">
+
+                {% if user.is_authenticated %}
+
                 {% csrf_token %}
-                <!-- TODO: add track total duration of entire quiz to FUTURE FEATURES -->
-                <input type="hidden" id="duration" name="duration" value="0">
 
                 <!-- cycle through all questions -->
                 {% for question in questions %}
@@ -72,8 +73,8 @@
                         {% for answer in question.answers.all %}
                         <div class="form-check">
                             <!-- TODO: check template logic for input value  -->
-                             <!-- TODO debug radio buttons - more than one can be clicked currently:  -->
-                            <input class="form-check-input" type="radio" name="{{ question.id }}" id="{{ answer.answer_option }}"
+                            <input class="form-check-input" type="radio" name="{{ question.id }}"
+                                id="{{ answer.answer_option }}"
                                 value="{% if answer.correct %} question.points {% else %} 0 {% endif %}">
                             <label class="form-check-label" for="{{ answer.answer_option }}">
                                 {{ answer.answer_content }}
@@ -82,28 +83,25 @@
                         {% endfor %}
                     </div>
 
-                    <!-- next && submit buttons -->
-                    {% if not forloop.last and questions|length > 1 %}
-                    <!-- "next" button for each question, except the final question -->
-                    <div class="card-footer bg-p-grey text-t-grey {% if not forloop.first %}hide full{% endif %}"
-                        id="card-next-btn-{{ forloop.counter }}">
-                        <div class="d-flex justify-content-center">
-                            <button id="next-btn-{{ forloop.counter }}" class="btn-ci">Next</button>
-                        </div>
-                    </div>
-                    {% else %}
-                    <!-- replace "next" button with the "submit" button -->
+
                     <div class="card-footer bg-p-grey text-t-grey {% if questions|length > 1 %}hide full{% endif %}"
                         id="card-next-btn-{{ forloop.counter }}">
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" id="quiz-submit-btn" data-submit="{{ forloop.counter }}"
-                                class="btn-ci">Submit</button>
-                        </div>
+                        <form method="post" id="answerSubmit">
+                            {{ answer_selection | crispy }}
+                        </form>
                     </div>
-                    {% endif %}
+                    {% endfor %}
 
+                    <div class="d-flex justify-content-center">
+                        <!-- TODO answer submit form  -->
+                        <button type="submit" id="quiz-submit-btn" data-submit="{{ forloop.counter }}"
+                            class="btn-ci">Submit</button>
+                    </div>
                 </fieldset>
-                {% endfor %}
+
+                {% else %}
+                <p>Log in to submit your answer</p>
+                {% endif %}
 
             </form>
         </div>

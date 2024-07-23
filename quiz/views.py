@@ -6,6 +6,7 @@ from django.db.models import Prefetch
 from django.contrib.auth.models import User
 
 from .models import Quiz, Question, Answer
+from .forms import AnswerSelection
 
 
 class QuizList(generic.ListView):
@@ -37,8 +38,9 @@ def single_quiz(request, slug):
     
     queryset = Quiz.objects.filter(status=1) 
     quiz = get_object_or_404(queryset, slug=slug)
-    
-    # Prefetch related answers to avoid multiple database queries
+    answer_selection = AnswerSelection()
+     
+    #TODO tidy    # Prefetch related answers to avoid multiple database queries
     # answers_prefetch = Prefetch('answers', queryset=Answer.objects.all())
     questions = Question.objects.filter(quiz_id=quiz)
     # .prefetch_related(answers_prefetch)
@@ -46,6 +48,7 @@ def single_quiz(request, slug):
     context = {
         'quiz': quiz,
         'questions': questions,
+        'answer_selection': answer_selection,  # form to submit answers  # TODO: add this to the context in single_quiz.html  # TODO: add form validation in forms.py  # TODO: add form handling in views.py  # TODO: add form success message in views.py  # TODO: add form error message in views.py  # TODO: add form validation in forms.py  # TODO: add form handling in views.py  #
     }
     return render(request, 'quiz/single_quiz.html', context)
 
