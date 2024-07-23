@@ -25,12 +25,13 @@ class QuestionAdminForm(forms.ModelForm):
         fields = '__all__'
 
     def clean(self):
+        # TODO debug 
         cleaned_data = super().clean()
-        answers = self.instance.answers.all() if self.instance.pk else []
+        # answers = self.instance.answers.all() # if self.instance.pk else []
         
-        if not any(answer.correct == 1 for answer in answers):
-            raise forms.ValidationError("At least one answer must be marked as correct.")
-        return cleaned_data
+        # if not any(answer.correct == 1 for answer in answers):
+        #     raise forms.ValidationError("At least one answer must be marked as correct.")
+        # return cleaned_data
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
@@ -38,20 +39,27 @@ class QuestionAdmin(admin.ModelAdmin):
     form = QuestionAdminForm
     inlines = [AnswerInline]
     list_display = ('points', 'quiz_id', 'question_text')
+    # TODO: debug at least one answer correct validation
+    def save_related(self, request, form, formsets, change):
+        super().save_related(request, form, formsets, change)
+        # Ensure at least one answer is correct for each question
+        if not any(answer.correct == 1 for answer in form.instance.answers.exclude(pk=form.instance.pk)):
+            form.add_error(None, "At least one answer must be marked as correct for each question.")
+            # form.instance.delete()
 
     # validate using forms for easier validation
-    def save_formset(self, request, form, formset, change):
-        instances = formset.save(commit=False)
-        for instance in instances:
-            instance.save()
-        formset.save_m2m()
+    # def save_formset(self, request, form, formset, change):
+    #     instances = formset.save(commit=False)
+    #     for instance in instances:
+    #         instance.save()
+    #     formset.save_m2m()
         
-        # Check if at least one answer is correct after saving
-        if not any(answer.correct == 1 for answer in form.instance.answers.all()):
-            form.add_error(None, "At least one answer must be marked as correct.")
-            return
+        # # Check if at least one answer is correct after saving
+        # if not any(answer.correct == 1 for answer in form.instance.answers.all()):
+        #     form.add_error(None, "At least one answer must be marked as correct.")
+        #     return
         
-        formset.save()
+        # formset.save()
 
 
 # admin.site.register(Answer)  # If you want to manage answers separately
