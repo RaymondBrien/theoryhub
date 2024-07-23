@@ -3,4 +3,7 @@
 {% block content %}
     <h1>Quiz Result</h1>
     <p>Your result: {{ result }}</p>
+    <p>Your score: {{ score }}/{{ total_questions }}</p>
+
+    <a href="{% url 'quiz_list' %}">Back to Quiz List</a>
 {% endblock %}
