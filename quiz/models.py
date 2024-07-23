@@ -85,7 +85,7 @@ class Answer(models.Model):
     
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
     answer_content = models.TextField(default='Put multiple-choice answer here')
-    answer_option = models.IntegerField(choices=ANSWER_OPTIONS, null=False) # TODO: do I need a default here?
+    answer_option = models.IntegerField(choices=ANSWER_OPTIONS, null=False) 
     correct = models.IntegerField(choices=CORRECT, default=0) # default answer incorrect
     
     class Meta:

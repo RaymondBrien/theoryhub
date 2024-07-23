@@ -18,6 +18,8 @@
 <!-- TODO: add a "Submit Quiz" button to submit the quiz results. -->
 <!-- TODO: add a "Restart Quiz" button to reset the quiz and start over. -->
 
+<!-- TODO check step 3 where does this go? -->
+
 
 <!-- class="{% if user.is_authenticated %} container my-5 {% else %} d-none {% endif  %} -->
 <section id="quiz-container" class="container">
@@ -51,58 +53,10 @@
     <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
             <!-- TODO: add submit quiz to form with: action=" url 'submit_quiz' quiz.id "> -->
-            <form id="quiz-form" class="hide full" method="POST">
-
-                {% if user.is_authenticated %}
-
+            <form method="post">
                 {% csrf_token %}
-
-                <!-- cycle through all questions -->
-                {% for question in questions %}
-
-                <fieldset id="card-set-{{ forloop.counter }}{% if forloop.last %}-last{% endif %}"
-                    class="card shadow {% if not forloop.first %}hide full{% endif %}">
-                    <!-- display the question content -->
-                    <div class="question-content">
-                        <img src="{{ question.question_image }}" alt="question image">
-                        <h6>{{ question.question_text }}</h6>
-                    </div>
-
-                    <!-- display the answer options -->
-                    <div class="answer-options">
-                        {% for answer in question.answers.all %}
-                        <div class="form-check">
-                            <!-- TODO: check template logic for input value  -->
-                            <input class="form-check-input" type="radio" name="{{ question.id }}"
-                                id="{{ answer.answer_option }}"
-                                value="{% if answer.correct %} question.points {% else %} 0 {% endif %}">
-                            <label class="form-check-label" for="{{ answer.answer_option }}">
-                                {{ answer.answer_content }}
-                            </label>
-                        </div>
-                        {% endfor %}
-                    </div>
-
-
-                    <div class="card-footer bg-p-grey text-t-grey {% if questions|length > 1 %}hide full{% endif %}"
-                        id="card-next-btn-{{ forloop.counter }}">
-                        <form method="post" id="answerSubmit">
-                            {{ answer_selection | crispy }}
-                        </form>
-                    </div>
-                    {% endfor %}
-
-                    <div class="d-flex justify-content-center">
-                        <!-- TODO answer submit form  -->
-                        <button type="submit" id="quiz-submit-btn" data-submit="{{ forloop.counter }}"
-                            class="btn-ci">Submit</button>
-                    </div>
-                </fieldset>
-
-                {% else %}
-                <p>Log in to submit your answer</p>
-                {% endif %}
-
+                {{ form.as_p }}
+                <button type="submit">Submit Quiz</button>
             </form>
         </div>
     </div>
