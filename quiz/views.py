@@ -96,4 +96,4 @@ def quiz_result(request, quiz_id):
         'quiz': quiz,
         'submission': submission,
     }
-    return render(request, 'quiz/quiz_result.html', context) #TODO make tempalte and add url pattern for quiz_result
+    return render(request, 'quiz/quiz_result.html', context)
