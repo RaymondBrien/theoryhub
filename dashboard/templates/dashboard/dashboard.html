@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Dashboard tabs could go here {% endblock %}
 
     <div class="container">
         <div class="row">
@@ -15,12 +15,13 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <h2>Profile</h2>
+                <!-- TODO add image? -->
+                <h2>Profile</h2> 
                 <hr>
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <strong>Hello {{ user.username }}</strong>
+                            <strong>Hello <i class="font-weight-bold">{{ user.username }}</i></strong>
                             <!-- TODO: Add list of quizzes completed -->
                             <!-- TODO:  update user name? CHECK USER STORIES and ensure meet all crud functionality for assessment requirements-->
                             <!-- TODO:  -->
