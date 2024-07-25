@@ -7,15 +7,15 @@ from django.urls import reverse, resolve
 
 #https://djangostars.com/blog/django-pytest-testing/#:~:text=Point%20your%20Django%20settings%20to%20pytest&text=Create%20a%20file%20called%20pytest,flag%20when%20running%20the%20tests.
 
-@pytest.mark.django_db
 class TestDashboardViews(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='testpassword')
         self.client.login(username='testuser', password='testpassword')
 
     def test_dashboard_url_returns_200(self):
-        response = self.client.get(reverse(f'dashboard/{self.user.username}/'))
+        response = self.client.get(reverse('dashboard', args=['testuser']))
         self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Dashboard', response.content)
 
     def test_dashboard_view_returns_404_if_user_does_not_exist(self):
         response = self.client.get('/dashboard/nonexistentuser/') # TODO add user auth validation in view handling so can't be brute forced
