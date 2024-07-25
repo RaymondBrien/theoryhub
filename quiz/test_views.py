@@ -48,29 +48,25 @@ class TestQuizViews(TestCase):
 
 
 class TestSingleQuizView(TestCase):
-# TODO move all into one class so setup is consistent
-# TODO replace names with first setup names for test functionality
-# TODO run tests for all quiz views
-    
-    # def setUp(self):
-    #         self.user = User.objects.create_user(username='testuser', password='testpassword')
-    #         self.client = Client()
-    #         self.quiz = Quiz.objects.create(title='Test Quiz', slug='test-quiz', status=1)
-    #         self.question1 = Question(quiz_id=self.quiz, question_text='Question 1')
-    #         self.question2 = Question(quiz_id=self.quiz, question_text='Question 2')
-    #         self.answer1a = Answer(question_id=self.question1, answer_option=1, answer_content='Answer 1a', correct=True)
-    #         self.answer1b = Answer(question_id=self.question1, answer_option=2, answer_content='Answer 1b', correct=False)
+    def setUp(self):
+            self.user = User.objects.create_user(username='testuser', password='testpassword')
+            self.client = Client()
+            self.quiz = Quiz.objects.create(title='Test Quiz', slug='test-quiz', status=1)
+            self.question1 = Question(quiz_id=self.quiz, question_text='Question 1')
+            self.question2 = Question(quiz_id=self.quiz, question_text='Question 2')
+            self.answer1a = Answer(question_id=self.question1, answer_option=1, answer_content='Answer 1a', correct=True)
+            self.answer1b = Answer(question_id=self.question1, answer_option=2, answer_content='Answer 1b', correct=False)
 
-    #         self.quiz.save()
-    #         self.question1.save()
-    #         self.answer1a.save()
-    #         self.answer1b.save()
+            self.quiz.save()
+            self.question1.save()
+            self.answer1a.save()
+            self.answer1b.save()
     
     def test_successful_submission_redirects_to_quiz_result(self):
         self.client.force_login(self.user)
         response = self.client.post(reverse('single_quiz', kwargs={'slug': 'test-quiz'}),
                                     {'question_1': self.answer1a, 'question_2': self.answer1b})
-        self.assertEqual(response.status_code, 302) # TODO test again once url quiz_result exists 
+        self.assertEqual(response.status_code, 302) 
         self.assertEqual(response.url, reverse('quiz_result', kwargs={'quiz_id': self.quiz.id}))
 
     def test_invalid_submission_redirects_to_quiz_page(self):
@@ -90,7 +86,7 @@ class TestSingleQuizView(TestCase):
         unpublished_quiz = Quiz.objects.create(title='Unpublished Quiz', slug='unpublished-quiz', status=0)
         response = self.client.get(reverse('single_quiz', kwargs={'slug': 'unpublished-quiz'}))
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, '/')
+        self.assertEqual(response.url, '/') # TODO DEBUG
 
     def test_submission_saves_to_database(self):
         self.client.force_login(self.user)
