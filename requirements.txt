@@ -15,10 +15,15 @@ django-crispy-forms==2.2
 django-summernote==0.8.20.0
 gunicorn==20.1.0
 idna==3.7
+iniconfig==2.0.0
 oauthlib==3.2.2
+packaging==24.1
+pluggy==1.5.0
 psycopg2==2.9.9
 pycparser==2.22
 PyJWT==2.8.0
+pytest==8.3.2
+pytest-django==4.8.0
 python3-openid==3.2.0
 requests==2.32.3
 requests-oauthlib==2.0.0
