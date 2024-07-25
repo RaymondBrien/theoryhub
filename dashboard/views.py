@@ -1,7 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.models import User
+
 from .models import UserQuizSubmission
 
-
-def dashboard(request):
-    submissions = UserQuizSubmission.objects.filter(owner=request.user)
-    return render(request, 'dashboard.html', {'submissions': submissions})
+def dashboard(request, username):
+    """
+    Context 
+    Template
+    
+    """
+    user = get_object_or_404(User, username=username)
+    submissions = UserQuizSubmission.objects.filter(owner=user) 
+    return render(request, 'dashboard/dashboard.html', {'submissions': submissions, 'user': user})

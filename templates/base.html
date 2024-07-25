@@ -4,7 +4,7 @@
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
-{% url 'user_dashboard' as dashboard_url %}
+{% url 'dashboard' as dashboard_url %}
 
 
 <!DOCTYPE html>
@@ -48,8 +48,8 @@
                             href="{% url 'account_logout' %}">Logout</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page"
-                            href="{% url 'user_dashboard' user.username %}">Dashboard</a>
+                        <a class="nav-link {% if request.path == user_dashboard %}active{% endif %}" aria-current="page"
+                            href="{% url 'dashboard' user.username %}">Dashboard</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
