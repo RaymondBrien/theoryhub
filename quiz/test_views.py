@@ -47,20 +47,23 @@ class TestQuizViews(TestCase):
 
 
 class TestSingleQuizView(TestCase):
+# TODO move all into one class so setup is consistent
+# TODO replace names with first setup names for test functionality
+# TODO run tests for all quiz views
+    
+    # def setUp(self):
+    #         self.user = User.objects.create_user(username='testuser', password='testpassword')
+    #         self.client = Client()
+    #         self.quiz = Quiz.objects.create(title='Test Quiz', slug='test-quiz', status=1)
+    #         self.question1 = Question(quiz_id=self.quiz, question_text='Question 1')
+    #         self.question2 = Question(quiz_id=self.quiz, question_text='Question 2')
+    #         self.answer1a = Answer(question_id=self.question1, answer_option=1, answer_content='Answer 1a', correct=True)
+    #         self.answer1b = Answer(question_id=self.question1, answer_option=2, answer_content='Answer 1b', correct=False)
 
-    def setUp(self):
-            self.user = User.objects.create_user(username='testuser', password='testpassword')
-            self.client = Client()
-            self.quiz = Quiz.objects.create(title='Test Quiz', slug='test-quiz', status=1)
-            self.question1 = Question(quiz_id=self.quiz, question_text='Question 1')
-            self.question2 = Question(quiz_id=self.quiz, question_text='Question 2')
-            self.answer1a = Answer(question_id=self.question1, answer_option=1, answer_content='Answer 1a', correct=True)
-            self.answer1b = Answer(question_id=self.question1, answer_option=2, answer_content='Answer 1b', correct=False)
-
-            self.quiz.save()
-            self.question1.save()
-            self.answer1a.save()
-            self.answer1b.save()
+    #         self.quiz.save()
+    #         self.question1.save()
+    #         self.answer1a.save()
+    #         self.answer1b.save()
     
     def test_successful_submission_redirects_to_quiz_result(self):
         self.client.force_login(self.user)

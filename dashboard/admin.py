@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import UserQuizSubmission
 
-# Register your models here.
+
+@admin.register(UserQuizSubmission)
+class UserQuizSubmissionAdmin(admin.ModelAdmin):
+    list_display = ('owner', 'quiz', 'user_score', 'last_taken')

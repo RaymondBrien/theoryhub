@@ -19,9 +19,9 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    path('', include('about.urls'), name='about-urls'),
+    path('', include('about.urls'), name='about-urls'), # about section
     path('dashboard/', include('dashboard.urls'), name='dashboard-urls'),  # for dashboard app
-    path('quiz/', include('quiz.urls'), name='quiz-urls'),  # for quiz app TODO: add custom inidivudal quiz url in quiz app
+    path('quiz/', include('quiz.urls'), name='quiz-urls'),  # for quiz app 
     path('accounts/', include('allauth.urls')),  # for social authentication
     path('summernote/', include('django_summernote.urls')),  # for Summernote editor
     path('admin/', admin.site.urls),
