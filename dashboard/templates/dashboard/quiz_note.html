@@ -14,7 +14,7 @@
         <!-- add quiz_notes to view for this template -->
         {% for single_note in quiz_note %}
         <!-- only show notes created by the user -->
-        <div class="card {% if not note.user == user %} d-none {% endif %}" id="note {{ note. id }}">
+        <div class="card {% if not note.user == user %} d-none {% endif %}" id="note {{ single_note.id }}">
             <div class="card-body">
                 <h5 class="font-weight-bold">{{ single_note.note }}</h5>
                 <br>
