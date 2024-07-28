@@ -1,8 +1,9 @@
-{% extends "base.html" %}
+{% extends "quiz/quiz_list.html" %}
+{% block quiz_notes %}
+<p>block quiz_notes which should be inside quiz_list</p>
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block quiz_notes %}
 
 <!-- Display quiz_note -->
 <!-- TODO style quiz notes using quiz_note class -->
@@ -36,11 +37,12 @@
                 <!-- a href= url 'create_quiz_note' quiz.id user.id " class="btn btn-primary">Create Note</a> -->
             </form>
         </div>
+        {% endif %}
+    
 
 
     </div>
 </div>
 <!-- TODO add delete comment with modal  -->
 
-{% endif %}
 {% endblock quiz_notes %}

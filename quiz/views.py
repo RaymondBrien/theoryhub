@@ -6,7 +6,7 @@ from django.views import generic
 from django.db.models import Prefetch
 from django.contrib.auth.models import User
 
-from .models import Quiz, Question, Answer
+from .models import Quiz, Question, Answer, QuizNote
 from .forms import AnswerSelection
 from dashboard.models import UserQuizSubmission 
 
@@ -97,3 +97,28 @@ def quiz_result(request, quiz_id):
         'submission': submission,
     }
     return render(request, 'quiz/quiz_result.html', context)
+
+
+def quiz_note(request, user, slug):
+    """
+    View to display a single quiz note.
+
+    Context:
+        user: single instance of :model:`auth.User`
+        quiz_note: single instance of :model:`dashboard.QuizNote`
+        quiz: single instance of :model:`quiz.Quiz`
+
+    Template:
+        dashboard/quiz_note.html
+    """
+    user = get_object_or_404(User, username=user)
+    quiz= get_object_or_404(Quiz, slug=slug)
+    quiz_note =QuizNote(user=user, quiz=quiz)
+    return render(
+        request, 
+        'quiz/quiz_note.html',
+        {
+        'user': user,
+        'quiz_note': quiz_note,
+        'quiz': quiz
+    })

@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from cloudinary.models import CloudinaryField
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 
 STATUS = ((0, "Draft"), (1, "Published"))
 CORRECT = ((0, "Incorrect"), (1, "Correct" ))
@@ -95,3 +96,18 @@ class Answer(models.Model):
     
     def __str__(self):
         return f'Answer: {self.answer_content}'
+    
+
+class QuizNote(models.Model):
+    """
+    Stores single note related to :model:`quiz.Quiz` and :model:`auth.User`
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz_note')
+    note = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    def __str__(self):
+        return f'QuizNote for {self.quiz.title} added by {self.user.username}'

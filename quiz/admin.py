@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Quiz, Question, Answer
+from .models import Quiz, Question, Answer, QuizNote
 
 class QuestionInline(admin.TabularInline):
     model = Question
@@ -63,3 +63,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
 
 # admin.site.register(Answer)  # If you want to manage answers separately
+
+@admin.register(QuizNote)
+class QuizNoteAdmin(admin.ModelAdmin): 
+    list_display = ('user', 'quiz', 'note', 'created_at')

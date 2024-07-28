@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-
-{% block content %}
-
 {% url 'single_quiz' as single_quiz_url %}
 
-{% block title %}
+{% block content %}
+<p>block content now in quiz_list</p>
+
 <h1 class="heading">Quizzes</h1>
-{% endblock %}
 
 <!-- Heading -->
 <div>
@@ -22,26 +20,30 @@
     <h1>List of Quizzes</h1>
     <ul>
         {% for q in quiz_list %}
+        <p>this is start of q in quiz_list</p>
         <li>
-             <a href="{% url 'single_quiz' q.slug %}">{{ q.title }}</a> <!-- TODO: add button with url for each quiz -->
-             <span class="badge badge-primary">Last updated on {{ q.updated_on }}</span>
-           
-             <!-- include quiz-notes block from quiz_note.html -->
-              {% block quiz_notes %}
-                {% include "dashboard/quiz_note.html" %}
-              {% endblock quiz_notes %}
-             <!-- TODO add to dashboard instead -->
-             <!-- <span class="badge badge-primary">{{ q.num_questions }}</span>
-             <span class="badge badge-secondary">{{ q.average_score }}</span>
-             <span class="badge badge-success">{{ q.num_correct_answers }}</span>
-             <span class="badge badge-danger">{{ q.num_incorrect_answers }}</span> -->
+            <a href="{% url 'single_quiz' q.slug %}">{{ q.title }}</a> <!-- TODO: add button with url for each quiz -->
+            <span class="badge badge-primary">Last updated on {{ q.updated_on }}</span>
+
+            <!-- include quiz-notes block from quiz_note.html -->
+            <ul>
+                <li>
+                        {%block quiz_notes %} 
+                        {% endblock quiz_notes %}
+                </li>
+            </ul>
+            <!-- TODO add to dashboard instead -->
+            <!-- <span class="badge badge-primary">{{ q.num_questions }}</span>
+            <span class="badge badge-secondary">{{ q.average_score }}</span>
+            <span class="badge badge-success">{{ q.num_correct_answers }}</span>
+            <span class="badge badge-danger">{{ q.num_incorrect_answers }}</span> -->
         </li>
         {% endfor %}
     </ul>
 </div>
 {% else %}
 <!-- TODO add styles  -->
- <!-- Login or register -->
+<!-- Login or register -->
 <div>
     <h1>Login or Register to access the Quiz List</h1>
     <p>You can learn about various topics from various fields and practice your skills.</p>
