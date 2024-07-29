@@ -19,3 +19,17 @@ class UserQuizSubmission(models.Model):
     def __str__(self):
         return f'{self.owner.username} | Score: {self.user_score} on quiz: {self.quiz.title} at: {self.last_taken}'
 
+
+class QuizNote(models.Model):
+    """
+    Stores single note related to :model:`quiz.Quiz` and :model:`auth.User`
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz_note')
+    note = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    def __str__(self):
+        return f'QuizNote for {self.quiz.title} added by {self.user.username}'

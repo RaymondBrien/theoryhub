@@ -1,5 +1,4 @@
 from django import forms
-from .models import QuizNote
 
 # collect user answers for each question in quiz submission
 # fields dynamically generated based on questions, not tied to specific model
@@ -15,12 +14,3 @@ class AnswerSelection(forms.Form): # custom form not for specific model for more
                 required=True,
                 label=question.question_text
             ) # TODO add back the image for each question!!
-
-
-class QuizNoteForm(forms.ModelForm):
-    class Meta:
-        model = QuizNote
-        fields = ['note', ]
-        widgets = {
-            'note': forms.Textarea(attrs={'class': 'form-control, height: 1em', 'placeholder': 'Enter your note here'})
-        } # TODO style here to make note smaller (or handle in local div in template)
