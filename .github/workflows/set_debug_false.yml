@@ -1,0 +1,40 @@
+name: Check DEBUG Setting
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Check DEBUG setting
+        id: check_debug
+        run: |
+          if grep -q "DEBUG = True" theoryhub/theoryhub/settings.py/settings.py; then
+            echo "DEBUG is set to True"
+            echo "debug_true=true" >> $GITHUB_OUTPUT
+          else
+            echo "DEBUG is set to False"
+            echo "debug_true=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Send email notification
+        if: steps.check_debug.outputs.debug_true == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.EMAIL_USER}}
+          password: ${{secrets.EMAIL_PASS}}
+          subject: WARNING - DEBUG is True in main branch
+          body: The DEBUG setting in settings.py is set to True in the main branch. Please fix this before deploying.
+          to: raytbrien@gmail.com
+          from: GitHub Actions
+
+      - name: Fail workflow if DEBUG is True
+        if: steps.check_debug.outputs.debug_true == 'true'
+        run: exit 1
