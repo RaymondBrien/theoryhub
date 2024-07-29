@@ -49,7 +49,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == user_dashboard %}active{% endif %}" aria-current="page"
-                            href="{% url 'dashboard' user.username %}">Dashboard</a>
+                            href="{% url 'dashboard' %}">Dashboard</a>
                     </li>
                     {% else %}
                     <li class="nav-item">

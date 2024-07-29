@@ -4,78 +4,50 @@
 
 {% block content %}
 
+{% url 'quiz_notes' as quiz_notes_url %}
+
 {% block title %}Dashboard tabs could go here {% endblock %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="display-4">Dashboard</h1>
-                <hr>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <!-- TODO add image? -->
-                <h2>Profile</h2> 
-                <hr>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <strong>Hello <i class="font-weight-bold">{{ user.username }}</i></strong>
-                            <!-- TODO: Add list of quizzes completed -->
-                            <!-- TODO:  update user name? CHECK USER STORIES and ensure meet all crud functionality for assessment requirements-->
-                            <!-- TODO:  -->
-                            <!-- TODO:  -->
-                        </h5>
-                </div>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="display-4">Dashboard</h1>
+            <hr>
         </div>
     </div>
-
-
-
-    <!-- TODO style quiz notes using quiz_note class -->
-    <!-- Display note pad from user -->
-    {% if user.is_authenticated %}
-    <div class="row quiz_notes">
+    <div class="row">
         <div class="col-md-6">
-            {% if quiz_notes %}
-            <h1>Quiz Notes</h1>
-            {% for single_note in quiz_notes %}
-            <div class="card {% if not note.user == user %} d-none {% endif %}" id="note {{ single_note.id }}">
+            <!-- TODO add image? -->
+            <h2>Profile</h2>
+            <hr>
+            <div class="card">
                 <div class="card-body">
-                    <h5 class="font-weight-bold">{{ single_note.note }}</h5>
-                    <br>
-                    <p class="p-2 faded">Created by: {{ single_note.author }} at: {{ single_note.created_on }}
-                    </p>
-                </div>
-                <!-- TODO add edit and delete buttons if author -->
-                <!-- TODO add edit confirmation modal -->
-                <!-- TODO add delete confirmation modal -->
-            </div>
-            {% endfor %}
-
-            <!-- Create new quiznote -->
-            {% elif user.is_authenticated and not quiz_note %}
-            <div class="make-quiz-note card">
-                <div class="card-body">
-                    <p class="card-text" style="text-align: center;">You have not created any notes for this
-                        quiz yet.</p>
-                    <h6>Posting as: {{ user.username }}</h6>
-                    <form id="quiznoteForm" method="post" style="margin-top: 1.3em">
-                        {{ quiz_note_form.as_p|crispy }}
-                        {% csrf_token %}
-                        <!-- TODO make submit button -->
-                        <button type="submit" id="submitButton" class="btn btn-primary btn-md">Submit</button>
-                    </form>
+                    <h5 class="card-title">
+                        <strong>Hello <i class="font-weight-bold">{{ user.username }}</i></strong>
+                        <!-- TODO: Add list of quizzes completed -->
+                        <!-- TODO:  update user name? CHECK USER STORIES and ensure meet all crud functionality for assessment requirements-->
+                        <!-- TODO:  -->
+                        <!-- TODO:  -->
+                    </h5>
+                    <a href="{% url 'quiz_notes' %}" class="">Notes page</a>
                 </div>
             </div>
-            {% endif %}
-
-
-
         </div>
     </div>
-    {% endif %}
-    <!-- TODO add delete comment with modal  -->
-{% endblock content %}
+    <div>
+        <p>
+            here is the form
+        </p>
+        <form method="POST">
+
+            {{ quiz_note_form|crispy}}
+            {% csrf_token %}
+            <button type="submit" method="POST" id="submitButton" class="btn btn-primary btn-md">Submit</button>
+        </form>
+    </div>
+
+
+
+    <!-- TODO add link to notes -->
+    <!-- TODO add url for notes page -->
+    {% endblock content %}

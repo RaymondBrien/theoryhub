@@ -1,20 +1,37 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 from quiz.models import Quiz
 from .models import UserQuizSubmission, QuizNote
+from .forms import QuizNoteForm
 
-def dashboard(request, username):
+def dashboard(request, ):
     """
     Context 
     Template
     
     """
-    user = get_object_or_404(User, username=username)
-    submissions = UserQuizSubmission.objects.filter(owner=user) 
-    return render(request, 'dashboard/dashboard.html', {'submissions': submissions, 'user': user})
+    # user = get_object_or_404(User, user=request.user)
+    submissions = UserQuizSubmission.objects.filter(owner=request.user)
+    # TODO debug then delete the form from this page: 
+    quiz_note_form = QuizNoteForm()
+    
+    if request.method == "POST": 
+        quiz_note_form = QuizNoteForm(data=request.POST)
+        if quiz_note_form.is_valid():
+            quiz_note = quiz_note_form.save(commit=False)
+            quiz_note.user = request.user
+            # quiz_note.quiz = quiz
+            quiz_note.save()
+            messages.add_message(
+                request, messages.success,
+                'quiznote added'
+            )
+    return render(request, 'dashboard/dashboard.html', {'submissions': submissions, 'quiz_note_form': quiz_note_form, 'user': request.user})
 
     # # TODO get any notes made related to a quiz from user in notepad and display on quiz list page
     # def get_context_data(self, **kwargs): # ensure quiz note form shows
@@ -23,40 +40,45 @@ def dashboard(request, username):
     #     return context
     
 
-def quiz_note(request, slug):
+def quiz_note(request, ):
     """
     View to display a single quiz note.
 
-    Context:
+    Context: TODO edit
         quiz: single instance of :model:`quiz.Quiz`
         quiz_note: single instance of :model:`quiz.QuizNote`
     
     **Template**
-        quiz_note TODO make quiz note template
+        notes page TODO make quiz note template
     """
-    queryset = Quiz.objects.filter(status=1)
-    quiz= get_object_or_404(queryset, slug=slug)
-    quiz_notes = quiz.quiz_notes.all().order_by("-created_at")
-    if request.method == "POST":
-        quiz_note_form = QuizNoteForm(data=request.POST)
-        if quiz_note_form.is_valid():
-            quiz_note = quiz_note_form.save(commit=False)
-            quiz_note.user = request.user
-            quiz_note.quiz = quiz
-            quiz_note.save()
-            messages.add_message(
-                request, messages.SUCCESS,
-                'Quiznote added'
-            )
+    user = request.user
+    queryset = QuizNote.objects.filter(user=user)
+    notes = get_object_or_404(queryset, user=user)
+    
+    
+    # # quiz_notes = user.quiz_notes.all().order_by("-created_at")
+    # if request.method == "POST": 
+    #     quiz_note_form = QuizNoteForm(data=request.POST)
+    #     if quiz_note_form.is_valid():
+    #         quiz_note = quiz_note_form.save(commit=False)
+    #         quiz_note.user = request.user
+    #         # quiz_note.quiz = quiz
+    #         quiz_note.save()
+    #         messages.add_message(
+    #             request, messages.SUCCESS,
+    #             'Quiznote added'
+    #         )
     
     quiz_note_form = QuizNoteForm() 
+    
     return render(
         request, 
-        'quiz/single_quiz.html',
+        'dashboard/dashboard.html',
         {
-        'quiz': quiz,
-        'quiz_notes': quiz_notes,
+        # 'quiz': quiz,
+        # 'quiz_notes': quiz_notes,
         'quiz_note_form': quiz_note_form
+        # add note count later?
     },
 )
 
