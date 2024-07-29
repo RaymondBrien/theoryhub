@@ -6,6 +6,7 @@ __pycache__/
 *.py[cod]
 node_modules/
 .github/
+!.github/workflows
 cloudinary_python.txt
 .venv/
 __pycache__/
