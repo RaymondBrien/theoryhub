@@ -25,7 +25,6 @@ class QuizNote(models.Model):
     Stores single note related to :model:`quiz.Quiz` and :model:`auth.User`
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='quiz_note')
     note = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     

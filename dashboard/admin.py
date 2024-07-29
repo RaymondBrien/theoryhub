@@ -6,4 +6,4 @@ class UserQuizSubmissionAdmin(admin.ModelAdmin):
     
 @admin.register(QuizNote)
 class QuizNoteAdmin(admin.ModelAdmin): 
-    list_display = ('user', 'quiz', 'note', 'created_at')
+    list_display = ('user', 'note', 'created_at')
