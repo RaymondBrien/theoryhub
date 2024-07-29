@@ -55,7 +55,7 @@
             <!-- TODO: add submit quiz to form with: action=" url 'submit_quiz' quiz.id "> -->
             <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ answer_form.as_p }}
                 <button type="submit">Submit Quiz</button>
             </form>
         </div>
