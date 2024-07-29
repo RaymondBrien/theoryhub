@@ -6,5 +6,5 @@ class QuizNoteForm(forms.ModelForm):
         model = QuizNote
         fields = ['note', ]
         widgets = {
-            'note': forms.Textarea(attrs={'class': 'form-control, height: 1em', 'placeholder': 'Enter your note here'})
+            'note': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your note here'})
         } # TODO style here to make note smaller (or handle in local div in template)

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.views import generic
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -17,21 +18,13 @@ def dashboard(request, ):
     """
     # user = get_object_or_404(User, user=request.user)
     submissions = UserQuizSubmission.objects.filter(owner=request.user)
-    # TODO debug then delete the form from this page: 
-    quiz_note_form = QuizNoteForm()
-    
-    if request.method == "POST": 
-        quiz_note_form = QuizNoteForm(data=request.POST)
-        if quiz_note_form.is_valid():
-            quiz_note = quiz_note_form.save(commit=False)
-            quiz_note.user = request.user
-            # quiz_note.quiz = quiz
-            quiz_note.save()
-            messages.add_message(
-                request, messages.success,
-                'quiznote added'
-            )
-    return render(request, 'dashboard/dashboard.html', {'submissions': submissions, 'quiz_note_form': quiz_note_form, 'user': request.user})
+    return render(
+        request, 
+        'dashboard/dashboard.html', 
+        {
+            'submissions': submissions, 'user': request.user
+        }
+    )
 
     # # TODO get any notes made related to a quiz from user in notepad and display on quiz list page
     # def get_context_data(self, **kwargs): # ensure quiz note form shows
@@ -40,9 +33,22 @@ def dashboard(request, ):
     #     return context
     
 
-def quiz_note(request, ):
+class UserNote(generic.ListView):
+    queryset = QuizNote.objects.all() # remove all later, filter by user
+    template_name = 'dashboard/notes_page.html'
+    paginate_by = 8
+    context_object_name = 'notes_list'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['quiz_note_form'] = QuizNoteForm()
+        return context
+# TODO handle post method in class
+
+
+def user_note(request):
     """
-    View to display a single quiz note.
+    View to display a single  note.
 
     Context: TODO edit
         quiz: single instance of :model:`quiz.Quiz`
@@ -51,32 +57,31 @@ def quiz_note(request, ):
     **Template**
         notes page TODO make quiz note template
     """
+    
+    quiz_note_form = QuizNoteForm()
     user = request.user
     queryset = QuizNote.objects.filter(user=user)
-    notes = get_object_or_404(queryset, user=user)
-    
-    
-    # # quiz_notes = user.quiz_notes.all().order_by("-created_at")
-    # if request.method == "POST": 
-    #     quiz_note_form = QuizNoteForm(data=request.POST)
-    #     if quiz_note_form.is_valid():
-    #         quiz_note = quiz_note_form.save(commit=False)
-    #         quiz_note.user = request.user
-    #         # quiz_note.quiz = quiz
-    #         quiz_note.save()
-    #         messages.add_message(
-    #             request, messages.SUCCESS,
-    #             'Quiznote added'
-    #         )
+    note = get_object_or_404(queryset, user=user)
+    quiz_notes = user.note.all().order_by("-created_at")
+    if request.method == "POST": 
+        quiz_note_form = QuizNoteForm(data=request.POST)
+        if quiz_note_form.is_valid():
+            quiz_note = quiz_note_form.save(commit=False)
+            quiz_note.user = request.user
+            # quiz_note.quiz = quiz
+            quiz_note.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Quiznote added'
+            )
     
     quiz_note_form = QuizNoteForm() 
     
     return render(
         request, 
-        'dashboard/dashboard.html',
+        'dashboard/notes.html',
         {
-        # 'quiz': quiz,
-        # 'quiz_notes': quiz_notes,
+         'quiz_notes': quiz_notes,
         'quiz_note_form': quiz_note_form
         # add note count later?
     },
@@ -84,7 +89,7 @@ def quiz_note(request, ):
 
 # TODO: debug if quiznote_id not correct param
 @login_required
-def edit_quiz_note(request, slug, quiznote_id):
+def edit_quiz_note(request, quiznote_id):
     """
     Display individual quiznote for user to edit if authenticated:
     Stays on page after the edit is submitted.

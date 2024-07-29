@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{% url 'quiz_notes' as quiz_notes_url %}
+{% url 'user_notes' as user_notes_url %}
 
 {% block title %}Dashboard tabs could go here {% endblock %}
 
@@ -29,22 +29,12 @@
                         <!-- TODO:  -->
                         <!-- TODO:  -->
                     </h5>
-                    <a href="{% url 'quiz_notes' %}" class="">Notes page</a>
+                    <a href="{% url 'user_notes' %}" class="">Notes page</a>
                 </div>
             </div>
         </div>
     </div>
-    <div>
-        <p>
-            here is the form
-        </p>
-        <form method="POST">
 
-            {{ quiz_note_form|crispy}}
-            {% csrf_token %}
-            <button type="submit" method="POST" id="submitButton" class="btn btn-primary btn-md">Submit</button>
-        </form>
-    </div>
 
 
 

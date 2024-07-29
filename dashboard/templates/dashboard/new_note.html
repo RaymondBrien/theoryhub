@@ -1,0 +1,26 @@
+{% block content %}
+
+<!-- TODO style quiz notes using quiz_note class -->
+{% if user.is_authenticated %}
+<div class="row quiz_notes">
+    <div class="col-md-6">
+        <!-- Create new quiznote -->
+        <div class="make-quiz-note card">
+            <div class="card-body">
+                <p class="card-text" style="text-align: center;">You have not created any notes for this
+                    quiz yet.</p>
+                <h6>Posting as: {{ user.username }}</h6>
+                <form id="quiznoteForm" method="post" style="margin-top: 1.3em">
+                    {{ quiz_note_form.as_p|crispy }}
+                    {% csrf_token %}
+                    <!-- TODO make submit button -->
+                    <button type="submit" id="submitButton" class="btn btn-primary btn-md">Submit</button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+<!-- TODO add delete comment with modal  -->
+{% endblock %}
