@@ -77,7 +77,7 @@ def edit_note(request, note_id):
         quiz_note_form = QuizNoteForm(data=request.POST, instance=note)
         
         if quiz_note_form.is_valid() and note.user == request.user:
-            note = quiz_note_form.save(commit=False)
+            note = quiz_note_form.save(commit=False) # TODO do I need this?
             note.save()
             messages.add_message(request, messages.SUCCESS, 'Note updated!')
         else: 
@@ -87,28 +87,28 @@ def edit_note(request, note_id):
     return HttpResponseRedirect(reverse('user_notes')) 
 
  
-def delete_quiz_note(request, slug, note_id):
+def delete_note(request, note_id):
     """
     Enables user to delete a quiz note instance.
     
     **Context**
-    
+    TODO revise context
     `quiz` - single instance of Quiz object, published only
     `quiz_note` - single instance of quiznote object, attached to quiz via FK.
     
     Appears on quiz list template.
     """
     
-    queryset = Quiz.objects.filter(status=1)
-    quiz = get_object_or_404(queryset, slug=slug)
-    quiz_note = get_object_or_404(QuizNote, pk=quiznote_id) # TODO check pk name
+
+    queryset = QuizNote.objects.filter(user=request.user)
+    note = get_object_or_404(queryset, pk=note_id)
     
-    if quiz_note.user == request.user:
-        quiz_note.delete()
-        messages.add_message(request, messages.SUCCESS, 'Quiznote deleted!')
+    if note.user == request.user:
+        note.delete()
+        messages.add_message(request, messages.SUCCESS, f'Note "{ note.note }" deleted!')
     else:
-        messages.add_message(request, messages.ERROR, 'There are no quiznotes you can delete.')
+        messages.add_message(request, messages.ERROR, 'There are no notes you can delete.')
     
-    return HttpResponseRedirect(reverse('quiz_list')) # TODO is this correct?
+    return HttpResponseRedirect(reverse('user_notes'))
     
     
