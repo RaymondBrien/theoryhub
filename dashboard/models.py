@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from quiz.models import Quiz
 
 class UserQuizSubmission(models.Model):
@@ -27,7 +28,10 @@ class QuizNote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     note = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    
+   
+    def clean(self):
+        if len(self.note) < 10:
+            raise ValidationError('Note must be at least 10 characters long')
     class Meta:
         ordering = ['-created_at']
     def __str__(self):

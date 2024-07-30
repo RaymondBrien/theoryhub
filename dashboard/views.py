@@ -44,6 +44,18 @@ class UserNote(generic.ListView):
         context['quiz_note_form'] = QuizNoteForm()
         return context
 # TODO handle post method in class
+    def post(self, request, *args, **kwargs):
+        quiz_note_form = QuizNoteForm(data=request.POST)
+        if quiz_note_form.is_valid():
+            quiz_note = quiz_note_form.save(commit=False)
+            quiz_note.user = request.user
+            quiz_note.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Quiznote added'
+            )
+            return redirect('user_notes')
+        return render(request, 'dashboard/notes_page.html', {'quiz_note_form': quiz_note_form})
 
 
 def user_note(request):

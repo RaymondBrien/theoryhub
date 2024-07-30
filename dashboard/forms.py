@@ -2,6 +2,7 @@ from django import forms
 from .models import QuizNote
 
 class QuizNoteForm(forms.ModelForm):
+    
     class Meta:
         model = QuizNote
         fields = ['note', ]
