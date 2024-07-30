@@ -44,13 +44,12 @@ class UserNote(generic.ListView):
         return context
 # TODO handle edit method in class
     def post(self, request, *args, **kwargs):
-        quiz_note = QuizNote.objects.filter(user=request.user)
-        quiz_note_content = get_object_or_404(QuizNote, pk=quiznote_id)
-        quiz_note_form = QuizNoteForm(data=request.POST, instance=quiz_note)
+        note = QuizNote.objects.filter(user=request.user)
+        quiz_note_form = QuizNoteForm(data=request.POST)
         if quiz_note_form.is_valid():
-            quiz_note = quiz_note_form.save(commit=False)
-            quiz_note.user = request.user
-            quiz_note.save()
+            note = quiz_note_form.save(commit=False)
+            note.user = request.user
+            note.save()
             messages.add_message(
                 request, messages.SUCCESS,
                 'Quiznote added'

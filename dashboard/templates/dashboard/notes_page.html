@@ -34,8 +34,8 @@
                         <p class="font-weight-bold note-content">{{ note.note | linebreaks }}</p>
                     </div>
                     {% if user.is_authenticated and note.user == user %}
-                    <button class="btn btn-edit btn-warning" data-note_id="{{ note.id }}">Edit</button>
-                    <button class="btn btn-delete btn-danger" data-note_id="{{ note.id }}">Delete</button>
+                    <button class="btn btn-edit btn-warning" data-note_id="note{{ note.id }}">Edit</button>
+                    <button class="btn btn-delete btn-danger" data-note_id="note{{ note.id }}">Delete</button>
                     {% endif %}
                 </div>
             </div>
