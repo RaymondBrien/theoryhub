@@ -9,10 +9,10 @@
 <section class="new-note">
     <div class="card">
         <div class="card-body">
-            <form method="post" style="margin-top: 1.3em">
+            <form method="post" style="margin-top: 1.3em" id="noteForm">
                 {{ quiz_note_form|crispy}}
                 {% csrf_token %}
-                <button type="submit" id="submitButton" class="btn btn-primary btn-md">Submit</button>
+                <button type="submit" id="submitNoteButton" class="btn btn-primary btn-md">Submit</button>
             </form>
         </div>
     </div>
@@ -20,60 +20,36 @@
 <p>Make link for new note page</p>
 {% endblock %}
 
+<!-- Notes List -->
 <section id="notes-list" class="container">
     {% if user.is_authenticated %}
     <div class="row" id="notes">
         <div class="col col-md-8">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 id="notes-list">Notes Collection:</h5>
+            <h5 id="notes-list">Notes Collection:</h5>
+            <div class="card-body">
+                {% for note in notes_list %}
+                <div class="card {% if not note.user == user %} d-none {% endif %}">
+                    <p class="p-2 faded">Created by: {{ note.user }} at: {{ note.created_at }}</p>
+                    <div id="note{{ note.id }}">
+                        <p class="font-weight-bold note-content">{{ note.note | linebreaks }}</p>
+                    </div>
+                    {% if user.is_authenticated and note.user == user %}
+                    <button class="btn btn-edit btn-warning" data-note_id="{{ note.id }}">Edit</button>
+                    <button class="btn btn-delete btn-danger" data-note_id="{{ note.id }}">Delete</button>
+                    {% endif %}
                 </div>
             </div>
-            <ul>
-                {% for note in notes_list %}
-                <li>
-                    <div class="card {% if not note.user == user %} d-none {% endif %}" id="note {{ single_note.id }}">
-                        <div class="card-body">
-                            <h5 class="font-weight-bold">{{ note.note }}</h5>
-                            <br>
-                            <!-- TODO change to WHEN written: -->
-                            <p class="p-2 faded">Created by: {{ note.author }} at: {{ note.created_on }}</p>
-                            <div>
-                                {% if user.is_authenticated and note.user == user %}
-                                <button class="btn btn-delete btn-danger" data-quiznote_id="{{ quiznote.id }}">Delete</button>
-                                <button class="btn btn-edit btn-warning" data-quiznote_id="{{ quiznote.id }}">Edit</button>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <!-- TODO add edit and delete buttons if author -->
-                        <!-- TODO add edit confirmation modal -->
-                        <!-- TODO add delete confirmation modal -->
-                    </div>
-                    {% empty %}
-                    <div class="make-quiz-note card">
-                        <div class="card-body">
-                            <p class="card-text" style="text-align: center;">You have not created any notes for this
-                                quiz yet.</p>
-                            <h6>Posting as: {{ user.username }}</h6>
-                            <form id="quiznoteForm" method="post" style="margin-top: 1.3em">
-                                {{ quiz_note_form.as_p|crispy }}
-                                {% csrf_token %}
-                                <!-- TODO make submit button -->
-                                <button type="submit" id="submitButton" class="btn btn-primary btn-md">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </li>
-            </ul>
+            <!-- TODO add edit confirmation modal -->
+            <!-- TODO add delete confirmation modal -->
+            {% endfor %}
         </div>
-    </div>
-    </div>
-    {% endif %}
+        {% endif %}
 </section>
 
 
+{% endblock content %}
 
+{% block scripts %}
+<script src="{% static 'js/edit_note.js' %}"></script>
 
-
-{% endblock %}
+{% endblock scripts %}
