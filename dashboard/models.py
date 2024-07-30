@@ -35,4 +35,4 @@ class QuizNote(models.Model):
     class Meta:
         ordering = ['-created_at']
     def __str__(self):
-        return f'QuizNote for {self.quiz.title} added by {self.user.username}'
+        return f'QuizNote added by {self.user.username}'

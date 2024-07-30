@@ -5,12 +5,13 @@ const submitButton = document.getElementById("submitNoteButton");
 
 for (let button of editButtons) {
     button.addEventListener("click", (e) => {
-        let noteId = e.target.getAttribute("data-note_id");
+        let fullNoteId = e.target.getAttribute("data-note_id");
+        let noteId = fullNoteId.replace("note", ""); // remote 'note' from noteId for url handling
         console.log(noteId);
-        let noteContent = document.querySelector(`#${noteId}`).innerText;
+        let noteContent = document.querySelector(`#${fullNoteId}`).innerText;
         noteText.value = noteContent;
         console.log(noteContent);
         submitButton.innerText = "Update";
-        noteForm.setAttribute("action", `edit_note/${noteId}`);
+        noteForm.setAttribute("action", `edit_note/${noteId}/`);
     });
 }
