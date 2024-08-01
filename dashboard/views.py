@@ -15,8 +15,18 @@ def dashboard(request, ):
     Template
     
     """
+    # TODO check
     # user = get_object_or_404(User, user=request.user)
     submissions = UserQuizSubmission.objects.filter(owner=request.user)
+    
+    if not request.user.is_authenticated:
+        messages.info(request, 'Access denied. Please log in to view this page.')
+        return render(HttpResponseRedirect(reverse('login')))
+    # TODO debug IMPORTANT - test by brute force too
+    # elif request.user is not submissions.owner:
+    #     messages.info(request, "You may not access someone else's submissions")
+    #     return render(HttpResponseRedirect(reverse('login')))
+        
     return render(
         request, 
         'dashboard/dashboard.html', 
