@@ -11,12 +11,10 @@
 <!-- TODO: CREDIT TIM NELSON -->
 <!-- TODO:  add function view to render question content in template -->
 <!-- TODO: add initial title page of single quiz: quiz title, description. Do not show quiz content until button is clicked. -->
-<!-- TODO: Add individual quiz url to urls  -->
 <!-- TODO: add start quiz button, which then reveals the content of the quiz.   -->
 <!-- TODO: add confirmation of starting quiz to user. -->
 <!-- TODO: add answer options to the quiz questions -->
-<!-- TODO: add a "Submit Quiz" button to submit the quiz results. -->
-<!-- TODO: add a "Restart Quiz" button to reset the quiz and start over. -->
+<!-- TODO: add "Submit Quiz" button functionality to submit the quiz results. -->
 
 <!-- TODO check step 3 where does this go? -->
 
@@ -53,10 +51,10 @@
     <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
             <!-- TODO: add submit quiz to form with: action=" url 'submit_quiz' quiz.id "> -->
-            <form method="post">
+            <form method="post" id="quiz-question-form" class="hide">
                 {% csrf_token %}
                 {{ answer_form.as_p }}
-                <button type="submit">Submit Quiz</button>
+                <button type="submit" data-user="{{ user.id }}">Submit Quiz</button>
             </form>
         </div>
     </div>
@@ -66,7 +64,6 @@
 
 
 {% block js %}
-<!-- TODO: EDIT -->
 <!-- scripts only for the quiz -->
 <script src="{% static 'js/quiz.js' %}"></script>
 {% endblock %}

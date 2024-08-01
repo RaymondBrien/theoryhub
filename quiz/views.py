@@ -33,7 +33,13 @@ def single_quiz(request, slug):
 
     **Template**
     :template:`quiz/single_quiz.html`
+    
+    However, there are a couple of points to note:
     """
+# TODO:
+# Error Handling: You might want to add some error handling around the Answer.objects.get(id=answer_id) call, in case an invalid answer ID is submitted.
+# Transaction: If you're doing multiple database operations, you might want to consider using a transaction to ensure data integrity.
+# Unused Code: The submit_quiz view appears to be unused and contains some inconsistencies. You might want to remove or update it if it's not being used.
     
     user = get_object_or_404(User, username=request.user)
     if not user.is_authenticated:
@@ -58,20 +64,27 @@ def single_quiz(request, slug):
                     score +=  question.points
             
             # save quiz score to database  
-            UserQuizSubmission.objects.create(
+            result = UserQuizSubmission.objects.create(
                 # includes timestamp for multiple attempts: 
                 # see dashboard.models.UserQuizSubmission
                 owner=user,
                 quiz=quiz,
                 user_score=score,
             )
-
-            messages.success(request, f'Quiz submitted successfully. Your score is {score}.') # TODO style for clear UX
-            # return redirect(reverse('quiz', kwargs={'slug': quiz.slug})) 
-            return redirect('quiz_result', quiz_id=quiz.id)
-        
+            messages.success(
+                request,
+                # TODO debug username message?
+                f'Thank you {request.user.username}, your quiz is submitted successfully.')
+            return redirect('quiz_result', result)
+        # TODO add else statement for invalid form or if trying to submit on behalf of another user?
+        # TODO do I handle crsf token here?
         else:
             answer_form = AnswerSelection(quiz=quiz)
+        # TODO decide on redirect or maintain on same page with form as above else statement
+        #      else:
+        # messages.error(request, 'Error submitting quiz. Please try again.')
+    # TODO decide on redirect
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # redirect to previous page if error occurs
 
     context = {
         'quiz': quiz,
@@ -88,15 +101,63 @@ def single_quiz(request, slug):
 # Question objects.
 
 @login_required
-def quiz_result(request, quiz_id):
-    quiz = get_object_or_404(Quiz, id=quiz_id)
-    submission = UserQuizSubmission.objects.filter(owner=request.user, quiz=quiz).order_by('-last_taken').first()
+def quiz_result(request, result):
+    # TODO debug as now using result instead for cleaner handling
+    # quiz = get_object_or_404(Quiz, slug=slug)
+    # submission = UserQuizSubmission.objects.filter(owner=request.user, quiz=quiz).order_by('-last_taken').first()
     
     context = {
-        'quiz': quiz,
-        'submission': submission,
+        # 'quiz': quiz,
+        # 'submission': submission,
     }
     return render(request, 'quiz/quiz_result.html', context)
 
 
+@login_required
+def submit_quiz(request, slug):
+    """
+    Process quiz submission and save user score to database
+    """
+    
+    if request.method == "POST":
+        quiz = get_object_or_404(Quiz, slug=slug)
+        user = get_object_or_404(User, id=request.user.id)
+        answer_form = AnswerSelection(data=request.POST, instance=quiz)
+        user_submission = UserQuizSubmission.objects.filter(owner=user, quiz=quiz)
+        score = 0
 
+
+        # TODO save score to database as UserQuizSubmission
+        # TODO add question answer required to form validation and clean on form first
+        
+        # add question score to score if answer is correct for each question
+        if answer_form.is_valid() and request.user.is_authenticated:
+            for question in quiz.question.all():
+                if question.answer.correct:
+                    score += question.points
+                else:
+                    score += 0
+            answer_form.save(comment=False)
+            answer_form.owner = user,
+            answer_form.quiz = quiz,
+            answer_form.user_score = score,
+            answer_form.save()
+            # TODO does this save it twice?
+            UserQuizSubmission.objects.create(
+                owner=user,
+                quiz=quiz,
+                user_score=score,
+            )
+            messages.success(
+                request, 
+                f'Thank you {request.user.username}, your quiz is submitted successfully.')
+            return redirect('quiz_result', quiz=quiz)
+                       
+    elif request.user.is_authenticated or not request.user == user:
+        messages.info(request, "Access denied. Please log in to view this page.")
+        return redirect('quiz_list')
+
+    else:
+        messages.error(request, 'Error submitting quiz. Please try again.')
+    # TODO decide on redirect
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # redirect to previous page if error occurs

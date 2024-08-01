@@ -73,7 +73,6 @@ def edit_note(request, note_id):
     if request.method == "POST":
         queryset = QuizNote.objects.filter(user=request.user)
         note = get_object_or_404(queryset, pk=note_id)
-        print(note)
         quiz_note_form = QuizNoteForm(data=request.POST, instance=note)
         
         if quiz_note_form.is_valid() and note.user == request.user:

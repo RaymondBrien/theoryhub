@@ -1,3 +1,5 @@
+/* jshint eversion: 11 */
+
 const editButtons = document.getElementsByClassName("btn-edit");
 const noteText = document.getElementById("id_note");
 const noteForm = document.getElementById("noteForm");
