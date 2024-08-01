@@ -48,16 +48,24 @@ def single_quiz(request, slug):
     
     queryset = Quiz.objects.filter(status=1) 
     quiz = get_object_or_404(queryset, slug=slug)
+    print(f'quiz: {quiz}')
+    print(f'quiz questions: {quiz.questions.count()}')
     # answers_prefetch = Prefetch('answers', queryset=Answer.objects.all())
     questions = Question.objects.filter(quiz_id=quiz)
+    # TODO tidy
     # .prefetch_related(answers_prefetch)
-    answer_form = AnswerSelection(request.POST, quiz=quiz) # add quiz for correct quiz fields specific to this quiz instance 
+    # answer_form = AnswerSelection(quiz=quiz)
     
     if request.method == "POST":
+        answer_form = AnswerSelection(data=request.POST, quiz=quiz) # add quiz for correct quiz fields specific to this quiz instance 
+        print(f'answer_form: {answer_form}')
+        print(f'POST request: {request.POST}')
+        
         if answer_form.is_valid():
             score = 0
             # process all questions at once
             for question in quiz.questions.all():
+                # TODO debug question_qusestion.id
                 answer_id = answer_form.cleaned_data[f'question_{question.id}'] # see AnswerSelection form
                 answer = Answer.objects.get(id=answer_id) # compare user answer to correct answer
                 if answer.correct:
@@ -78,8 +86,9 @@ def single_quiz(request, slug):
             return redirect('quiz_result', result)
         # TODO add else statement for invalid form or if trying to submit on behalf of another user?
         # TODO do I handle crsf token here?
-        else:
-            answer_form = AnswerSelection(quiz=quiz)
+    else:
+        answer_form = AnswerSelection(quiz=quiz) # pass quiz object to form for GET request to dynamically generate form fields
+        print(f'GEt request: answer_form {answer_form}')
         # TODO decide on redirect or maintain on same page with form as above else statement
         #      else:
         # messages.error(request, 'Error submitting quiz. Please try again.')
@@ -89,7 +98,7 @@ def single_quiz(request, slug):
     context = {
         'quiz': quiz,
         'questions': questions,
-        'form': answer_form,
+        'answer_form': answer_form,
     }
     return render(request, 'quiz/single_quiz.html', context)
 
@@ -160,4 +169,4 @@ def submit_quiz(request, slug):
     else:
         messages.error(request, 'Error submitting quiz. Please try again.')
     # TODO decide on redirect
-    # return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # redirect to previous page if error occurs
+    return HttpResponseRedirect(reverse('quiz-list'))

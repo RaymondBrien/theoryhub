@@ -47,23 +47,41 @@
         </div>
     </div>
 
+    {% if user.is_authenticated %}
     <!-- quiz form -->
     <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
-            <!-- TODO: add submit quiz to form with: action=" url 'submit_quiz' quiz.id "> -->
-            <form method="post" id="quiz-question-form" class="hide">
+            <form method="post" id="quiz-question-form" class="hidden">
+                {{ answer_form | crispy }}
                 {% csrf_token %}
-                {{ answer_form.as_p }}
-                <button type="submit" data-user="{{ user.id }}">Submit Quiz</button>
+                {% for field in answer_form %}
+                <div class="form-group">
+                    <h3>
+                        {{ field.label }}
+                    </h3>
+                    {{ field }}
+                    {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <button type="submit" id="quiz-submit-btn" data-user="{{ user.id }}">Submit Quiz</button>
             </form>
         </div>
     </div>
+    {% else %}
+    <div class="row">
+        <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
+            <p class="text-center">Please <a href="{% url 'login' %}">login</a> to take the quiz.</p>
+        </div>
+    </div>
+    {% endif %}
 </section>
 
-{% endblock %}
+{% endblock content %}
 
 
-{% block js %}
+{% block scripts %}
 <!-- scripts only for the quiz -->
 <script src="{% static 'js/quiz.js' %}"></script>
 {% endblock %}
