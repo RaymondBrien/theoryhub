@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views import generic
@@ -52,6 +53,20 @@ def single_quiz(request, slug):
     print(f'quiz questions: {quiz.questions.count()}')
     # answers_prefetch = Prefetch('answers', queryset=Answer.objects.all())
     questions = Question.objects.filter(quiz_id=quiz)
+
+    #TODO call function when?    
+    # paginate one question per page
+    # https://docs.djangoproject.com/en/5.0/topics/pagination/
+    def paginate_questions(questions):
+        """
+        """
+        paginator = Paginator(questions, 1)
+        
+        page_number  = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'quiz/single_quiz.html', {'page_obj': page_obj})
+        
+        
     # TODO tidy
     # .prefetch_related(answers_prefetch)
     # answer_form = AnswerSelection(quiz=quiz)

@@ -52,7 +52,7 @@
     <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
             <form method="post" id="quiz-question-form" class="hidden">
-                {{ answer_form | crispy }}
+                {{ answer_form.as_p | crispy }}
                 {% csrf_token %}
                 {% for field in answer_form %}
                 <div class="form-group">
@@ -64,7 +64,24 @@
                     <small class="form-text text-muted">{{ field.help_text }}</small>
                     {% endif %}
                 </div>
+                <!-- TODO sort pagination so one question per page and WITH IMAGE -->
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
                 {% endfor %}
+                <!-- TODO: only display submit if user has answers for all qusetions and question is last question of quiz (JS?) -->
                 <button type="submit" id="quiz-submit-btn" data-user="{{ user.id }}">Submit Quiz</button>
             </form>
         </div>
