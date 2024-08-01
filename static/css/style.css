@@ -10,3 +10,7 @@ select {
     cursor: inherit;
     line-height: inherit;
 }
+
+hidden {
+    display: none;
+}
