@@ -6,6 +6,7 @@
 
 const quizStartButton = document.getElementById('quiz-start-btn');
 const quizQuestionForm = document.getElementById('quiz-question-form');
+const quizSubmitButton = document.getElementById('quiz-submit-btn');
 
 // show question form when start button is clicked
 quizStartButton.addEventListener('click', () => {
@@ -26,5 +27,6 @@ quizStartButton.addEventListener('click', () => {
 // ensure that the quiz result page is created and that the view is updated to show the result
 // check DB updated as UserQuizSubmission
 
-
-quizQuestionForm.setAttribute('action', 'submit_quiz/');
+// quizSubmitButton.addEventListener('click', () => {
+//     quizQuestionForm.setAttribute('action', 'submit_quiz/');
+// });
