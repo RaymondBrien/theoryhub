@@ -83,7 +83,7 @@ def single_quiz(request, slug):
                 request,
                 # TODO debug username message?
                 f'Thank you {request.user.username}, your quiz is submitted successfully.')
-            return redirect('quiz_result', result)
+            return redirect('quiz_result', slug=quiz.slug)
         # TODO add else statement for invalid form or if trying to submit on behalf of another user?
         # TODO do I handle crsf token here?
     else:
@@ -110,63 +110,71 @@ def single_quiz(request, slug):
 # Question objects.
 
 @login_required
-def quiz_result(request, result):
+def quiz_result(request, slug):
+    """
+    # TODO add context for this view
     # TODO debug as now using result instead for cleaner handling
-    # quiz = get_object_or_404(Quiz, slug=slug)
-    # submission = UserQuizSubmission.objects.filter(owner=request.user, quiz=quiz).order_by('-last_taken').first()
+    """
+    
+    quiz = get_object_or_404(Quiz, slug=slug)
+    submission = UserQuizSubmission.objects.filter(owner=request.user, quiz=quiz).order_by('-last_taken').first()
+    def calculate_total_possible_score(quiz):
+        max_score = sum([question.points for question in quiz.questions.all()])
+        return max_score
     
     context = {
-        # 'quiz': quiz,
-        # 'submission': submission,
+        'quiz': quiz,
+        'submission': submission,
+        'max_score': calculate_total_possible_score(quiz),
     }
     return render(request, 'quiz/quiz_result.html', context)
 
 
-@login_required
-def submit_quiz(request, slug):
-    """
-    Process quiz submission and save user score to database
-    """
+# @login_required
+# def submit_quiz(request, slug):
+#     """
+#     Process quiz submission and save user score to database
+#     """
     
-    if request.method == "POST":
-        quiz = get_object_or_404(Quiz, slug=slug)
-        user = get_object_or_404(User, id=request.user.id)
-        answer_form = AnswerSelection(data=request.POST, instance=quiz)
-        user_submission = UserQuizSubmission.objects.filter(owner=user, quiz=quiz)
-        score = 0
+#     if request.method == "POST":
+#         quiz = get_object_or_404(Quiz, slug=slug)
+#         user = get_object_or_404(User, id=request.user.id)
+#         answer_form = AnswerSelection(data=request.POST, instance=quiz)
+#         user_submission = UserQuizSubmission.objects.filter(owner=user, quiz=quiz)
+#         score = 0
 
 
-        # TODO save score to database as UserQuizSubmission
-        # TODO add question answer required to form validation and clean on form first
+#         # TODO save score to database as UserQuizSubmission
+#         # TODO add question answer required to form validation and clean on form first
         
-        # add question score to score if answer is correct for each question
-        if answer_form.is_valid() and request.user.is_authenticated:
-            for question in quiz.question.all():
-                if question.answer.correct:
-                    score += question.points
-                else:
-                    score += 0
-            answer_form.save(comment=False)
-            answer_form.owner = user,
-            answer_form.quiz = quiz,
-            answer_form.user_score = score,
-            answer_form.save()
-            # TODO does this save it twice?
-            UserQuizSubmission.objects.create(
-                owner=user,
-                quiz=quiz,
-                user_score=score,
-            )
-            messages.success(
-                request, 
-                f'Thank you {request.user.username}, your quiz is submitted successfully.')
-            return redirect('quiz_result', quiz=quiz)
+#         # add question score to score if answer is correct for each question
+#         if answer_form.is_valid() and request.user.is_authenticated:
+#             for question in quiz.question.all():
+#                 if question.answer.correct:
+#                     score += question.points
+#                 else:
+#                     score += 0
+#             answer_form.save(comment=False)
+#             answer_form.owner = user,
+#             answer_form.quiz = quiz,
+#             answer_form.user_score = score,
+#             answer_form.save()
+#             # TODO does this save it twice?
+#             UserQuizSubmission.objects.create(
+#                 owner=user,
+#                 quiz=quiz,
+#                 user_score=score,
+#             )
+#             messages.success(
+#                 request, 
+#                 f'Thank you {request.user.username}, your quiz is submitted successfully.')
+#             return redirect('quiz_result', quiz=quiz)
                        
-    elif request.user.is_authenticated or not request.user == user:
-        messages.info(request, "Access denied. Please log in to view this page.")
-        return redirect('quiz_list')
+#     elif request.user.is_authenticated or not request.user == user:
+#         messages.info(request, "Access denied. Please log in to view this page.")
+#         return redirect('quiz_list')
 
-    else:
-        messages.error(request, 'Error submitting quiz. Please try again.')
-    # TODO decide on redirect
-    return HttpResponseRedirect(reverse('quiz-list'))
+#     else:
+#         messages.error(request, 'Error submitting quiz. Please try again.')
+#     # TODO decide on redirect
+#     return HttpResponseRedirect(reverse('quiz-list'))
