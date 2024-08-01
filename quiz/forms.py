@@ -8,10 +8,8 @@ class AnswerSelection(forms.Form): # custom form not for specific model for more
     def __init__(self, *args, **kwargs): # accept any number of positional and keyword arguments
         quiz = kwargs.pop('quiz') # use quiz object to generate form fields
         super(AnswerSelection, self).__init__(*args, **kwargs) # constructor for parent class: ensure standard args are handled properly and form is correctly initialised
-        print('initialising form with quiz', quiz.title)
-        
+
         for question in quiz.questions.all():
-            print("question", question.question_text)
             # data = {
             #     'question': question.question_text,
             #     'question_image': question.question_image,
@@ -19,8 +17,6 @@ class AnswerSelection(forms.Form): # custom form not for specific model for more
             #     'answers': question.answers.all()
             # }
             self.fields[f'question_{question.id}'] = forms.ChoiceField( # for each question, create new form field
-                # TODO possible debug answer_content correct?
-
                 # tuple: (value, label) -> (id, content),
                 choices=[(answer.id, answer.answer_content) for answer in question.answers.all()],
                 widget=forms.RadioSelect,
@@ -28,6 +24,5 @@ class AnswerSelection(forms.Form): # custom form not for specific model for more
                 label=question.question_text,
         ) # TODO add back the image for each question!!
             
-        print(f'fields: {len(self.fields)}')
         # f = AnswerSelection()
         # print(f.is_bound) # Exp: True, bound to data
