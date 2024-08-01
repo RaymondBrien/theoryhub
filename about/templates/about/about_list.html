@@ -6,14 +6,16 @@
 {% url 'quiz_list' as quiz_list_url %}
 
 
-<div class="card">
+<div class="card about-section">
     <div class="card-body">
-        <h5 class="card-title">About Us</h5>
+        <h5 class="card-title text-center">About TheoryHub</h5>
         <!-- TODO: edit about text -->
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Sed non mauris vitae erat consequat auctor eu in elit.</p>
-        <a href="#" class="btn btn-primary">Learn More</a>
+         <h3 class="page-title text-center">{{ about_list.title }}</h3>
     </div>
-    <div>
+    <div class="card-text text-center">
+        {{ about_list.content | safe }}
+    </div>
+    <div class="links">
         <a href="{{ quiz_list_url }}" class="btn btn-primary">Quiz List</a>
     </div>
 </div>

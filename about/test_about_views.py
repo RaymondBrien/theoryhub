@@ -2,7 +2,6 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-# test about page renders
 class TestAboutView(TestCase):
     
     def setup(self):
@@ -11,4 +10,5 @@ class TestAboutView(TestCase):
         self.client.login(username='testuser', password='testpassword')
         response = self.client.get(reverse('about'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'about.html')
+        self.assertTemplateUsed(response, 'about/about_list.html')
+        

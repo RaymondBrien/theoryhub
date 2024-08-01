@@ -1,6 +1,15 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views import generic
 
-# Create your views here.
-class About(TemplateView):
-    template_name = 'about.html'
+from .models import About
+
+def about(request):
+    """
+    Shows about page with all content
+    """
+    about_list = About.objects.all().order_by('-id')
+    template_name = 'about/about_list.html'
+    context = {
+        'about_list': about_list,
+    }
+    return render(request, template_name, context)
