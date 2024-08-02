@@ -6,8 +6,8 @@
 {% block content %}
 
 {% block new_note %}
-<section class="new-note">
-    <div class="card">
+<section class="new-note container">
+    <div class="card col-6">
         <div class="card-body">
             <form method="post" style="margin-top: 1.3em" id="noteForm">
                 {{ quiz_note_form|crispy}}
@@ -17,7 +17,6 @@
         </div>
     </div>
 </section>
-<p>Make link for new note page</p>
 {% endblock %}
 
 <!-- Notes List -->
