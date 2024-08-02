@@ -52,8 +52,10 @@ class TestQuizNotes(TestCase):
         self.quiznote2.save()
     
     def test_render_notes_page_includes_quiz_note_form(self):
-        """Test when loading notes page that the user can make a
-        post request to post QuizNote instance"""
+        """
+        Test when loading notes page that the user can make a
+        post request to post QuizNote instance
+        """
         response = self.client.get(reverse('user_notes'))
         self.assertEqual(response.status_code, 200)
         self.assertIsInstance(response.context['quiz_note_form'], QuizNoteForm)
