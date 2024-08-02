@@ -15,4 +15,6 @@
    "files.autoSave": "off",
    "workbench.colorTheme": "Visual Studio Dark",
    "terminal.integrated.gpuAcceleration": "canvas",
+   "editor.fontFamily": "OpenDyslexic-Regular, Consolas, 'Courier New', monospace",
+   "editor.codeLensFontFamily": "OpenDyslexic-Regular, Consolas, 'Courier New', monospace",
 }
