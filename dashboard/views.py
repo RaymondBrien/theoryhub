@@ -1,6 +1,8 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
@@ -44,26 +46,35 @@ def dashboard(request, ):
     
 
 
-class UserNote(generic.ListView):
+class UserNote(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
     """
     Display all notes made by the current user.
+    Unauthenticated users will be redirected to the login page.
+    Only authenticated users can view and add notes.
+    Users can only see their own notes.
     
     **Context** 
-    :param notes_list: List of QuizNote objects for the current user.
+    TODO add more context
     """
     # TODO filter by user!!
-    queryset = QuizNote.objects.all() # remove all later, filter by user
     template_name = 'dashboard/notes_page.html'
     paginate_by = 8
     context_object_name = 'notes_list'
+    # login_url = reverse('login')
+    
+    # for extra validation to avoid brute force
+    def test_func(self) -> bool | None:
+        return self.request.user.is_authenticated
+    
+    def get_queryset(self):
+        return QuizNote.objects.filter(user=self.request.user)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['quiz_note_form'] = QuizNoteForm()
         return context
-# TODO handle edit method in class
+    
     def post(self, request, *args, **kwargs):
-        note = QuizNote.objects.filter(user=request.user)
         quiz_note_form = QuizNoteForm(data=request.POST)
         if quiz_note_form.is_valid():
             note = quiz_note_form.save(commit=False)
@@ -74,11 +85,11 @@ class UserNote(generic.ListView):
                 'Quiznote added'
             )
             return redirect('user_notes')
-        return render(request, 'dashboard/notes_page.html', {'quiz_note_form': quiz_note_form})
+        else:
+            return self.render_to_response(self.get_context_data(quiz_note_form=quiz_note_form))
 
 
 
-# TODO: debug if quiznote_id not correct param
 @login_required
 def edit_note(request, note_id):
     """
