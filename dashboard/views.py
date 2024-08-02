@@ -9,6 +9,7 @@ from django.contrib import messages
 from .models import UserQuizSubmission, QuizNote
 from .forms import QuizNoteForm
 
+@login_required
 def dashboard(request, ):
     """
     Context 
@@ -42,7 +43,15 @@ def dashboard(request, ):
     #     return context
     
 
+
 class UserNote(generic.ListView):
+    """
+    Display all notes made by the current user.
+    
+    **Context** 
+    :param notes_list: List of QuizNote objects for the current user.
+    """
+    # TODO filter by user!!
     queryset = QuizNote.objects.all() # remove all later, filter by user
     template_name = 'dashboard/notes_page.html'
     paginate_by = 8
@@ -95,7 +104,7 @@ def edit_note(request, note_id):
     # TODO where do I want to stay on page?
     return HttpResponseRedirect(reverse('user_notes')) 
 
- 
+@login_required
 def delete_note(request, note_id):
     """
     Enables user to delete a quiz note instance.
