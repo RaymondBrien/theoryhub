@@ -103,7 +103,7 @@ def single_quiz(request, slug):
         # TODO do I handle crsf token here?
     else:
         answer_form = AnswerSelection(quiz=quiz) # pass quiz object to form for GET request to dynamically generate form fields
-        print(f'GEt request: answer_form {answer_form}')
+        print(f'Get request: answer_form {answer_form}')
         # TODO decide on redirect or maintain on same page with form as above else statement
         #      else:
         # messages.error(request, 'Error submitting quiz. Please try again.')

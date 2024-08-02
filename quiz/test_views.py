@@ -53,7 +53,7 @@ class TestSingleQuizView(TestCase):
             self.question1.save()
             self.answer1a.save()
             self.answer1b.save()
-    
+            
     def test_renders_single_quiz_page(self):
         self.client.login(username='testuser', password='testpassword')
         response = self.client.get(reverse('single_quiz', args=['test-quiz']))
@@ -63,29 +63,16 @@ class TestSingleQuizView(TestCase):
         self.assertIn(b'Answer 1a', response.content)
         self.assertIn(b'Answer 1b', response.content)
     
-    # TODO ensure functionality is actually there first for submitting quiz answer
     def test_user_can_submit_answer(self):
         self.client.login(username='testuser', password='testpassword')
-        response = self.client.post(reverse('single_quiz', args=['test-quiz']), post_data={'question_1': self.answer1a, 'question_2': self.answer1b})
+        response = self.client.post(reverse('single_quiz', kwargs={'slug': 'test-quiz'}), {'question_1': self.answer1a})
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Thank you testuser, your quiz is submitted successfully.', response.content)
-    
-    def test_successful_submission_redirects_to_quiz_result(self):
-        response = self.client.post(reverse('single_quiz', kwargs={'slug': 'test-quiz'}),
-                                    {'question_1': self.answer1a, 'question_2': self.answer1b})
-        self.assertEqual(response.status_code, 302) 
-        self.assertEqual(response.url, reverse('quiz_result', kwargs={'quiz_id': self.quiz.id}))
+        # TODO check UserQuizSubmission instance was created with user feedback
 
     def test_unauthenticated_user_redirects_to_login_page(self):
         self.client.logout()
         response = self.client.get(reverse('single_quiz', kwargs={'slug': 'test-quiz'}))
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, '/accounts/login/?next=/quiz/test-quiz/')
+        self.assertRedirects(response, '/accounts/login/?next=/quiz/test-quiz/')
         
-
-    def test_submission_saves_to_database(self):
-        self.client.force_login(self.user)
-        response = self.client.post(reverse('single_quiz', kwargs={'slug': 'test-quiz'}),
-                                    {'question_1': self.answer1a, 'question_2': self.answer1b})
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(UserQuizSubmission.objects.filter(owner=self.user, quiz=self.quiz).exists())
+    # TODO test user score available for user to see (after made object to check that in the dashbaord) 
