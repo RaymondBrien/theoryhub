@@ -3,45 +3,136 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
+<!-- TODO add link to notes -->
+<!-- TODO add url for notes page -->
 {% url 'user_notes' as user_notes_url %}
 
-{% block title %}Dashboard tabs could go here {% endblock %}
+<main class="quiz-scores-dashboard mt-3">
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="display-4">Dashboard</h1>
-            <hr>
+    <div class="container">
+        <div class="row title-dashboard">
+            <div class="col-md-12">
+                <h1 class="display-4">Dashboard</h1>
+                <hr>
+                <p class="text-faded">Here you can see all your quiz results.</p>
+                <p><i>Check out your own personal notes folder by heading to the notes page at the bottom</i></p>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <!-- TODO add image? -->
-            <h2>Profile</h2>
-            <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- TODO add image? -->
+                <h2>Profile</h2>
+                <hr>
+                <div class="container">
+
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {% if user.is_authenticated and user == user %}
+                            <strong>Hello <i class="font-weight-bold">{{ user.username }}</i></strong>
+                            <!-- TODO: Add list of quizzes completed -->
+                            <!-- TODO:  update user name? CHECK USER STORIES and ensure meet all crud functionality for assessment requirements-->
+                            <!-- TODO:  -->
+                            <!-- TODO:  -->
+                            {% else %}
+                            <strong>Please log in to your account to see your page</strong>
+                            <!-- TODO add link to login page -->
+                            {% endif %}
+                        </h5>
+                        <a href="{% url 'user_notes' %}" class="">Notes page</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="" alt="user-profile">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
             <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        {% if user.is_authenticated and user == user %}
-                        <strong>Hello <i class="font-weight-bold">{{ user.username }}</i></strong>
-                        <!-- TODO: Add list of quizzes completed -->
-                        <!-- TODO:  update user name? CHECK USER STORIES and ensure meet all crud functionality for assessment requirements-->
-                        <!-- TODO:  -->
-                        <!-- TODO:  -->
-                         {% else %}
-                        <strong>Please log in to your account to see your page</strong>
-                         {% endif %}
-                    </h5>
-                    <a href="{% url 'user_notes' %}" class="">Notes page</a>
+                <div class="card-title">
+                    <div class="card-text text-center">
+                        <h4>Your Quiz Scores:</h4>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Quiz Title</th>
+                                                <th>Your Score</th>
+                                                <th>Date Taken</th>
+                                            </tr>
+                                        </thead>
+                                        {% for item in subsmissions %}
+                                        {% if user.is_authenticated and item.owner == user %}
+                                        <tbody>
+                                            <tr>{{ item.quiz.title }}</tr>
+                                            <tr>{{ item.user_score }}</tr>
+                                            <!-- TODO format date shorter -->
+                                            <tr>{{ item.last_taken | safe }}</tr>
+                                        </tbody>
+                                        {% else %}
+                                        <tr>
+                                            <td colspan="3">Log in to view your quiz results</td>
+                                            <!-- TODO add link to login page -->
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</main>
+
+<!-- Incomplete Quizzes List -->
+<section class="incomplete-quizzes mt-3">
+    <div class="row">
+        <div class="card">
+            <div class="card-title">
+                <div class="card-text text-center">
+                    <h4>Incomplete Quizzes:</h4>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table" style="{%if item.user_score == 0 %}display:inline-block {% else %} d-none {% endif %}">
+                                    <thead>
+                                        <tr>
+                                            <th>Quiz Title</th>
+                                            <th>Link</th>
+                                        </tr>
+                                    </thead>
+                                    {% for item in subsmissions %}
+                                    {% if user.is_authenticated and item.owner == user %}
+                                    <tbody>
+                                        <tr>{{ item.quiz.title }}</tr>
+                                        <tr>INSERT LINK HERE</tr>
+                                    </tbody>
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="3">You have completed all the quizzes!</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 
-
-    <!-- TODO add link to notes -->
-    <!-- TODO add url for notes page -->
-    {% endblock content %}
+{% endblock content %}
