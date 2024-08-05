@@ -37,7 +37,7 @@ def single_quiz(request, slug):
     
     However, there are a couple of points to note:
     """
-# TODO:
+# TODO remove comments:
 # Error Handling: You might want to add some error handling around the Answer.objects.get(id=answer_id) call, in case an invalid answer ID is submitted.
 # Transaction: If you're doing multiple database operations, you might want to consider using a transaction to ensure data integrity.
 # Unused Code: The submit_quiz view appears to be unused and contains some inconsistencies. You might want to remove or update it if it's not being used.
@@ -49,31 +49,20 @@ def single_quiz(request, slug):
     
     queryset = Quiz.objects.filter(status=1) 
     quiz = get_object_or_404(queryset, slug=slug)
-    print(f'quiz: {quiz}')
-    print(f'quiz questions: {quiz.questions.count()}')
-    # answers_prefetch = Prefetch('answers', queryset=Answer.objects.all())
     questions = Question.objects.filter(quiz_id=quiz)
 
-    #TODO call function when?    
+    #TODO   
     # paginate one question per page
     # https://docs.djangoproject.com/en/5.0/topics/pagination/
-    def paginate_questions(questions):
-        """
-        """
-        paginator = Paginator(questions, 1)
-        
-        page_number  = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        return render(request, 'quiz/single_quiz.html', {'page_obj': page_obj})
-        
-        
+    
+
     # TODO tidy
     # .prefetch_related(answers_prefetch)
     # answer_form = AnswerSelection(quiz=quiz)
     
     if request.method == "POST":
-        answer_form = AnswerSelection(data=request.POST, quiz=quiz) # add quiz for correct quiz fields specific to this quiz instance 
-        print(f'answer_form: {answer_form}')
+        answer_form = AnswerSelection(data=request.POST, quiz=quiz) # render quiz-specific fields
+        print(f'answer_form TEST: {answer_form.fields.values()}')
         print(f'POST request: {request.POST}')
         
         if answer_form.is_valid():
@@ -96,9 +85,9 @@ def single_quiz(request, slug):
             )
             messages.success(
                 request,
-                # TODO debug username message?
                 f'Thank you {request.user.username}, your quiz is submitted successfully.')
             return redirect('quiz_result', slug=quiz.slug)
+        
         # TODO add else statement for invalid form or if trying to submit on behalf of another user?
         # TODO do I handle crsf token here?
     else:
@@ -114,6 +103,7 @@ def single_quiz(request, slug):
         'quiz': quiz,
         'questions': questions,
         'answer_form': answer_form,
+        # 'page': page_obj, TODO clean
     }
     return render(request, 'quiz/single_quiz.html', context)
 
@@ -145,6 +135,7 @@ def quiz_result(request, slug):
     return render(request, 'quiz/quiz_result.html', context)
 
 
+# TODO remove if unneeded
 # @login_required
 # def submit_quiz(request, slug):
 #     """

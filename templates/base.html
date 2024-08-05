@@ -45,16 +45,16 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page"
-                            href="{% url 'account_logout' %}">Logout</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link {% if request.path == user_dashboard %}active{% endif %}" aria-current="page"
                             href="{% url 'dashboard' %}">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == user_dashboard %}active{% endif %}" aria-current="page"
                             href="{% url 'quiz_list' %}">Quizlist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == logout_url %}active{% endif %} logout"
+                            aria-current="page" href="{% url 'account_logout' %}">Logout</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
@@ -68,7 +68,9 @@
                     {% endif %}
                 </ul>
                 <span class="navbar-text text-muted">
-                    Champion your music theory
+                    <p class="slogan">
+                        Champion your music theory
+                    </p>
                 </span>
             </div>
         </div>

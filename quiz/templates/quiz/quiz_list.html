@@ -7,13 +7,11 @@
 
 <!-- TODO: add semantic tags -->
 <!-- Heading -->
-<section class="container text-center pt-5">
-    <h1 class="heading">Quizzes</h1>
+<section class="container pt-5">
+    <h1 class="heading text-center">Quiz List</h1>
     <hr class="divider">
-    <div>
-        <h1>Welcome to TheoryHub!</h1>
-        <p>This is a platform where you can find and practice various topics from various fields.</p>
-    </div>
+    <p>Here is your quiz list, where you will find all the quizzes available to you.</p>
+    <p>You can take quizzes as many times as you want and can check your stats in the dashboard area.</p>
 </section>
 
 
@@ -22,12 +20,10 @@
     {% if user.is_authenticated %}
     <div class="mt-6 quiz-list">
         <hr class="divider">
-        <h2>List of Quizzes</h2>
         <ul>
             {% for q in quiz_list %}
             <li class="p-2">
-                <a href="{% url 'single_quiz' q.slug %}">{{ q.title }}</a>
-                <!-- TODO: add as button with url for each quiz -->
+                <a href="{% url 'single_quiz' q.slug %}" class="btn btn-info">{{ q.title }}</a>
                 <span class="badge badge-primary">Last updated on {{ q.updated_on }}</span>
             </li>
             {% endfor %}

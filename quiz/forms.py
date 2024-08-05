@@ -10,12 +10,7 @@ class AnswerSelection(forms.Form): # custom form not for specific model for more
         super(AnswerSelection, self).__init__(*args, **kwargs) # constructor for parent class: ensure standard args are handled properly and form is correctly initialised
 
         for question in quiz.questions.all():
-            # data = {
-            #     'question': question.question_text,
-            #     'question_image': question.question_image,
-            #     'points': question.points,
-            #     'answers': question.answers.all()
-            # }
+            
             self.fields[f'question_{question.id}'] = forms.ChoiceField( # for each question, create new form field
                 # tuple: (value, label) -> (id, content),
                 choices=[(answer.id, answer.answer_content) for answer in question.answers.all()],

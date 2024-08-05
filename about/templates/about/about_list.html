@@ -6,17 +6,17 @@
 {% url 'quiz_list' as quiz_list_url %}
 
 <!-- About section title and info -->
-<div class="card about-section">
+<div class="card about-section m-3">
     <div class="card-body">
         <h3 class="page-title text-center">{{ about_list.title }}</h3>
     </div>
     <div class="card-text">
         {{ about_list.content | safe }}
     </div>
+    <!-- Button to go to quiz list -->
+    <div class="links text-center pt-5">
+        <a href="{{ quiz_list_url }}" class="btn btn-primary btn-success">Get Started</a>
+    </div>
 </div>
 
-<!-- Button to go to quiz list -->
-<div class="links text-center pt-5">
-    <a href="{{ quiz_list_url }}" class="btn btn-primary">Quiz List</a>
-</div>
 {% endblock content %}
