@@ -7,7 +7,7 @@ def about(request):
     """
     Shows about page with all content
     """
-    about_list = About.objects.all().order_by('-id')
+    about_list = About.objects.first()
     template_name = 'about/about_list.html'
     context = {
         'about_list': about_list,

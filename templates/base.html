@@ -5,6 +5,8 @@
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
 {% url 'dashboard' as dashboard_url %}
+{% url 'quiz_list' as quiz_list_url %}
+
 
 
 <!DOCTYPE html>
@@ -49,6 +51,10 @@
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == user_dashboard %}active{% endif %}" aria-current="page"
                             href="{% url 'dashboard' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == user_dashboard %}active{% endif %}" aria-current="page"
+                            href="{% url 'quiz_list' %}">Quizlist</a>
                     </li>
                     {% else %}
                     <li class="nav-item">

@@ -7,7 +7,42 @@
 
 {% block new_note %}
 <section class="new-note container">
-    <div class="card col-6">
+    <!-- Note page info -->
+    <div class="row col-12 p-2">
+        <div class="card-body">
+            <h5>Welcome to your notes area!</h5>
+            <p>Here you can make notes on things you have learned and notes on what to revise for your upcoming exams!
+            </p>
+            <ul>
+
+                <li>
+                    Enter your note content in the form below. Click <mark class="submit">Submit</mark> and your new
+                    note will appear where
+                    in your list at the bottom of the page.
+                </li>
+                <hr>
+                <li>
+                    You can customize each note card by tapping <mark class="alert">edit</mark> into the text area. Your
+                    text will
+                    appear in the text area. at the top for your edit as you wish. Once finished, simply click save!
+                </li>
+                <hr>
+                <li>
+                    If you want delete a note card, click on the card's <mark class="delete">delete</mark> button to
+                    remove it from your collection.
+                </li>
+                <hr>
+                <li>
+                    In the future, you will be able to organize your notes by categories, drag and drop the cards into
+                    different sections or categories, and rearrange them as
+                    needed for easy access and reference.
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <!-- Note Form -->
+    <div class="card row col-12 p-2">
         <div class="card-body">
             <form method="POST" action="{% url 'user_notes' %}" style="margin-top: 1.3em" id="noteForm">
                 {{ quiz_note_form|crispy}}
@@ -20,49 +55,45 @@
 {% endblock %}
 
 <!-- Notes List -->
-<section id="notes-list" class="container">
+<section id="notes-list" class="pt-5 col-12 container">
+    <h5 class="p-2">Notes Collection:</h5>
     {% if user.is_authenticated %}
-    <div class="row" id="notes">
-        <div class="col col-md-8">
-            <h5 id="notes-list">Notes Collection:</h5>
-            <div class="card-body">
-                {% for note in notes_list %}
-                <div class="card {% if not note.user == user %} d-none {% endif %}">
-                    <p class="p-2 faded">Created by: {{ note.user }} at: {{ note.created_at }}</p>
-                    <div id="note{{ note.id }}">
-                        <p class="font-weight-bold note-content">{{ note.note | linebreaks }}</p>
-                    </div>
-                    {% if user.is_authenticated and note.user == user %}
-                    <button class="btn btn-edit btn-warning" data-note_id="note{{ note.id }}">Edit</button>
-                    <button class="btn btn-delete btn-danger" data-note_id="note{{ note.id }}">Delete</button>
-                    {% endif %}
-                </div>
+    <div class="notes-collection d-flex flex-wrap align-content-around">
+        {% for note in notes_list %}
+        <!-- inidividual note -->
+        <div class="note p-2 {% if not note.user == user %} d-none {% endif %}">
+            <div id="note{{ note.id }}" class="">
+                <p class="note-content">{{ note.note | linebreaks }}</p>
             </div>
-            {% endfor %}
+            <p class="p-2 note-info text-faded">{{ note.user }}<br>{{ note.created_at }}</p>
+            {% if user.is_authenticated and note.user == user %}
+            <button class="btn btn-edit btn-warning col-3 text-center d-inline-flex justify-content-around" data-note_id="note{{ note.id }}">Edit</button>
+            <button class="btn btn-delete btn-danger col-3 text-center d-inline-flex justify-content-around" data-note_id="note{{ note.id }}">Delete</button>
             {% endif %}
-            <!-- Delete confirmation modal -->
-            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModalLabel">Delete note?</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Are you sure you want to delete your note?
-                            This action cannot be undone.
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <a id="deleteConfirm" href="#" class="btn btn-danger">Delete</a>
-                        </div>
-                    </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!-- Delete confirmation modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete note?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete your note?
+                    This action cannot be undone.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a id="deleteConfirm" href="#" class="btn btn-danger">Delete</a>
                 </div>
             </div>
         </div>
+    </div>
 </section>
-
 
 {% endblock content %}
 
