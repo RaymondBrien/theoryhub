@@ -32,15 +32,18 @@
                         <br>
                         <small class="text-muted">{{ quiz.description }}</small>
                     </h5>
-                    <p class="card-text">
-                        You will be presented with <strong>{{ questions|length }}</strong>
-                        question{{ questions|length|pluralize }}
-                    </p>
-                    <p>
-                        When you're ready, click the <strong>Start Quiz</strong> button.
-                    </p>
-                    <!-- TODO:Add JS to reveal quiz section once clicked?: -->
-                    <button id="quiz-start-btn" class="btn btn-success">Start Quiz</button>
+                    <div id="quiz-starter-content">
+                        <p class="card-text">
+                            You will be presented with <strong>{{ questions|length }}</strong>
+                            question{{ questions|length|pluralize }}
+                        </p>
+                        <p><strong>N.B.</strong><br>Some questions are worth 2 points, some are worth one point.</p>
+                        <p>
+                            When you're ready, click the <strong>Start Quiz</strong> button.
+                        </p>
+                        <!-- TODO:Add JS to reveal quiz section once clicked?: -->
+                        <button id="quiz-start-btn" class="btn btn-success">Start Quiz</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,39 +52,44 @@
     {% if user.is_authenticated %}
     <!-- quiz form -->
     <div class="row d-none" id="question-section">
-        <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
-            <form method="post" id="quiz-question-form" class="hidden">
-                {{ answer_form.as_p | crispy }}
+        <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3 text-center">
+            <form method="post" id="quiz-question-form">
                 {% csrf_token %}
                 {% for field in answer_form %}
-                <div class="form-group">
-                    <h3>
+                <div class="form-group mt-3 row card text-center">
+                    <!-- question-text -->
+                    <h3 class="mt-3 p-3 col-12 question-text">
                         {{ field.label }}
                     </h3>
-                    {{ field }}
+                    <!-- answer-options -->
+                    <div class="answer-options">
+                        {{ field }}
+                    </div>
                     {% if field.help_text %}
                     <small class="form-text text-muted">{{ field.help_text }}</small>
                     {% endif %}
                 </div>
                 <!-- TODO sort pagination so one question per page and WITH IMAGE -->
-                <div class="pagination">
+                {% if is_paginated %}
+                <div class="text-center">
                     <span class="step-links">
-                        {% if page_obj.has_previous %}
+                        {% if page.has_previous %}
                         <a href="?page=1">&laquo; first</a>
                         <a href="?page={{ page_obj.previous_page_number }}">previous</a>
                         {% endif %}
                         <span class="current">
                             Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
                         </span>
-                        {% if page_obj.has_next %}
+                        {% if page.has_next %}
                         <a href="?page={{ page_obj.next_page_number }}">next</a>
                         <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
                         {% endif %}
                     </span>
                 </div>
+                {% endif %}
                 {% endfor %}
                 <!-- TODO: only display submit if user has answers for all qusetions and question is last question of quiz (JS?) -->
-                <button type="submit" id="quiz-submit-btn" data-user="{{ user.id }}">Submit Quiz</button>
+                <button type="submit" id="quiz-submit-btn" data-user="{{ user.id }}" class="btn btn-success text-center mt-3 m-auto">Submit Quiz</button>
             </form>
         </div>
     </div>

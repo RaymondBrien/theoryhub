@@ -118,3 +118,15 @@ mark.delete {
 .btn-edit, .btn-delete {
     width: auto;
 }
+
+.question-text {
+    margin-top: 1em;
+    border-bottom: #999 solid 1px;
+    text-align: left;
+}
+
+.answer-options > div > * {
+    padding: 4%;
+    display: inline-block;
+    color:#dc3545;
+}
