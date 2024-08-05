@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% url 'new_note' as new_note_url %}
+{% url 'user_notes' as user_notes_url %}
 
 {% block content %}
 
@@ -9,7 +9,7 @@
 <section class="new-note container">
     <div class="card col-6">
         <div class="card-body">
-            <form method="post" style="margin-top: 1.3em" id="noteForm">
+            <form method="POST" action="{% url 'user_notes' %}" style="margin-top: 1.3em" id="noteForm">
                 {{ quiz_note_form|crispy}}
                 {% csrf_token %}
                 <button type="submit" id="submitNoteButton" class="btn btn-primary btn-md">Submit</button>
