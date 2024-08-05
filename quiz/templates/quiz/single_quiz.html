@@ -22,7 +22,7 @@
 <!-- class="{% if user.is_authenticated %} container my-5 {% else %} d-none {% endif  %} -->
 <section id="quiz-container" class="container">
 
-    <!-- quiz start button -->
+    <!-- quiz starting page -->
     <div class="row" id="quiz-start-row">
         <div class="col col-md-8 offset-md-2 col-lg-6 offset-lg-3">
             <div class="card text-center shadow">
@@ -37,11 +37,10 @@
                         question{{ questions|length|pluralize }}
                     </p>
                     <p>
-                        <!-- TODO: style button -->
                         When you're ready, click the <strong>Start Quiz</strong> button.
                     </p>
                     <!-- TODO:Add JS to reveal quiz section once clicked?: -->
-                    <button id="quiz-start-btn" class="btn btn-ci my-4">Start Quiz</button>
+                    <button id="quiz-start-btn" class="btn btn-success">Start Quiz</button>
                 </div>
             </div>
         </div>
@@ -49,7 +48,7 @@
 
     {% if user.is_authenticated %}
     <!-- quiz form -->
-    <div class="row">
+    <div class="row d-none" id="question-section">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
             <form method="post" id="quiz-question-form" class="hidden">
                 {{ answer_form.as_p | crispy }}
@@ -68,15 +67,15 @@
                 <div class="pagination">
                     <span class="step-links">
                         {% if page_obj.has_previous %}
-                            <a href="?page=1">&laquo; first</a>
-                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
                         {% endif %}
                         <span class="current">
                             Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
                         </span>
                         {% if page_obj.has_next %}
-                            <a href="?page={{ page_obj.next_page_number }}">next</a>
-                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        <a href="?page={{ page_obj.next_page_number }}">next</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
                         {% endif %}
                     </span>
                 </div>
