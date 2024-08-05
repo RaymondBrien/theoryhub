@@ -13,7 +13,7 @@ from .models import UserQuizSubmission, QuizNote
 from .forms import QuizNoteForm
 
 @login_required
-def dashboard(request, ):
+def dashboard(request):
     """
     Context 
     Template

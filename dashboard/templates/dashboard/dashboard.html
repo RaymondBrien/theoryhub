@@ -11,44 +11,41 @@
 
     <div class="container">
         <div class="row title-dashboard">
-            <div class="col-md-12">
+            <div class="col-md-12 text-center">
                 <h1 class="display-4">Dashboard</h1>
                 <hr>
-                <p class="text-faded">Here you can see all your quiz results.</p>
-                <p><i>Check out your own personal notes folder by heading to the notes page at the bottom</i></p>
+                <p class="text-faded">Here you can see all your quiz results and navigate to your own personal notes
+                    station</p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <!-- TODO add image? -->
-                <h2>Profile</h2>
-                <hr>
-                <div class="container">
-
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            {% if user.is_authenticated and user == user %}
-                            <strong>Hello <i class="font-weight-bold">{{ user.username }}</i></strong>
-                            <!-- TODO: Add list of quizzes completed -->
-                            <!-- TODO:  update user name? CHECK USER STORIES and ensure meet all crud functionality for assessment requirements-->
-                            <!-- TODO:  -->
-                            <!-- TODO:  -->
-                            {% else %}
-                            <strong>Please log in to your account to see your page</strong>
-                            <!-- TODO add link to login page -->
-                            {% endif %}
-                        </h5>
-                        <a href="{% url 'user_notes' %}" class="">Notes page</a>
-                    </div>
+        <div class="row col-md-12 mt-3 text-center">
+            <div class="col-md-6 card">
+                <div class="card-body d-flex align-items-center justify-content-center">
+                    <h2 class="display-6">Profile</h2>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="" alt="user-profile">
-                    </div>
+            <div class="col-md-6 card">
+                <div class="card-body">
+                    {% if user.is_authenticated and user == user %}
+                    <h5 class="card-title">
+                        <strong>{{ user.username }} </strong>
+                    </h5>
+                    <ul class="user-info-list">
+                        <li>{{ user.email }}</li>
+                        <li>Last logged in on: {{ user.last_login }}</li>
+                    </ul>
+                    <!-- TODO: Add list of quizzes completed -->
+                    <!-- TODO:  update user name? CHECK USER STORIES and ensure meet all crud functionality for assessment requirements-->
+                    <!-- TODO:  -->
+                    <!-- TODO:  -->
+                    {% else %}
+                    <!-- TODO add link to login page -->
+                    <strong>Please log in to your account to see your page</strong><a href="{}">here</a>
+                    {% endif %}
+                    <button class="btn btn-success">
+                        <a href="{% url 'user_notes' %}" class="link text-white" style="text-decoration: none;">YOUR NOTES</a>
+                    </button>
+
                 </div>
             </div>
         </div>
@@ -95,16 +92,16 @@
 </main>
 
 <!-- Incomplete Quizzes List -->
-<section class="incomplete-quizzes mt-3">
+<section class="incomplete-quizzes mt-3 container">
     <div class="row">
-        <div class="card">
+        <div class="card col-md-12">
             <div class="card-title">
                 <div class="card-text text-center">
                     <h4>Incomplete Quizzes:</h4>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <table class="table" style="{%if item.user_score == 0 %}display:inline-block {% else %} d-none {% endif %}">
+                                <table class="table {%if item.user_score == 0 %} display:inline-block {% else %} d-none {% endif %}">
                                     <thead>
                                         <tr>
                                             <th>Quiz Title</th>
@@ -115,7 +112,8 @@
                                     {% if user.is_authenticated and item.owner == user %}
                                     <tbody>
                                         <tr>{{ item.quiz.title }}</tr>
-                                        <tr>INSERT LINK HERE</tr>
+                                        <!-- TODO -->
+                                        <tr>INSERT LINK HERE</tr> 
                                     </tbody>
                                     {% else %}
                                     <tr>

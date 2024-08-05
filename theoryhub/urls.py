@@ -23,6 +23,7 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls'), name='dashboard-urls'),  # for dashboard app
     path('quiz/', include('quiz.urls'), name='quiz-urls'),  # for quiz app 
     path('accounts/', include('allauth.urls')),  # for social authentication
+    # path("accounts/login/", auth_views.LoginView.as_view()), TODO
     path('summernote/', include('django_summernote.urls')),  # for Summernote editor
     path('admin/', admin.site.urls),
 ]

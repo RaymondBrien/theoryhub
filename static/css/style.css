@@ -1,3 +1,7 @@
+body {
+    background-color: #F9FAFC;
+}
+
 select {
     appearance: none;
     background-color: transparent;
@@ -11,6 +15,57 @@ select {
     line-height: inherit;
 }
 
-hidden {
-    display: none;
+.messages {
+    margin: 20px 0;
+}
+
+.messages li {
+    list-style-type: none;
+    padding: 0;
+}
+
+.messages .alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: rgb(255, 196, 138);
+}
+.messages .alert.info {
+    background-color: #5bc0de;
+}
+.messages .alert.success {
+    background-color: #eaf1ea;
+}
+.messages .alert.warning {
+    background-color: #f0ad4e;
+}
+.messages .alert.danger {
+    background-color: #d9534f;
+}
+
+.copyright {
+    padding-top: 2%;
+    background-color: #f9f9f9;
+    color: #999;
+    border-top: 1px solid #ddd;
+}
+
+.card {
+    padding: 1rem
+}
+
+.divider {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.quiz-list li {
+    background-color: #e0e0e0;
+    border: 1px solid #ddd;
+}
+
+.user-info-list li {
+    padding-top: 2px;
+    list-style-type: none;
 }
