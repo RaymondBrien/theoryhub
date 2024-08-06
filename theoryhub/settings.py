@@ -24,10 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 STATIC_ROOT = os.path.join(BASE_DIR / 'static')
 
-
-
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
 SECRET_KEY = os.environ.get("SECRET_KEY") 
 
 # SECURITY WARNING: don't run with debug turned on in production!
