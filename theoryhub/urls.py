@@ -14,16 +14,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin 
+from django.contrib import admin
 from django.urls import path, include
 
 
 urlpatterns = [
-    path('', include('about.urls'), name='about-urls'), # about section
-    path('dashboard/', include('dashboard.urls'), name='dashboard-urls'),  # for dashboard app
-    path('quiz/', include('quiz.urls'), name='quiz-urls'),  # for quiz app 
+    path('', include('about.urls'), name='about-urls'),  # about section
+    path('dashboard/', include('dashboard.urls'), name='dashboard-urls'),  # for dashboard app # noqa
+    path('quiz/', include('quiz.urls'), name='quiz-urls'),  # for quiz app
     path('accounts/', include('allauth.urls')),  # for social authentication
     # path("accounts/login/", auth_views.LoginView.as_view()), TODO
-    path('summernote/', include('django_summernote.urls')),  # for Summernote editor
+    path('summernote/', include(
+        'django_summernote.urls')),  # for Summernote editor
     path('admin/', admin.site.urls),
 ]

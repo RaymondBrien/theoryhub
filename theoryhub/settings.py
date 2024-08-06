@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import sys
-from django.contrib.messages import constants as messages # for message styling
+from django.contrib.messages import constants as messages
 
 import dj_database_url
 if os.path.isfile('env.py'):
@@ -24,22 +24,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 STATIC_ROOT = os.path.join(BASE_DIR / 'static')
 
-SECRET_KEY = os.environ.get("SECRET_KEY") 
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 CSRF_TRUSTED_ORIGINS = [
     'https://theoryhub-253c97b41326.herokuapp.com'
-    
-    # For local development 
+
+    # For local development
     'http://localhost:8000',
     'http://127.0.0.1:8000',
 ]
 ALLOWED_HOSTS = [
-    '8000-raymondbrien-theoryhub-5ifrqs0clkn.ws.codeinstitute-ide.net', 
-    '127.0.0.1', 
-    '.herokuapp.com' ,
+    '8000-raymondbrien-theoryhub-5ifrqs0clkn.ws.codeinstitute-ide.net',
+    '127.0.0.1',
+    '.herokuapp.com',
     'theoryhub-253c97b41326.herokuapp.com']
 
 
@@ -119,7 +119,7 @@ WSGI_APPLICATION = 'theoryhub.wsgi.application'
 
 # Database
 DATABASES = {
-    'default' : dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
 if 'test' in sys.argv:
@@ -130,22 +130,22 @@ if 'pytest' in sys.modules:
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-    
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa
     },
 ]
 
@@ -169,7 +169,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' TODO--neccessary?
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
