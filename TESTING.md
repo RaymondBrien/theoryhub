@@ -114,10 +114,8 @@ I've tested my deployed project on multiple browsers to check for compatibility 
 | --- | --- | --- | --- | --- | --- |
 | Chrome | ![screenshot](./static/images/documentation/browser-testing/chrome/chrome_home.png) | ![screenshot](./static/images/documentation/browser-testing/chrome/chrome_quiz_list.png) | ![screenshot](./static/images/documentation/browser-testing/chrome/chrome_dashboard.png) | ![screenshot](./static/images/documentation/browser-testing/chrome/chrome_single_quiz.png) | Works as expected |
 | Safari | ![screenshot](./static/images/documentation/browser-testing/safari/home.png) | ![screenshot](./static/images/documentation/browser-testing/safari/quiz-list.png) | ![screenshot](./static/images/documentation/browser-testing/safari/dash.png) | ![screenshot](./static/images/documentation/browser-testing/safari/single.png) | Works as expected |
+| Opera | ![screenshot](./static/images/documentation/browser-testing/opera/home.png) | ![screenshot](./static/images/documentation/browser-testing/opera/quiz_list.png) | ![screenshot](./static/images/documentation/browser-testing/opera/dashboard.png) | ![screenshot](./static/images/documentation/browser-testing/opera/single.png) | Works as expected |
 
-
-
-| Opera | ![screenshot](documentation/browsers/browser-opera-home.png) | ![screenshot](documentation/browsers/browser-opera-about.png) | ![screenshot](documentation/browsers/browser-opera-contact.png) | ![screenshot](documentation/browsers/browser-opera-etc.png) | Minor differences |
 
 ## Responsiveness
 
