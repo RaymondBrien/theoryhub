@@ -391,6 +391,7 @@ Through it, user stories, issues, and milestone tasks were planned, then tracked
 [GitHub Issues](https://github.com/RaymondBrien/theoryhub/issues) served as an another Agile tool.
 There, I used my own **User Story Template** to manage user stories, define milestone deadlines, milestone iterations and arrange user stories by priority level on a weekly basis.
 
+Please see my user stories listed in issues for a full list of user stories.
 
 - [Open Issues](https://github.com/RaymondBrien/theoryhub/issues) [![GitHub issues](https://img.shields.io/github/issues/RaymondBrien/theoryhub)](https://github.com/RaymondBrien/theoryhub/issues)
 
