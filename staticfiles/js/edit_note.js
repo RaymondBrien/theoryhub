@@ -22,6 +22,7 @@ for (let button of editButtons) {
         let noteId = fullNoteId.replace("note", ""); // remote 'note' from noteId for url handling
         let noteContent = document.querySelector(`#${fullNoteId}`).innerText;
         noteText.value = noteContent;
+        noteForm.scrollIntoView({ behavior: 'smooth' });
         submitButton.innerText = "Update";
         noteForm.setAttribute("action", `edit_note/${noteId}/`);
     });

@@ -5,18 +5,23 @@
 
 
 const quizStartButton = document.getElementById('quiz-start-btn');
-const quizQuestionForm = document.getElementById('quiz-question-form');
+const quizQuestionForm = document.getElementById('question-section');
 const quizSubmitButton = document.getElementById('quiz-submit-btn');
+const questionSection = document.getElementById('quiz-question-form');
+const starterContent = document.getElementById('quiz-starter-content');
 
 // show question form when start button is clicked
 quizStartButton.addEventListener('click', () => {
-    console.log('getting quiz.js');
-    quizQuestionForm.classList.remove('hidden');
-    quizStartButton.classList.add('hidden');
+    console.log('from quiz.js');
+    quizQuestionForm.classList.remove('d-none');
+    quizStartButton.classList.add('d-none');
+    starterContent.classList.add('d-none');
+    questionSection.scrollIntoView({ behavior: 'smooth' });
+
 });
 
 
-
+// TODO check not needed?
 // add submit functionality to the button
 
 // check all questions have been answered (see TIm handling)
