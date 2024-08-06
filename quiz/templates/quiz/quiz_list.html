@@ -5,7 +5,6 @@
 
 {% block content %}
 
-<!-- TODO: add semantic tags -->
 <!-- Heading -->
 <section class="container pt-5">
     <h1 class="heading text-center">Quiz List</h1>
@@ -16,7 +15,7 @@
 
 
 <!-- Quiz List -->
-<main class="container">
+<section class="container">
     {% if user.is_authenticated %}
     <div class="mt-6 quiz-list">
         <hr class="divider">
@@ -31,11 +30,11 @@
     </div>
     {% else %}
     <div>
-        <h1>Login or Register to access the Quiz List</h1>
+        <h2 class="fs-1">Login or Register to access the Quiz List</h2>
         <p>You can learn about various topics from various fields and practice your skills.</p>
         <a href="{% url 'account_login' %}">Login</a> or <a href="{% url 'account_signup' %}">Register</a>
     </div>
     {% endif %}
-</main>
+</section>
 
 {% endblock content %}
