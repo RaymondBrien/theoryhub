@@ -80,44 +80,4 @@
     </div>
 </main>
 
-<!-- TODO add to future features Incomplete Quizzes List -->
-<section class="incomplete-quizzes mt-3 container">
-    <div class="row">
-        <div class="card col-md-12">
-            <div class="card-title">
-                <div class="card-text text-center">
-                    <h4>Incomplete Quizzes:</h4>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- only display if there are still incomplete quizzes -->
-                             <!-- TODO move display logig to tbody loop -->
-                            <table class="table {%if item.user_score == 0 %} display:inline-block {% else %} d-none {% endif %}">
-                                <thead>
-                                    <tr>
-                                        <th>Quiz Title</th>
-                                        <th>Link</th>
-                                    </tr>
-                                </thead>
-                                {% for item in subsmissions %}
-                                {% if user.is_authenticated and item.owner == user %}
-                                <tbody>
-                                    <tr>{{ item.quiz.title }}</tr>
-                                    <!-- TODO add link for each quiz -->
-                                    <tr>INSERT LINK HERE</tr>
-                                </tbody>
-                                {% else %}
-                                <tr>
-                                    <td colspan="3">You have completed all the quizzes!</td>
-                                </tr>
-                                {% endif %}
-                                {% endfor %}
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 {% endblock content %}
