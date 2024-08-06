@@ -1,4 +1,4 @@
-/* jshint eversion: 11 */
+/* jshint esversion: 11 */
 
 const editButtons = document.getElementsByClassName("btn-edit");
 const noteText = document.getElementById("id_note");
@@ -12,9 +12,11 @@ const deleteConfirm = document.getElementById("deleteConfirm");
 
 
 /**
- * Initialize edit note form with note content and set action to update note via urls
+ * Initialize edit note form with note content and set action to 
+ * update note via urls
  * 
- * For each button in the editButtons list, add an event listener to listen for a click event.
+ * For each button in the editButtons list, add an event listener 
+ * to listen for a click event.
  */
 for (let button of editButtons) {
     button.addEventListener("click", (e) => {
