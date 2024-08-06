@@ -76,10 +76,15 @@
         </div>
     </nav>
     <!-- Display user status -->
-    <div class="row user-status {% if not user.is_authenticated %} d-none {% endif %}">
-        <p class="text-bold">
-            Logged in as {{ user.username }}
-        </p>
+    <div class="container-fluid">
+        <div class="row user-status {% if not user.is_authenticated %} d-none {% endif %}">
+            <div class="col">
+                <p class="text-bold">
+                    Logged in as {{ user.username }}
+                </p>
+            </div>
+        </div>
+
     </div>
     <!-- displaying Django messages -->
     {% if messages %}
