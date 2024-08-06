@@ -46,7 +46,6 @@ select {
 }
 
 .messages .alert {
-    margin-bottom: 10px;
     border-radius: 5px;
     color: rgb(255, 196, 138);
 }
@@ -55,6 +54,7 @@ select {
 }
 .messages .alert.success {
     background-color: #378d37;
+    color: #ddd;
 }
 .messages .alert.warning {
     background-color: #f0ad4e;
