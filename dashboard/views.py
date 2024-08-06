@@ -15,9 +15,14 @@ from .forms import QuizNoteForm
 @login_required
 def dashboard(request):
     """
-    TODO flesh out context
-    Context 
-    Template
+    Displays list of all user's own quiz submissions data.
+    Users must be logged in to view their data.
+    
+    **Context**
+    :model: `dashboard.UserQuizSubmission`
+    
+    **Template**
+    :template: `dashboard/dashboard.html`
     
     """
     submissions = UserQuizSubmission.objects.filter(owner=request.user)
@@ -39,63 +44,18 @@ def dashboard(request):
         context
     )
 
-    # # TODO get any notes made related to a quiz from user in notepad and display on quiz list page
-    # def get_context_data(self, **kwargs): # ensure quiz note form shows
-    #     context = super().get_context_data(**kwargs)
-    #     context['quiz_note_form'] = QuizNoteForm()
-    #     return context
-
-# class UserNote(LoginRequiredMixin, UserPassesTestMixin, ListView):
-#     """
-#     Display all notes made by the current user.
-#     Unauthenticated users will be redirected to the login page.
-#     Only authenticated users can view and add notes.
-#     Users can only see their own notes.
-    
-#     **Context**
-#     TODO add more context
-#     """
-#     # model = QuizNote
-#     template_name = 'dashboard/notes_page.html'
-#     paginate_by = 8
-#     context_object_name = 'notes_list'
-#     # login_url = reverse('login') TODO
-
-#     # for extra validation to avoid brute force
-#     def test_func(self) -> bool | None:
-#         return self.request.user.is_authenticated
-
-#     def get_queryset(self):
-#         queryset = QuizNote.objects.filter(user=self.request.user)
-#         print(f'get queryset got: {queryset}')
-#         return QuizNote.objects.filter(user=self.request.user)
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['quiz_note_form'] = QuizNoteForm()
-#         return context
-
-#     def post(self, request, *args, **kwargs):
-#         quiz_note_form = QuizNoteForm(data=request.POST)
-#         if quiz_note_form.is_valid():
-#             note = quiz_note_form.save(commit=False)
-#             note.user = request.user
-#             note.save()
-#             messages.add_message(
-#                 request, messages.SUCCESS,
-#                 'Quiznote added'
-#             )
-#             return redirect('user_notes')
-#         else:
-#             messages.add_message(
-#                 request, messages.ERROR,
-#                 'Error adding quiznote'
-#             )
-#             return self.render_to_response(self.get_context_data(quiz_note_form=quiz_note_form))
-
-
 @login_required
 def user_notes(request):
+    """
+    Display list of user's own quiz note items.
+    Handles post request for new user notes made on page.
+    
+    **Context**
+    :model: `dashboard.QuizNote`
+    
+    *Template**
+    :template: `dashboard/notes_page.html`
+    """
     if request.method == 'POST':
         quiz_note_form = QuizNoteForm(data=request.POST)
         if quiz_note_form.is_valid():
@@ -128,12 +88,20 @@ def user_notes(request):
 @login_required
 def edit_note(request, note_id):
     """
-    Display individual note for user to edit if authenticated:
-    Stays on page after the edit is submitted.
+    Enables individual note instance editing on notes page using quiz note form.
+    User is redirected to same page after the edit is submitted, where 
+    the note is updated and appears in the list.
+    Edit updates content of note instance in database.
+    
+    Validation to ensure users can only edit their own notes.
     
     **Context** 
-    TODO add context
-    Appears on quiz list template.
+    :model: `dashboard.QuizNote`
+    :form: `dashboard.QuizNoteForm`
+    
+    **Template**
+    :template: `dashboard/notes_page.html`
+    
     """
     if request.method == "POST":
         queryset = QuizNote.objects.filter(user=request.user)
@@ -147,20 +115,20 @@ def edit_note(request, note_id):
         else: 
             messages.add_message(request, messages.ERROR, 'Error updating note!')
     
-    # TODO where do I want to stay on page?
     return HttpResponseRedirect(reverse('user_notes')) 
 
 @login_required
 def delete_note(request, note_id):
     """
-    Enables user to delete a quiz note instance.
+    Enables user to delete a quiz note instance from database.
+    Validation to ensure users can only delete their own notes.
     
     **Context**
-    TODO revise context
-    `quiz` - single instance of Quiz object, published only
-    `quiz_note` - single instance of quiznote object, attached to quiz via FK.
+    :model: `dashboard.QuizNote`
     
-    Appears on quiz list template.
+    **Template**
+    :template: `dashboard/dashboard.html`
+    
     """
     
 

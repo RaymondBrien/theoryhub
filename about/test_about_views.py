@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 class TestAboutView(TestCase):
+    """
+    Test about view renders successfully
+    """
     
     def setup(self):
         self.user = User.objects.create_user(username='testuser', password='testpassword')

@@ -4,39 +4,70 @@ from .models import Quiz, Question, Answer
 
 
 class QuestionInline(admin.TabularInline):
+    """
+    Enables admin to assign questions to each quiz in single interface
+    for ease of editing and quiz creation.
+    
+    **Context**
+    :model: `quiz.Question`
+    
+    """
     model = Question
-    # TODO: do I need show_change_link?
-    # show_change_link = True  # This allows editing questions from the quiz page
 
 @admin.register(Quiz)
 class QuizAdmin(admin.ModelAdmin):
-    """Adds question list to quiz admin page"""
+    """
+    Adds list of quizzes to admin page.
+    
+    **Context**
+    :model: `quiz.Quiz`
+    
+    """
     list_display = ('title', 'status', 'created_on', 'updated_on')
     inlines = [QuestionInline]  # This will show a list of questions, not for editing
 
 class AnswerInline(admin.TabularInline):
-    """Each question has 4 answer options (multiple choice)"""
+    """
+    Enables admin to assign 4 multiple-choice answer options to each question in
+    single interface for ease of editing and quiz creation.
+    
+    **Context**
+    :model: `quiz.Answer`
+    
+    """
     model = Answer
     extra = 4
     max_num = 4
 
 class QuestionAdminForm(forms.ModelForm):
+    """
+    Form to host interface for admin to create questions with assigned answers.
+    Answers are connected via fk in question model and accessible with 
+    AnswerInline class in QuestionAdmin class.
+    
+    Form validated to ensure at least one answer is correct.
+    
+    **Context**
+    :model: `quiz.Question`
+    """
     class Meta:
         model = Question
         fields = '__all__'
 
     def clean(self):
-        # TODO debug 
         cleaned_data = super().clean()
-        # answers = self.instance.answers.all() # if self.instance.pk else []
-        
-        # if not any(answer.correct == 1 for answer in answers):
-        #     raise forms.ValidationError("At least one answer must be marked as correct.")
-        # return cleaned_data
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    """Adds 4 multiple-choice answers to a single question admin page."""
+    """
+    Adds 4 multiple-choice answers to a single question admin page for easier
+    quiz question generation.
+    
+    **Context**
+    :form: `QuestionAdminForm`
+    :inlines: `AnswerInline`
+    
+    """
     form = QuestionAdminForm
     inlines = [AnswerInline]
     list_display = ('points', 'quiz_id', 'question_text')
@@ -46,22 +77,4 @@ class QuestionAdmin(admin.ModelAdmin):
         # Ensure at least one answer is correct for each question
         if not any(answer.correct == 1 for answer in form.instance.answers.exclude(pk=form.instance.pk)):
             form.add_error(None, "At least one answer must be marked as correct for each question.")
-            # form.instance.delete()
-
-    # validate using forms for easier validation
-    # def save_formset(self, request, form, formset, change):
-    #     instances = formset.save(commit=False)
-    #     for instance in instances:
-    #         instance.save()
-    #     formset.save_m2m()
-        
-        # # Check if at least one answer is correct after saving
-        # if not any(answer.correct == 1 for answer in form.instance.answers.all()):
-        #     form.add_error(None, "At least one answer must be marked as correct.")
-        #     return
-        
-        # formset.save()
-
-
-# admin.site.register(Answer)  # If you want to manage answers separately
 

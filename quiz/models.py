@@ -2,7 +2,6 @@ from django.db import models
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from cloudinary.models import CloudinaryField
 from django.utils.text import slugify
-from django.contrib.auth.models import User
 
 STATUS = ((0, "Draft"), (1, "Published"))
 CORRECT = ((0, "Incorrect"), (1, "Correct" ))
@@ -10,6 +9,7 @@ CORRECT = ((0, "Incorrect"), (1, "Correct" ))
 POINTS= ((1, "Small"), (2, "Medium" ))
 QUESTION_NUMBER = ((1, ""), (2, ""))
 ANSWER_OPTIONS = ((1, "A"), (2, "B"), (3, "C"), (4, "D"))
+
 
 class Quiz(models.Model):
     """Stores a single quiz, which is a collection of questions"""
@@ -24,6 +24,7 @@ class Quiz(models.Model):
 
 # TODO Date field validation for published vs draft quiz - copy to questions too
 # https://docs.djangoproject.com/en/4.2/ref/models/instances/#django.db.models.Model.clean_field
+    # TODO future feauter
     # def clean(self):
     # # Don't allow draft entries to have a pub_date.
     # if self.status == "draft" and self.pub_date is not None:
@@ -46,8 +47,8 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     """Stores a single question related :model:`quiz.Quiz`"""
-    # TODO: check how many types of point questions there are, and update integer choices accordingly. 
-    # TODO: make question numbers - how many per quiz?
+    # TODO: future feature check how many types of point questions there are, and update integer choices accordingly. 
+    # TODO: future feature make questions numbered - how many per quiz?
     
     quiz_id = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
     question_text = models.TextField()
@@ -61,7 +62,8 @@ class Question(models.Model):
     def __str__(self):
         return f'Question belongs to Quiz {self.quiz_id})'
        
-       # TODO: add question numbers to appear in order in each quiz - see snippet to edit below 
+       # TODO future feature
+       # add question numbers to appear in order in each quiz - see snippet to edit below 
         #     QUESTIONS = {
         #     0: "",
         #     1: "What is your name?",
@@ -79,8 +81,6 @@ class Question(models.Model):
         #     question_number = models.IntegerField(choices=[(k, v) for k, v in QUESTIONS.items()])
     
 
-
-
 class Answer(models.Model):
     """Stores a single answer related :model:`quiz.Question`"""
     
@@ -92,7 +92,9 @@ class Answer(models.Model):
     class Meta:
         ordering = ["answer_option"]
         verbose_name_plural = "Answers"
-        unique_together = ("question_id", "answer_option") # only one answer option per question (i.e. a, b, c, d only. Not two option b's (a b, b, c) for example)
-    
+        # only one answer option per question (i.e. a, b, c, d only. 
+        # (a b, b, c) is invalid.
+        unique_together = ("question_id", "answer_option")
+
     def __str__(self):
         return f'Answer: {self.answer_content}'
