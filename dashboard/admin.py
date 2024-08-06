@@ -13,6 +13,7 @@ class UserQuizSubmissionAdmin(admin.ModelAdmin):
     """
     list_display = ('owner', 'quiz', 'user_score', 'last_taken')
 
+
 @admin.register(QuizNote)
 class QuizNoteAdmin(admin.ModelAdmin):
     """
