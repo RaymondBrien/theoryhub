@@ -1,16 +1,12 @@
-from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView
-import logging
+from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.contrib.auth.models import User
 from django.contrib import messages
 
 from .models import UserQuizSubmission, QuizNote
 from .forms import QuizNoteForm
+
 
 @login_required
 def dashboard(request):
@@ -27,12 +23,9 @@ def dashboard(request):
     """
     submissions = UserQuizSubmission.objects.filter(owner=request.user)
     if not request.user.is_authenticated:
-        messages.info(request, 'Access denied. Please log in to view this page.')
+        messages.info(
+            request, 'Access denied. Please log in to view this page.')
         return render(HttpResponseRedirect(reverse('login')))
-    # TODO debug IMPORTANT - test by brute force too
-    # elif request.user is not submissions.owner:
-    #     messages.info(request, "You may not access someone else's submissions")
-    #     return render(HttpResponseRedirect(reverse('login')))
 
     context = {
         'submissions': submissions,
@@ -43,6 +36,7 @@ def dashboard(request):
         'dashboard/dashboard.html',
         context
     )
+
 
 @login_required
 def user_notes(request):
@@ -88,7 +82,9 @@ def user_notes(request):
 @login_required
 def edit_note(request, note_id):
     """
-    Enables individual note instance editing on notes page using quiz note form.
+    Enables individual note instance editing on notes page using
+    quiz note form.
+
     User is redirected to same page after the edit is submitted, where
     the note is updated and appears in the list.
     Edit updates content of note instance in database.
@@ -109,13 +105,16 @@ def edit_note(request, note_id):
         quiz_note_form = QuizNoteForm(data=request.POST, instance=note)
 
         if quiz_note_form.is_valid() and note.user == request.user:
-            note = quiz_note_form.save(commit=False) # TODO do I need this?
+            note = quiz_note_form.save(commit=False)
             note.save()
-            messages.add_message(request, messages.SUCCESS, 'Note updated!')
+            messages.add_message(
+                request, messages.SUCCESS, 'Note updated!')
         else:
-            messages.add_message(request, messages.ERROR, 'Error updating note!')
+            messages.add_message(
+                request, messages.ERROR, 'Error updating note!')
 
     return HttpResponseRedirect(reverse('user_notes'))
+
 
 @login_required
 def delete_note(request, note_id):
@@ -131,14 +130,15 @@ def delete_note(request, note_id):
 
     """
 
-
     queryset = QuizNote.objects.filter(user=request.user)
     note = get_object_or_404(queryset, pk=note_id)
 
     if note.user == request.user:
         note.delete()
-        messages.add_message(request, messages.SUCCESS, f'Note "{ note.note }" deleted!')
+        messages.add_message(
+            request, messages.SUCCESS, f'Note "{ note.note }" deleted!')
     else:
-        messages.add_message(request, messages.ERROR, 'There are no notes you can delete.')
+        messages.add_message(
+            request, messages.ERROR, 'There are no notes you can delete.')
 
     return HttpResponseRedirect(reverse('user_notes'))
