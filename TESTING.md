@@ -98,13 +98,9 @@ All relevant project files have been validated, for HTML, CSS, JavaScript and Py
 
 ## Browser Compatibility
 
-
-Recommended browsers to consider:
+I have run tests using the following browsers:
 - [Chrome](https://www.google.com/chrome)
-- [Firefox (Developer Edition)](https://www.mozilla.org/firefox/developer)
-- [Edge](https://www.microsoft.com/edge)
 - [Safari](https://support.apple.com/downloads/safari)
-- [Brave](https://brave.com/download)
 - [Opera](https://www.opera.com/download)
 
 
@@ -133,12 +129,16 @@ I have tested my deployed project on multiple physical and virtual devices to ch
 
 I have tested my deployed project using the Lighthouse Audit tool to check for any major issues.
 
+I have tested my deployed project using the Lighthouse Audit tool to check for any major issues.
+
 | Page | Mobile | Desktop | Notes |
 | --- | --- | --- | --- |
-| Home | ![screenshot](documentation/lighthouse/lighthouse-home-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-home-desktop.png) | Some minor warnings |
-| About | ![screenshot](documentation/lighthouse/lighthouse-about-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-about-desktop.png) | Some minor warnings |
-| Gallery | ![screenshot](documentation/lighthouse/lighthouse-gallery-mobile.png) | ![screenshot](documentation/lighthouse/lighthouse-gallery-desktop.png) | Slow response time due to large images |
-| x | x | x | repeat for any other tested pages/sizes |
+| Home | ![screenshot](./static/images/documentation/lighthouse/mobile/lh-home-mob.png) | ![screenshot](./static/images/documentation/lighthouse/desktop/lh-home-desktop.png) | Some minor warnings |
+| Quiz List | ![screenshot](./static/images/documentation/lighthouse/mobile/lh-quiz-list-mob.png) | ![screenshot](./static/images/documentation/lighthouse/desktop/lh-quiz-list-desktop.png) | Some minor warnings |
+| Single Quiz | ![screenshot](./static/images/documentation/lighthouse/mobile/lh-single-mob.png) | ![screenshot](./static/images/documentation/lighthouse/desktop/lh-single-desktop.png) | Some minor warnings |
+| Dashboard | ![screenshot](./static/images/documentation/lighthouse/mobile/lh-dashboard-mob.png) | ![screenshot](./static/images/documentation/lighthouse/desktop/lh-dashboard-desktop.png) | Some minor warnings. As a future feature, the dashboard will be styled to include improved contrast for user data for accessibility. |
+| Notes Page | ![screenshot](./static/images/documentation/lighthouse/mobile/lh-notes-mob.png) | ![screenshot](./static/images/documentation/lighthouse/desktop/lh-notes-desktop.png) | Some minor warnings |
+
 
 ## Defensive Programming
 
@@ -152,10 +152,6 @@ Examples of this could include (not limited to):
 Forms:
 - Users cannot submit an empty form
 - Users must enter valid email addresses
-
-PP3 (Python-only):
-- Users must enter a valid letter/word/string when prompted
-- Users must choose from a specific list only
 
 MS3 (Flask) | MS4/PP4/PP5 (Django):
 - Users cannot brute-force a URL to navigate to a restricted page
