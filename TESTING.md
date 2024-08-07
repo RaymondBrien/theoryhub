@@ -297,7 +297,7 @@ Validation and delinting tests were run globally, for all HTML, CSS, JavaScript,
 
 Any further issues can be found at https://github.com/RaymondBrien/theoryhub/issues
 
-**Fixed Bugs**
+**Unfixed Bugs?**
 
 [![GitHub issue custom search](https://img.shields.io/github/issues-search?query=repo%3ARaymondBrien%2Ftheoryhub%20label%3Abug&label=bugs)](https://github.com/RaymondBrien/theoryhub/issues?q=is%3Aissue+is%3Aclosed+label%3Abug)
 
