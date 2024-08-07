@@ -142,123 +142,34 @@ I have tested my deployed project using the Lighthouse Audit tool to check for a
 
 ## Defensive Programming
 
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-START OF NOTES (to be deleted)
-
-Defensive programming (defensive design) is extremely important!
-
-When building projects that accept user inputs or forms, you should always test the level of security for each.
-Examples of this could include (not limited to):
-
-Forms:
-- Users cannot submit an empty form
-- Users must enter valid email addresses
-
-MS3 (Flask) | MS4/PP4/PP5 (Django):
-- Users cannot brute-force a URL to navigate to a restricted page
-- Users cannot perform CRUD functionality while logged-out
-- User-A should not be able to manipulate data belonging to User-B, or vice versa
-- Non-Authenticated users should not be able to access pages that require authentication
-- Standard users should not be able to access pages intended for superusers
-
-You'll want to test all functionality on your application, whether it's a standard form,
-or uses CRUD functionality for data manipulation on a database.
-Make sure to include the `required` attribute on any form-fields that should be mandatory.
-Try to access various pages on your site as different user types (User-A, User-B, guest user, admin, superuser).
-
-You should include any manual tests performed, and the expected results/outcome.
-
-Testing should be replicable.
-Ideally, tests cases should focus on each individual section of every page on the website.
-Each test case should be specific, objective, and step-wise replicable.
-
-Instead of adding a general overview saying that everything works fine,
-consider documenting tests on each element of the page
-(ie. button clicks, input box validation, navigation links, etc.) by testing them in their happy flow,
-and also the bad/exception flow, mentioning the expected and observed results,
-and drawing a parallel between them where applicable.
-
-Consider using the following format for manual test cases:
-
-Expected Outcome / Test Performed / Result Received / Fixes Implemented
-
-- **Expected**: "Feature is expected to do X when the user does Y."
-- **Testing**: "Tested the feature by doing Y."
-- (either) **Result**: "The feature behaved as expected, and it did Y."
-- (or) **Result**: "The feature did not respond to A, B, or C."
-- **Fix**: "I did Z to the code because something was missing."
-
-Use the table below as a basic start, and expand on it using the logic above.
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-END OF NOTES (to be deleted)
-
 Defensive programming was manually tested with the below user acceptance testing:
 
 | Page | Expectation | Test | Result | Fix | Screenshot |
 | --- | --- | --- | --- | --- | --- |
 | Home | | | | | |
-| | Feature is expected to do X when the user does Y | Tested the feature by doing Y | The feature behaved as expected, and it did Y | Test concluded and passed | ![screenshot](documentation/features/feature01.png) |
-| | Feature is expected to do X when the user does Y | Tested the feature by doing Y | The feature did not respond to A, B, or C. | I did Z to the code because something was missing | ![screenshot](documentation/features/feature02.png) |
-| About | | | | | |
-| | Feature is expected to do X when the user does Y | Tested the feature by doing Y | The feature behaved as expected, and it did Y | Test concluded and passed | ![screenshot](documentation/features/feature03.png) |
-| | Feature is expected to do X when the user does Y | Tested the feature by doing Y | The feature did not respond to A, B, or C. | I did Z to the code because something was missing | ![screenshot](documentation/features/feature04.png) |
-| Gallery | | | | | |
-| | Feature is expected to do X when the user does Y | Tested the feature by doing Y | The feature behaved as expected, and it did Y | Test concluded and passed | ![screenshot](documentation/features/feature05.png) |
-| | Feature is expected to do X when the user does Y | Tested the feature by doing Y | The feature did not respond to A, B, or C. | I did Z to the code because something was missing | ![screenshot](documentation/features/feature06.png) |
-| Contact | | | | | |
-| | Feature is expected to do X when the user does Y | Tested the feature by doing Y | The feature behaved as expected, and it did Y | Test concluded and passed | ![screenshot](documentation/features/feature07.png) |
-| | Feature is expected to do X when the user does Y | Tested the feature by doing Y | The feature did not respond to A, B, or C. | I did Z to the code because something was missing | ![screenshot](documentation/features/feature08.png) |
-| repeat for all remaining pages | x | x | x | x | x |
+|  | Quiz list page is expected to load on 'getting started' button click | Tested the feature by doing clicking button | The feature behaved as expected, and it did redirect to quiz list. | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt1.png) |
+|  | Button click for 'getting started' is expected to redirect to login page if user is not logged in | Tested the feature by logging out and clicking button | Redirected to login page as expected | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt2.png) |
+|  | Global navigation should be accessible via burger icon to avoid screen overcrowding | Tested on mobile in devtools and on iphone | Burger icon for navbar appears as expected | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt3.png) |
+| Quiz List | | | | | |
+|  | Button click for specific quiz expected to redirect to specific quiz | Tested the feature by clicking on buttons available in quiz list when logged in | The feature behaved as expected, and it did redirect to specific quiz | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt4.png) |
+|  | Quiz url is not intended to be accessible by brute force for unauthenticated users | Tested the feature by logging out and entering a single quiz url manually | Feature redirected to sign in page as expected. | Test concluded and passed. | ![screenshot](./static/images/documentation/defensive-testing/dt5.png) |
+|  | If accessing single quiz url and not logged in, user should be redirected to single quiz once logging in from the login page | Tested the feature by logging out and entering a single quiz url manually, then logging in | Feature redirected to sign in page as expected, then directly to desired quiz url | Test concluded and passed. | ![screenshot](./static/images/documentation/defensive-testing/dt6.png) |
+| Single Quiz | | | | | |
+|  | Upon clicking start quiz on a single quiz page, the quiz is revealed and a list of questions are presented with a submit button at the bottom. First question should scroll into view and starting information box should become smaller | Tested the feature by starting a quiz | The feature behaved as expected | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt7.png) |
+|  | Users should be able to submit quiz only when all the questions have been answered. | Attempted to submit quiz without answering all questions | The unanswered questions were highlighted and quiz submission was not successful, as expected | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt8.png) |
+|  | Users should be redirected to quiz result page once valid quiz answers are submitted, showing their score for that quiz | Tested the feature by completing a quiz | Redirect to quiz result page with score as expected | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt9.png) |
+| Dashboard | | | | | |
+|  | Dashboard should only be available for authenticated users | Tested the feature by logging out and brute forcing via url to dashboard | Redirect to login page occured instead, as expected | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt11.png) |
+|  | Dashboard should only display users' own quiz score data | Tested the feature by completing a quiz, noting the result and checking the dashboard to confirm the result was showing | The dashboard listed latest quiz result as expected | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt12.png) |
+| Notes Page | | | | | |
+|  | Notes page should only be available for authenticated users | Tested the feature by logging out and brute forcing url to notes page | Redirect to login occurred as expected | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt13.png) |
+|  | Notes should only display users' own notes | Tested the feature by making a new note as another user (user B). Logged back in as user A to confirm user B's note was note displaying for user A | Only user A's own notes were displayed. User B's notes were only available for user B to see. | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt14.png) |
+|  | A note edit button should display note content in form, form should scroll into view and user can submit an edit successfully with a confirmation message for user feedback. The notes page should now display the edited note for that user | Tested the feature by clicking edit and making an edit to a note | The note content was editable and upon saving, the new note displayed as expected | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt15.png) |
+|  | Users should be able to delete a note, with a confirmation message | Tested the feature by deleting a note | The confirmation delete modal displayed as expected. The note was successfully deleted and no longer displayed on the user's notes page | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt16.png) |
+| Additional Defenses | | | | | |
+|  | Navigation bar should be listed at top (not burger icon, like for mobile users) | Tested the feature by opening the same page as both logged in and logged out | The feature displayed as expected | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt10.png) |
+|  | Clicking browser back button should not break the site, nor allow users to access content once logged out, even if previously logged in. | Tested the feature by logging out and pressing back button. | Briefly showed page before redirecting to login page. Further view authentication and a next element in the redirect was added. Tested again for all pages and now completely secure, redirecting immediately to login, then the desired page, as expected | Test concluded and passed | ![screenshot](./static/images/documentation/defensive-testing/dt17.png) |
 
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-START OF NOTES (to be deleted)
-
-Another way of performing defensive testing is a simple Pass/Fail for each test.
-The assessors prefer the above method, with the full test explained, but this is also acceptable in most cases.
-
-When in doubt, use the above method instead, and delete the table below.
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-END OF NOTES (to be deleted)
-
-| Page | User Action | Expected Result | Pass/Fail | Comments |
-| --- | --- | --- | --- | --- |
-| Home | | | | |
-| | Click on Logo | Redirection to Home page | Pass | |
-| | Click on Home link in navbar | Redirection to Home page | Pass | |
-| Gallery | | | | |
-| | Click on Gallery link in navbar | Redirection to Gallery page | Pass | |
-| | Load gallery images | All images load as expected | Pass | |
-| Contact | | | | |
-| | Click on Contact link in navbar | Redirection to Contact page | Pass | |
-| | Enter first/last name | Field will accept freeform text | Pass | |
-| | Enter valid email address | Field will only accept email address format | Pass | |
-| | Enter message in textarea | Field will accept freeform text | Pass | |
-| | Click the Submit button | Redirects user to form-dump | Pass | User must click 'Back' button to return |
-| Sign Up | | | | |
-| | Click on Sign Up button | Redirection to Sign Up page | Pass | |
-| | Enter valid email address | Field will only accept email address format | Pass | |
-| | Enter valid password (twice) | Field will only accept password format | Pass | |
-| | Click on Sign Up button | Asks user to confirm email page | Pass | Email sent to user |
-| | Confirm email | Redirects user to blank Sign In page | Pass | |
-| Log In | | | | |
-| | Click on the Login link | Redirection to Login page | Pass | |
-| | Enter valid email address | Field will only accept email address format | Pass | |
-| | Enter valid password | Field will only accept password format | Pass | |
-| | Click Login button | Redirects user to home page | Pass | |
-| Log Out | | | | |
-| | Click Logout button | Redirects user to logout page | Pass | Confirms logout first |
-| | Click Confirm Logout button | Redirects user to home page | Pass | |
-| Profile | | | | |
-| | Click on Profile button | User will be redirected to the Profile page | Pass | |
-| | Click on the Edit button | User will be redirected to the edit profile page | Pass | |
-| | Click on the My Orders link | User will be redirected to the My Orders page | Pass | |
-| | Brute forcing the URL to get to another user's profile | User should be given an error | Pass | Redirects user back to own profile |
-| repeat for all remaining pages | x | x | x | x |
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-START OF NOTES (to be deleted)
-
-Repeat for all other tests, as applicable to your own site.
-The aforementioned tests are just an example of a few different project scenarios.
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-END OF NOTES (to be deleted)
 
 ## User Story Testing
 
