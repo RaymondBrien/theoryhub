@@ -2,24 +2,9 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-<!-- {% block css %} -->
-<!--TODO: ADD Quiz-specific STYLES  and crispy form tags <link rel="stylesheet" href="{% static 'css/quiz.css' %}" type="text/css"> -->
-<!-- {% endblock %} -->
 
 {% block content %}
 
-<!-- TODO: CREDIT TIM NELSON -->
-<!-- TODO:  add function view to render question content in template -->
-<!-- TODO: add initial title page of single quiz: quiz title, description. Do not show quiz content until button is clicked. -->
-<!-- TODO: add start quiz button, which then reveals the content of the quiz.   -->
-<!-- TODO: add confirmation of starting quiz to user. -->
-<!-- TODO: add answer options to the quiz questions -->
-<!-- TODO: add "Submit Quiz" button functionality to submit the quiz results. -->
-
-<!-- TODO check step 3 where does this go? -->
-
-
-<!-- class="{% if user.is_authenticated %} container my-5 {% else %} d-none {% endif  %} -->
 <section id="quiz-container" class="container">
 
     <!-- quiz starting page -->
@@ -41,7 +26,6 @@
                         <p>
                             When you're ready, click the <strong>Start Quiz</strong> button.
                         </p>
-                        <!-- TODO:Add JS to reveal quiz section once clicked?: -->
                         <button id="quiz-start-btn" class="btn btn-success">Start Quiz</button>
                     </div>
                 </div>
@@ -69,26 +53,7 @@
                     <small class="form-text text-muted">{{ field.help_text }}</small>
                     {% endif %}
                 </div>
-                <!-- TODO sort pagination so one question per page and WITH IMAGE -->
-                {% if is_paginated %}
-                <div class="text-center">
-                    <span class="step-links">
-                        {% if page.has_previous %}
-                        <a href="?page=1">&laquo; first</a>
-                        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                        {% endif %}
-                        <span class="current">
-                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                        </span>
-                        {% if page.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}">next</a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                        {% endif %}
-                    </span>
-                </div>
-                {% endif %}
                 {% endfor %}
-                <!-- TODO: only display submit if user has answers for all qusetions and question is last question of quiz (JS?) -->
                 <button type="submit" id="quiz-submit-btn" data-user="{{ user.id }}" class="btn btn-success text-center mt-3 m-auto">Submit Quiz</button>
             </form>
         </div>
