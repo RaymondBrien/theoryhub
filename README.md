@@ -391,15 +391,71 @@ Through it, user stories, issues, and milestone tasks were planned, then tracked
 [GitHub Issues](https://github.com/RaymondBrien/theoryhub/issues) served as an another Agile tool.
 There, I used my own **User Story Template** to manage user stories, define milestone deadlines, milestone iterations and arrange user stories by priority level on a weekly basis.
 
-Please see my user stories listed in issues for a full list of user stories.
+<details>
+<summary>List of User Stories</summary>
+- As a **User**, I want to **delete a quiz note** for **keeping workspace tidy, or for completed reminders**.
 
+- As a **user**, I want to **edit** for **updating quiz notes or fixing typos**.
+
+- As an **admin**, I want to **create quizzes** for **quicker quiz creation**.
+
+- As a **user**, I want to **write a note in my dashboard notes page** for **making notes on what to revise over next time**.
+
+- As a **User**, I want to **update my account information or delete my account** for **account security**.
+
+- As an **Admin**, I want to **create a blog post** for **users to read and improve their theory knowledge**.
+
+- As a user, I want to initiate any media or actions myself so that I have a positive user experience.
+
+- As a user, I want my information to be pre-filled so that I don't have to enter it multiple times.
+
+- As a user, I want to be able to view detailed progress information so that I can analyze my performance and identify areas for improvement.
+
+- As a user, I want to be able to access a dashboard showing my progress so that I can track my performance and identify areas for improvement.
+
+- As a user, I want to be able to view my score for a completed specific quiz so that I can identify areas for improvement.
+
+- As a user, I want to be able to submit my answers for a quiz so that I can complete the quiz.
+
+- As a user, I want to be able to start a quiz so that I can answer the questions.
+
+- As a user, I want to be able to view a list of available quizzes so that I can select and take a quiz.
+
+- As a user, I want to be able to create a new account so that I can access the quizzes.
+
+- As a user, I want to be able to access a sign-up form so that I can create a new account.
+
+- As an admin, I want to be able to edit the answer options for questions in a quiz so that I can correct or update the content.
+
+- As an admin, I want to be able to edit existing questions in a quiz so that I can correct or update the content.
+
+- As an admin, I want to be able to view detailed analytics for a specific quiz so that I can analyze user performance.
+
+- As an admin, I want to be able to access a dashboard showing analytics for each quiz so that I can understand user performance and identify areas for improvement.
+
+- As an admin, I want to be able to delete user accounts so that I can remove inactive or non-compliant users.
+
+- As an admin, I want to be able to view details of a user account so that I can monitor activity and ensure compliance.
+
+- As an admin, I want to be able to access a list of all registered user accounts so that I can view and manage them.
+
+- As an admin, I want to be able to save and publish a quiz so that users can access and take it.
+
+- As an admin, I want to be able to add multiple-choice questions to a quiz so that users can answer them.
+
+- As an admin, I want to be able to set the title and description of a quiz so that users can easily identify the quiz.
+
+- As an admin, I want to be able to access a quiz creation interface so that I can create new quizzes.
+
+
+</details>
+
+Open Issues are now all future features milestone issues or won't have features.
 - [Open Issues](https://github.com/RaymondBrien/theoryhub/issues) [![GitHub issues](https://img.shields.io/github/issues/RaymondBrien/theoryhub)](https://github.com/RaymondBrien/theoryhub/issues)
 
-    ![screenshot](documentation/gh-issues-open.png)
 
 - [Closed Issues](https://github.com/RaymondBrien/theoryhub/issues?q=is%3Aissue+is%3Aclosed) [![GitHub closed issues](https://img.shields.io/github/issues-closed/RaymondBrien/theoryhub)](https://github.com/RaymondBrien/theoryhub/issues?q=is%3Aissue+is%3Aclosed)
 
-    ![screenshot](documentation/gh-issues-closed.png)
 
 ### MoSCoW Prioritization
 
