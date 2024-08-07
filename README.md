@@ -8,10 +8,14 @@
 ![screenshot](./static/images/favicon.jpg)
 
 
+[Live Site](https://theoryhub-253c97b41326.herokuapp.com/)
+
+
 The TheoryHub is an online platform designed to help users prepare for music theory exams, specifically for ABRSM grade 5. Built with Django, this web application provides a comprehensive set of quizzes and resources to enhance your understanding of music theory concepts essential for your musical progress and required by ABRSM for grades 6 and above performance exams.
 
 > [!NOTE]
-> BLUE: Please note that this is currently a developed MVP - check out the documentation below for more information, including the Future Features section [here](#future-features).
+> BLUE: Please note that this is currently a developed MVP - check out the documentation below for more information, including the Future Features section
+![here](#future-features).
 
 ## Top Features ✨
 
@@ -63,7 +67,7 @@ In the table below are the base wireframes for the app. This was built using [Go
 
 As the project developed, these wireframes were followed for overall structure, to ensure navigation, accessibility and discoverability were maintained at all times.
 As the project continues to grow and evolve, further images will be added for quizzes.
-For a list of future features, please see the [future Features](#future-features) documentation.
+For a list of future features, please see the [future Features](#future-features--) documentation.
 
 <details>
 <summary>Home 🏠</summary>
@@ -187,8 +191,8 @@ The CSS file defines the following styles:
 The database architecture features multiple entities managed in three main apps within the TheoryHub project.
 Namely, these apps are: 'quiz', 'dashboard' and 'about'.
 
-> [!TIP]  
-> GREEN: For an up-to-date, interactive rendering of database architecture, please click [here](https://mermaid.live/edit#pako:eNq1VE1vozAQ_SuWpd7SKk2IWbhV6nmlbrWXFRJyYUqsgk3tsfqR8t_XNoQWkk20h_qAmJnnec_jBztaqBJoSkHfCl5p3mQyk8Stmwdlkez6wC8hkYjyMzaohawICqzhM4vwiqRQEkFin-32HX8b0HdWvN_bh0YYI5Q81d7H1u3ITaH0F4KSI5CaG8yRP4EcOf7B0KnLy4-PUCEpyah6kaAzeg7vswH_7F48vN_g0z-VE3BCeJiAdKCpZhQNkEKDey1zjhPdY9u5Wj-AKfv_38iQNbWtZiJLMIUWLbpzn9B6tGjb8qA4EImGVzAVaZCjNTM73FkweMYEQebzAMx9dEA3Vo_wtso9zWzUA-uxi84d9zjtG2le3DWcU8cDLJ9Yfg8eamo2Yl9yptZQTG0wMI7KBqW9uv0pvyi8uCC_oOY-b7aiNcfNdGDlb_1S6II2oBsuSvdTCbPLKG6hgYx6UMn1k-_ZORy3qO7fZEFT1BYWVCtbbWn6yGvjot5hw09pD2m5pOmOvtKUra7WSZIsmXuuriMWL-hbyF5H0SaKlxsWs038o1vQd6Xc_uVVvE4itmLxmrFomaxDsz-h5nt3fwHuAJLw).
+> [!TIP]
+> For an up-to-date, interactive rendering of database architecture, please click [here](https://mermaid.live/edit#pako:eNq1VE1vozAQ_SuWpd7SKk2IWbhV6nmlbrWXFRJyYUqsgk3tsfqR8t_XNoQWkk20h_qAmJnnec_jBztaqBJoSkHfCl5p3mQyk8Stmwdlkez6wC8hkYjyMzaohawICqzhM4vwiqRQEkFin-32HX8b0HdWvN_bh0YYI5Q81d7H1u3ITaH0F4KSI5CaG8yRP4EcOf7B0KnLy4-PUCEpyah6kaAzeg7vswH_7F48vN_g0z-VE3BCeJiAdKCpZhQNkEKDey1zjhPdY9u5Wj-AKfv_38iQNbWtZiJLMIUWLbpzn9B6tGjb8qA4EImGVzAVaZCjNTM73FkweMYEQebzAMx9dEA3Vo_wtso9zWzUA-uxi84d9zjtG2le3DWcU8cDLJ9Yfg8eamo2Yl9yptZQTG0wMI7KBqW9uv0pvyi8uCC_oOY-b7aiNcfNdGDlb_1S6II2oBsuSvdTCbPLKG6hgYx6UMn1k-_ZORy3qO7fZEFT1BYWVCtbbWn6yGvjot5hw09pD2m5pOmOvtKUra7WSZIsmXuuriMWL-hbyF5H0SaKlxsWs038o1vQd6Xc_uVVvE4itmLxmrFomaxDsz-h5nt3fwHuAJLw).
 
 
 <details>
