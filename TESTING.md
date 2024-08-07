@@ -122,13 +122,12 @@ I've tested my deployed project on multiple browsers to check for compatibility 
 I have tested my deployed project on multiple physical and virtual devices to check for responsiveness issues.
 
 | Device | Home | Quiz List | Single Quiz | Dashboard | Notes Page | Results |
-| --- | --- | --- | --- | --- | --- | -- |
-| Mobile (iPhone 13) | ![screenshot](documentation/responsiveness/responsive-mobile-home.png) | ![screenshot](documentation/responsiveness/responsive-mobile-about.png) | ![screenshot](documentation/responsiveness/responsive-mobile-contact.png) | ![screenshot](documentation/responsiveness/responsive-mobile-etc.png) | Works as expected |
-| Tablet (iPad 12") | ![screenshot](documentation/responsiveness/responsive-tablet-home.png) | ![screenshot](documentation/responsiveness/responsive-tablet-about.png) | ![screenshot](documentation/responsiveness/responsive-tablet-contact.png) | ![screenshot](documentation/responsiveness/responsive-tablet-etc.png) | Works as expected |
-| Desktop (Mac) | ![screenshot](documentation/responsiveness/responsive-desktop-home.png) | ![screenshot](documentation/responsiveness/responsive-desktop-about.png) | ![screenshot](documentation/responsiveness/responsive-desktop-contact.png) | ![screenshot](documentation/responsiveness/responsive-desktop-etc.png) | Works as expected |
-| XL Monitor | ![screenshot](documentation/responsiveness/responsive-xl-home.png) | ![screenshot](documentation/responsiveness/responsive-xl-about.png) | ![screenshot](documentation/responsiveness/responsive-xl-contact.png) | ![screenshot](documentation/responsiveness/responsive-xl-etc.png) | Scaling starts to have minor issues |
-| Windows Laptop (emulator?) | ![screenshot](documentation/responsiveness/responsive-pixel-home.png) | ![screenshot](documentation/responsiveness/responsive-pixel-about.png) | ![screenshot](documentation/responsiveness/responsive-pixel-contact.png) | ![screenshot](documentation/responsiveness/responsive-pixel-etc.png) | Works as expected |
-| repeat for any other tested browsers | x | x | x | x | x |
+| --- | --- | --- | --- | --- | --- | --- |
+| Mobile (iPhone 13, Opera) | ![screenshot](./static/images/device-testing/mobile/mobile-home.png) | ![screenshot](./static/images/device-testing/mobile/mobile-quiz-list.png) | ![screenshot](./static/images/device-testing/mobile/mobile-single.png) | ![screenshot](./static/images/device-testing/mobile/mobile-dashboard.png) | ![screenshot](./static/images/device-testing/mobile/mobile-notes.png) | Works as expected |
+| Tablet (iPad 12", Safari) | ![screenshot](./static/images/device-testing/tablet/tablet-home.png) | ![screenshot](./static/images/device-testing/tablet/tablet-quiz-list.png) | ![screenshot](./static/images/device-testing/tablet/tablet-single.png) | ![screenshot](./static/images/device-testing/tablet/tablet-dashboard.png) | ![screenshot](./static/images/device-testing/tablet/tablet-notes.png) | Works as expected |
+| Desktop (Mac, Chrome) | ![screenshot](./static/images/device-testing/desktop/desktop-home.png) | ![screenshot](./static/images/device-testing/desktop/desktop-quiz-list.png) | ![screenshot](./static/images/device-testing/desktop/desktop-single.png) | ![screenshot](./static/images/device-testing/desktop/desktop-dashboard.png) | ![screenshot](./static/images/device-testing/desktop/desktop-notes.png) | Works as expected |
+| XL Monitor | ![screenshot](./static/images/device-testing/xl/xl-home.png) | ![screenshot](./static/images/device-testing/xl/xl-quiz-list.png) | ![screenshot](./static/images/device-testing/xl/xl-single.png) | ![screenshot](./static/images/device-testing/xl/xl-dashboard.png) | ![screenshot](./static/images/device-testing/xl/xl-notes.png) | Scaling starts to have minor issues |
+
 
 ## Lighthouse Audit
 
