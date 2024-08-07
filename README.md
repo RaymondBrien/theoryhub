@@ -447,6 +447,8 @@ There, I used my own **User Story Template** to manage user stories, define mile
 
 - As an admin, I want to be able to access a quiz creation interface so that I can create new quizzes.
 
+For feature screenshots, please see the user story testing documentation [here](TESTING.md).
+
 
 </details>
 
