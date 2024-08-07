@@ -90,10 +90,10 @@ All relevant project files have been validated, for HTML, CSS, JavaScript and Py
 
 | Language/File         | Image                                                                                  | Result |
 |------------------|---------------------------------------------------------------------------------------------|------|
-| HTML             | ![validate_html](./static/images/documentation/validation/validate_html.png)                | Yes  |
-| CSS              | ![validate_css](./static/images/documentation/validation/validate_css.png)                  | Yes  |
-| JS (edit_note.js)       | ![validate_edit_note_js](./static/images/documentation/validation/validate_edit_note_js.png) | Yes  |
-| JS (quiz.js)       | ![validate_quiz_js](./static/images/documentation/validation/validate_quiz_js.png)           | Yes  |
+| HTML             | ![validate_html](./static/images/documentation/validation/validate-html.png)                | Yes  |
+| CSS              | ![validate_css](./static/images/documentation/validation/validate-css.png)                  | Yes  |
+| JS (edit_note.js)       | ![validate_edit_note_js](./static/images/documentation/validation/validate-edit-note-js.png) | Yes  |
+| JS (quiz.js)       | ![validate_quiz_js](./static/images/documentation/validation/validate-quiz-js.png)           | Yes  |
 
 
 ## Browser Compatibility
@@ -204,223 +204,98 @@ I have conducted a series of automated tests on my application.
 
 I fully acknowledge and understand that, in a real-world scenario, an extensive set of additional tests would be more comprehensive.
 
-### JavaScript (Jest Testing)
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-START OF NOTES (to be deleted)
-
-Adjust the code below (file names, etc.) to match your own project files/folders.
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-END OF NOTES (to be deleted)
-
-I have used the [Jest](https://jestjs.io) JavaScript testing framework to test the application functionality.
-
-In order to work with Jest, I first had to initialize NPM.
-
-- `npm init`
-- Hit `enter` for all options, except for **test command:**, just type `jest`.
-
-Add Jest to a list called **Dev Dependencies** in a dev environment:
-
-- `npm install --save-dev jest`
-
-**IMPORTANT**: Initial configurations
-
-When creating test files, the name of the file needs to be `file-name.test.js` in order for Jest to properly work.
-
-Without the following, Jest won't properly run the tests:
-
-- `npm install -D jest-environment-jsdom`
-
-Due to a change in Jest's default configuration, you'll need to add the following code to the top of the `.test.js` file:
-
-```js
-/**
- * @jest-environment jsdom
- */
-
-const { test, expect } = require("@jest/globals");
-const { function1, function2, function3, etc. } = require("../script-name");
-
-beforeAll(() => {
-    let fs = require("fs");
-    let fileContents = fs.readFileSync("index.html", "utf-8");
-    document.open();
-    document.write(fileContents);
-    document.close();
-});
-```
-
-Remember to adjust the `fs.readFileSync()` to the specific file you'd like you test.
-The example above is testing the `index.html` file.
-
-Finally, at the bottom of the script file where your primary scripts are written, include the following at the bottom of the file.
-Make sure to include the name of all of your functions that are being tested in the `.test.js` file.
-
-```js
-if (typeof module !== "undefined") module.exports = {
-    function1, function2, function3, etc.
-};
-```
-
-Now that these steps have been undertaken, further tests can be written, and be expected to fail initially.
-Write JS code that can get the tests to pass as part of the Red-Green refactor process.
-
-Once ready, to run the tests, use this command:
-
-- `npm test`
-
-**NOTE**: To obtain a coverage report, use the following command:
-
-- `npm test --coverage`
-
-Below are the results from the tests that I've written for this application:
-
-| Test Suites | Tests | Screenshot |
-| --- | --- | --- |
-| 1 passed | 16 passed | ![screenshot](documentation/tests/js-test-coverage.png) |
-| x | x | repeat for all remaining tests |
-
-#### Jest Test Issues
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-START OF NOTES (to be deleted)
-
-Use this section to list any known issues you ran into while writing your Jest tests.
-Remember to include screenshots (where possible), and a solution to the issue (if known).
-
-This can be used for both "fixed" and "unresolved" issues.
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-END OF NOTES (to be deleted)
 
 ### Python (Unit Testing)
 
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-START OF NOTES (to be deleted)
+I have used the pytest library to run my automated tests globally for my application and all have returned successfully.
 
-Adjust the code below (file names, etc.) to match your own project files/folders.
+Please see the documentation here:
+![screenshot](./static/images/documentation/validation/global-tests.png)
 
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-END OF NOTES (to be deleted)
 
-I have used Django's built-in unit testing framework to test the application functionality.
+As an alternative I could have also used Django's built-in unit testing framework to test the application functionality, but I chose pytest for improved readability.
 
-In order to run the tests, I ran the following command in the terminal each time:
+Should you wish to use the build in testing framework from Django, please follow the instructions.
+
+In order to run the tests, I run the following command in the terminal each time:
 
 `python3 manage.py test name-of-app`
 
-To create the coverage report, I would then run the following commands:
+The global report of my django tests are as all returning complete:
+![screenshots](./static/images/documentation/validation/django-global-test.png)
 
-`pip3 install coverage`
 
-`pip3 freeze --local > requirements.txt`
 
-`coverage run --omit=*/site-packages/*,*/migrations/*,*/__init__.py,env.py manage.py test`
 
-`coverage report`
-
-To see the HTML version of the reports, and find out whether some pieces of code were missing, I ran the following commands:
-
-`coverage html`
-
-`python3 -m http.server`
-
-Below are the results from the various apps on my application that I've tested:
-
-| App | File | Coverage | Screenshot |
-| --- | --- | --- | --- |
-| Bag | test_forms.py | 99% | ![screenshot](documentation/tests/py-test-bag-forms.png) |
-| Bag | test_models.py | 89% | ![screenshot](documentation/tests/py-test-bag-models.png) |
-| Bag | test_urls.py | 100% | ![screenshot](documentation/tests/py-test-bag-urls.png) |
-| Bag | test_views.py | 71% | ![screenshot](documentation/tests/py-test-bag-views.png) |
-| Checkout | test_forms.py | 99% | ![screenshot](documentation/tests/py-test-checkout-forms.png) |
-| Checkout | test_models.py | 89% | ![screenshot](documentation/tests/py-test-checkout-models.png) |
-| Checkout | test_urls.py | 100% | ![screenshot](documentation/tests/py-test-checkout-urls.png) |
-| Checkout | test_views.py | 71% | ![screenshot](documentation/tests/py-test-checkout-views.png) |
-| Home | test_forms.py | 99% | ![screenshot](documentation/tests/py-test-home-forms.png) |
-| Home | test_models.py | 89% | ![screenshot](documentation/tests/py-test-home-models.png) |
-| Home | test_urls.py | 100% | ![screenshot](documentation/tests/py-test-home-urls.png) |
-| Home | test_views.py | 71% | ![screenshot](documentation/tests/py-test-home-views.png) |
-| Products | test_forms.py | 99% | ![screenshot](documentation/tests/py-test-products-forms.png) |
-| Products | test_models.py | 89% | ![screenshot](documentation/tests/py-test-products-models.png) |
-| Products | test_urls.py | 100% | ![screenshot](documentation/tests/py-test-products-urls.png) |
-| Products | test_views.py | 71% | ![screenshot](documentation/tests/py-test-products-views.png) |
-| Profiles | test_forms.py | 99% | ![screenshot](documentation/tests/py-test-profiles-forms.png) |
-| Profiles | test_models.py | 89% | ![screenshot](documentation/tests/py-test-profiles-models.png) |
-| Profiles | test_urls.py | 100% | ![screenshot](documentation/tests/py-test-profiles-urls.png) |
-| Profiles | test_views.py | 71% | ![screenshot](documentation/tests/py-test-profiles-views.png) |
-| x | x | x | repeat for all remaining tested apps/files |
 
 #### Unit Test Issues
 
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-START OF NOTES (to be deleted)
+I acknowledge that there is a warning with pytest showing a database configuration error - this is because I have not enabled pytest to write directly to my database, and instead have directed it to use sqlite3 which comes preinstalled with django projects instead, to preserve database configuration and safety.
 
-Use this section to list any known issues you ran into while writing your unit tests.
-Remember to include screenshots (where possible), and a solution to the issue (if known).
+This was arranged in a pytest.ini file and settings:
+pytests.ini file:
+1[screenshot](./static/images/documentation/validation/global-tests-ini.png)
+settings:
+1[screenshot](./static/images/documentation/validation/global-tests-ini2.png)
 
-This can be used for both "fixed" and "unresolved" issues.
 
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-END OF NOTES (to be deleted)
+
+
 
 ## Bugs
 
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-START OF NOTES (to be deleted)
+Validation and delinting tests were run globally, for all HTML, CSS, JavaScript, and Python files that were my own.
 
-This section is primarily used for JavaScript and Python applications,
-but feel free to use this section to document any HTML/CSS bugs you might run into.
+<Details>
+<Summary>Results:</Summary>
 
-It's very important to document any bugs you've discovered while developing the project.
-Make sure to include any necessary steps you've implemented to fix the bug(s) as well.
+![Screenshot](./static/images/documentation/validation/validate-html.png)
 
-**PRO TIP**: screenshots of bugs are extremely helpful, and go a long way!
+![Screenshot](./static/images/documentation/validation/validate-css.png)
 
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-END OF NOTES (to be deleted)
+![Screenshot](./static/images/documentation/validation/validate-quiz-js.png)
 
-- JS Uncaught ReferenceError: `foobar` is undefined/not defined
+![Screenshot](./static/images/documentation/validation/validate-edit-note-js.png)
 
-    ![screenshot](documentation/bugs/bug01.png)
+<Details>
+<Summary>Python</Summary>
 
-    - To fix this, I _____________________.
+- ![Screenshot](./static/images/documentation/validation/python/about_admin.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/about_apps.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/about_models.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/about_test_about_views.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/about_urls.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/about_views.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/dashboard_admin.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/dashboard_apps.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/dashboard_forms.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/dashboard_models.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/dashboard_test_dashboard_views.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/dashboard_urls.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/dashboard_views.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/manage.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/quiz_admin.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/quiz_apps.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/quiz_forms.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/quiz_models.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/quiz_test_views.py.png)
+- ![Screenshot](./static/images/documentation/validation/python/quiz_urls.py.png)
 
-- JS `'let'` or `'const'` or `'template literal syntax'` or `'arrow function syntax (=>)'` is available in ES6 (use `'esversion: 11'`) or Mozilla JS extensions (use moz).
 
-    ![screenshot](documentation/bugs/bug02.png)
+</Details>
 
-    - To fix this, I _____________________.
+</Details>
 
-- Python `'ModuleNotFoundError'` when trying to import module from imported package
 
-    ![screenshot](documentation/bugs/bug03.png)
+- Python `E501 line too long` (106 > 79 characters)
 
-    - To fix this, I _____________________.
+    ![screenshot](./static/images/documentation/bug01.png)
 
-- Django `TemplateDoesNotExist` at /appname/path appname/template_name.html
-
-    ![screenshot](documentation/bugs/bug04.png)
-
-    - To fix this, I _____________________.
-
-- Python `E501 line too long` (93 > 79 characters)
-
-    ![screenshot](documentation/bugs/bug04.png)
-
-    - To fix this, I _____________________.
+    - To fix this, I indented after the bracket for a new line whilst maintaining functionality.
 
 ### GitHub **Issues**
 
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-START OF NOTES (to be deleted)
-
-An improved way to manage bugs is to use the built-in **Issues** tracker on your GitHub repository.
-To access your Issues, click on the "Issues" tab at the top of your repository.
-Alternatively, use this link: https://github.com/RaymondBrien/theoryhub/issues
-
-If using the Issues tracker for your bug management, you can simplify the documentation process.
-Issues allow you to directly paste screenshots into the issue without having to first save the screenshot locally,
-then uploading into your project.
-
-You can add labels to your issues (`bug`), assign yourself as the owner, and add comments/updates as you progress with fixing the issue(s).
-
-Once you've sorted the issue, you should then "Close" it.
-
-When showcasing your bug tracking for assessment, you can use the following format:
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-END OF NOTES (to be deleted)
+Any further issues can be found at https://github.com/RaymondBrien/theoryhub/issues
 
 **Fixed Bugs**
 
@@ -428,66 +303,16 @@ When showcasing your bug tracking for assessment, you can use the following form
 
 All previously closed/fixed bugs can be tracked [here](https://github.com/RaymondBrien/theoryhub/issues?q=is%3Aissue+is%3Aclosed).
 
-| Bug | Status |
-| --- | --- |
-| [JS Uncaught ReferenceError: `foobar` is undefined/not defined](https://github.com/RaymondBrien/theoryhub/issues/1) | Closed |
-| [Python `'ModuleNotFoundError'` when trying to import module from imported package](https://github.com/RaymondBrien/theoryhub/issues/2) | Closed |
-| [Django `TemplateDoesNotExist` at /appname/path appname/template_name.html](https://github.com/RaymondBrien/theoryhub/issues/3) | Closed |
-
-**Open Issues**
 
 [![GitHub issues](https://img.shields.io/github/issues/RaymondBrien/theoryhub)](https://github.com/RaymondBrien/theoryhub/issues)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/RaymondBrien/theoryhub)](https://github.com/RaymondBrien/theoryhub/issues?q=is%3Aissue+is%3Aclosed)
 
 Any remaining open issues can be tracked [here](https://github.com/RaymondBrien/theoryhub/issues).
 
-| Bug | Status |
-| --- | --- |
-| [JS `'let'` or `'const'` or `'template literal syntax'` or `'arrow function syntax (=>)'` is available in ES6 (use `'esversion: 11'`) or Mozilla JS extensions (use moz).](https://github.com/RaymondBrien/theoryhub/issues/4) | Open |
-| [Python `E501 line too long` (93 > 79 characters)](https://github.com/RaymondBrien/theoryhub/issues/5) | Open |
 
 ## Unfixed Bugs
 
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-START OF NOTES (to be deleted)
-
-You will need to mention unfixed bugs and why they were not fixed.
-This section should include shortcomings of the frameworks or technologies used.
-Although time can be a big variable to consider, paucity of time and difficulty understanding
-implementation is not a valid reason to leave bugs unfixed.
-
-If you've identified any unfixed bugs, no matter how small, be sure to list them here.
-It's better to be honest and list them, because if it's not documented and an assessor finds the issue,
-they need to know whether or not you're aware of them as well, and why you've not corrected/fixed them.
-
-Some examples:
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-END OF NOTES (to be deleted)
-
-- On devices smaller than 375px, the page starts to have `overflow-x` scrolling.
-
-    ![screenshot](documentation/bugs/unfixed-bug01.png)
-
-    - Attempted fix: I tried to add additional media queries to handle this, but things started becoming too small to read.
-
-- For PP3, when using a helper `clear()` function, any text above the height of the terminal does not clear, and remains when you scroll up.
-
-    ![screenshot](documentation/bugs/unfixed-bug02.png)
-
-    - Attempted fix: I tried to adjust the terminal size, but it only resizes the actual terminal, not the allowable area for text.
-
-- When validating HTML with a semantic `section` element, the validator warns about lacking a header `h2-h6`. This is acceptable.
-
-    ![screenshot](documentation/bugs/unfixed-bug03.png)
-
-    - Attempted fix: this is a known warning and acceptable, and my section doesn't require a header since it's dynamically added via JS.
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-START OF NOTES (to be deleted)
-
-If you legitimately cannot find any unfixed bugs or warnings, then use the following sentence:
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-END OF NOTES (to be deleted)
-
-> [!NOTE]  
+> [!NOTE]
 > There are no remaining bugs that I am aware of.
 
 
