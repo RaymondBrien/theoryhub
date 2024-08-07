@@ -123,32 +123,15 @@ I have tested my deployed project on multiple physical and virtual devices to ch
 
 | Device | Home | Quiz List | Single Quiz | Dashboard | Notes Page | Results |
 | --- | --- | --- | --- | --- | --- | --- |
-| Mobile (iPhone 13, Opera) | ![screenshot](./static/images/device-testing/mobile/mobile-home.png) | ![screenshot](./static/images/device-testing/mobile/mobile-quiz-list.png) | ![screenshot](./static/images/device-testing/mobile/mobile-single.png) | ![screenshot](./static/images/device-testing/mobile/mobile-dashboard.png) | ![screenshot](./static/images/device-testing/mobile/mobile-notes.png) | Works as expected |
-| Tablet (iPad 12", Safari) | ![screenshot](./static/images/device-testing/tablet/tablet-home.png) | ![screenshot](./static/images/device-testing/tablet/tablet-quiz-list.png) | ![screenshot](./static/images/device-testing/tablet/tablet-single.png) | ![screenshot](./static/images/device-testing/tablet/tablet-dashboard.png) | ![screenshot](./static/images/device-testing/tablet/tablet-notes.png) | Works as expected |
-| Desktop (Mac, Chrome) | ![screenshot](./static/images/device-testing/desktop/desktop-home.png) | ![screenshot](./static/images/device-testing/desktop/desktop-quiz-list.png) | ![screenshot](./static/images/device-testing/desktop/desktop-single.png) | ![screenshot](./static/images/device-testing/desktop/desktop-dashboard.png) | ![screenshot](./static/images/device-testing/desktop/desktop-notes.png) | Works as expected |
-| XL Monitor | ![screenshot](./static/images/device-testing/xl/xl-home.png) | ![screenshot](./static/images/device-testing/xl/xl-quiz-list.png) | ![screenshot](./static/images/device-testing/xl/xl-single.png) | ![screenshot](./static/images/device-testing/xl/xl-dashboard.png) | ![screenshot](./static/images/device-testing/xl/xl-notes.png) | Scaling starts to have minor issues |
+| Mobile (iPhone 13, Opera) | ![screenshot](./static/images/documentation/device-testing/mobile/mobile-home.png) | ![screenshot](./static/images/documentation/device-testing/mobile/mobile-quiz-list.png) | ![screenshot](./static/images/documentation/device-testing/mobile/mobile-single.png) | ![screenshot](./static/images/documentation/device-testing/mobile/mobile-dashboard.png) | ![screenshot](./static/images/documentation/device-testing/mobile/mobile-notes.png) | Works as expected |
+| Tablet (iPad 12", Safari) | ![screenshot](./static/images/documentation/device-testing/tablet/tablet-home.png) | ![screenshot](./static/images/documentation/device-testing/tablet/tablet-quiz-list.png) | ![screenshot](./static/images/documentation/device-testing/tablet/tablet-single.png) | ![screenshot](./static/images/documentation/device-testing/tablet/tablet-dashboard.png) | ![screenshot](./static/images/documentation/device-testing/tablet/tablet-notes.png) | Works as expected |
+| Desktop (Mac, Chrome) | ![screenshot](./static/images/documentation/device-testing/desktop/desktop-home.png) | ![screenshot](./static/images/documentation/device-testing/desktop/desktop-quiz-list.png) | ![screenshot](./static/images/documentation/device-testing/desktop/desktop-single.png) | ![screenshot](./static/images/documentation/device-testing/desktop/desktop-dashboard.png) | ![screenshot](./static/images/documentation/device-testing/desktop/desktop-notes.png) | Works as expected |
+| XL Monitor | ![screenshot](./static/images/documentation/device-testing/xl/xl-home.png) | ![screenshot](./static/images/documentation/device-testing/xl/xl-quiz-list.png) | ![screenshot](./static/images/documentation/device-testing/xl/xl-single.png) | ![screenshot](./static/images/documentation/device-testing/xl/xl-dashboard.png) | ![screenshot](./static/images/documentation/device-testing/xl/xl-notes.png) | Scaling starts to have minor issues |
 
 
 ## Lighthouse Audit
 
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-START OF NOTES (to be deleted)
-
-Use this space to discuss testing the live/deployed site's Lighthouse Audit reports.
-Avoid testing the local version (especially if developing in Gitpod), as this can have knock-on effects of performance.
-
-If you don't have Lighthouse in your Developer Tools,
-it can be added as an [extension](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk).
-
-Don't just test the home page (unless it's a single-page application).
-Make sure to test the Lighthouse Audit results for all of your pages.
-
-**IMPORTANT**: You must provide screenshots of the results, to "prove" that you've actually tested them.
-
-Sample Lighthouse testing documentation:
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-END OF NOTES (to be deleted)
-
-I've tested my deployed project using the Lighthouse Audit tool to check for any major issues.
+I have tested my deployed project using the Lighthouse Audit tool to check for any major issues.
 
 | Page | Mobile | Desktop | Notes |
 | --- | --- | --- | --- |
