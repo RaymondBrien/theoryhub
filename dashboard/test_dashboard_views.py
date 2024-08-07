@@ -43,8 +43,8 @@ class TestQuizNotes(TestCase):
 
     def setUp(self):
         """Create standard user objects and a QuizNote instances"""
-        self.user =
-        User.objects.create_user(username='testuser', password='testpassword')
+        self.user = User.objects.create_user(
+            username='testuser', password='testpassword')
         self.client.login(username='testuser', password='testpassword')
         self.quiznote = QuizNote.objects.create(
             user=self.user, note='Test note')
