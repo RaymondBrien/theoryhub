@@ -173,28 +173,30 @@ Defensive programming was manually tested with the below user acceptance testing
 
 ## User Story Testing
 
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-START OF NOTES (to be deleted)
-
-Testing user stories is actually quite simple, once you've already got the stories defined on your README.
-
-Most of your project's **features** should already align with the **user stories**,
-so this should as simple as creating a table with the user story, matching with the re-used screenshot
-from the respective feature.
-
-🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑-END OF NOTES (to be deleted)
+Each user story has been tested and documented below. Any open user stories are listed in the future features milestone (milestone 8).
 
 | User Story | Screenshot |
 | --- | --- |
-| As a new site user, I would like to ____________, so that I can ____________. | ![screenshot](documentation/features/feature01.png) |
-| As a new site user, I would like to ____________, so that I can ____________. | ![screenshot](documentation/features/feature02.png) |
-| As a new site user, I would like to ____________, so that I can ____________. | ![screenshot](documentation/features/feature03.png) |
-| As a returning site user, I would like to ____________, so that I can ____________. | ![screenshot](documentation/features/feature04.png) |
-| As a returning site user, I would like to ____________, so that I can ____________. | ![screenshot](documentation/features/feature05.png) |
-| As a returning site user, I would like to ____________, so that I can ____________. | ![screenshot](documentation/features/feature06.png) |
-| As a site administrator, I should be able to ____________, so that I can ____________. | ![screenshot](documentation/features/feature07.png) |
-| As a site administrator, I should be able to ____________, so that I can ____________. | ![screenshot](documentation/features/feature08.png) |
-| As a site administrator, I should be able to ____________, so that I can ____________. | ![screenshot](documentation/features/feature09.png) |
-| repeat for all remaining user stories | x |
+| User can delete a quiz note | ![screenshot](./static/images/documentation/defensive-testing/dt16.png) |
+| User can edit a note | ![screenshot](./static/images/documentation/defensive-testing/dt15.png) |
+| User can make notes on a notes page | ![screenshot](./static/images/documentation/defensive-testing/dt13.png) |
+| User initiates media and actions | ![screenshot](./static/images/documentation/defensive-testing/dt6.png) |
+| User information is pre-filled | ![screenshot](./static/images/documentation/defensive-testing/dt15.png) |
+| User can view progress details | ![screenshot](./static/images/documentation/defensive-testing/dt12.png) |
+| User can access progress dashboard | ![screenshot](./static/images/documentation/defensive-testing/dt12.png) |
+| User can submit quiz answers | ![screenshot](./static/images/documentation/defensive-testing/dt9.png) |
+| User can start a quiz | ![screenshot](./static/images/documentation/defensive-testing/dt6.png) |
+| User can view quiz list | ![screenshot](./static/images/documentation/device-testing/desktop/desktop-quiz-list.PNG) |
+| User can create account | ![screenshot](./static/images/documentation/create-account.png) |
+| User can access sign-up form | ![screenshot](./static/images/documentation/create-account.png) |
+| Admin can edit quiz answers | ![screenshot](./static/images/documentation/admin-1.png) |
+| Admin can edit quiz questions | ![screenshot](./static/images/documentation/admin-1.png) |
+| Admin can delete user accounts | ![screenshot](./static/images/documentation/admin-2.png) |
+| Admin can view user details | ![screenshot](./static/images/documentation/admin-2.png) |
+| Admin can access user accounts list |![screenshot](./static/images/documentation/admin-3.png) |
+| Admin can save and publish quiz | ![screenshot](./static/images/documentation/admin-4.png) |
+| Admin can add multiple-choice questions | ![screenshot](./static/images/documentation/admin-1.png) |
+| Admin can set quiz title and description | ![screenshot](./static/images/documentation/admin-4.png) |
 
 ## Automated Testing
 
