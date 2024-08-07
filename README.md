@@ -14,8 +14,8 @@
 The TheoryHub is an online platform designed to help users prepare for music theory exams, specifically for ABRSM grade 5. Built with Django, this web application provides a comprehensive set of quizzes and resources to enhance your understanding of music theory concepts essential for your musical progress and required by ABRSM for grades 6 and above performance exams.
 
 > [!NOTE]
-> BLUE: Please note that this is currently a developed MVP - check out the documentation below for more information, including the Future Features section
-![here](#future-features).
+> BLUE: Please note that this is currently a developed MVP - check out the documentation below for more information, including the Future Features section [here](#future-features--).
+
 
 ## Top Features ✨
 
@@ -67,7 +67,7 @@ In the table below are the base wireframes for the app. This was built using [Go
 
 As the project developed, these wireframes were followed for overall structure, to ensure navigation, accessibility and discoverability were maintained at all times.
 As the project continues to grow and evolve, further images will be added for quizzes.
-For a list of future features, please see the [future Features](#future-features--) documentation.
+For a list of future features, please see the future features documentation.
 
 <details>
 <summary>Home 🏠</summary>
@@ -656,7 +656,6 @@ Any differences between local and deployed versions are minimal and purely due t
 | [W3Schools](https://www.w3schools.com/howto/howto_css_modals.asp) | contact page | interactive pop-up (modal) |
 | [WhiteNoise](http://whitenoise.evans.io) | entire site | hosting static files on Heroku temporarily |
 | [Django Forms Documentation](https://docs.djangoproject.com/en/4.2/ref/forms/) | forms | Django documentation for handling forms with validation efficiently |
-
 | [TravelTimN GitHub](https://github.com/TravelTimN/) | Quiz models and project structure | project mentor |
 
 # Appendix
