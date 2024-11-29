@@ -1,3 +1,9 @@
+> [!NOTE]
+> Welcome to TheoryHub version 1.0 (depreciated)
+> N.B. TheoryHub 1.0 is a proof of concept MVP.
+> TheoryHub 1.1 has been in development since August 2024 on a private repository and is due to be released next year (2025).
+
+
 # [THEORYHUB🎵✨](https://theoryhub-253c97b41326.herokuapp.com)
 ### *Your Pathway to Musical Excellence*
 
